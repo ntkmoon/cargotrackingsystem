@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargo Tracking System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #ecebed;
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        /* Navigation Bar */
+        .nav-bar {
+            background-color: #000;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+        
+        .brand {
+            color: #ceef49;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 25px;
+        }
+        
+        .top-nav a {
+            color: #ceef49;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .top-nav a:hover {
+            color: #aecbfa;
+        }
+        
+        /* Login Page */
+        .login-page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .content {
+            padding: 40px;
+            flex: 1;
+            position: relative;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0;
+        }
+        
+        .logo {
+            text-align: left;
+        }
+        
+        .logo h1 {
+            font-size: 35px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+        
+        .main-container {
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            margin-top: -50px;
+        }
+        
+        .login-form {
+            background: #b15e6c;
+            width: 600px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-left: auto;
+            margin-top: 50px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #ceef49;
+            font-size: 18px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        
+        .app-buttons {
+            position: absolute;
+            left: 40px;
+            bottom: 0;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .app-btn {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-weight: 400;
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            width: 180px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 16px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        /* Dashboard Page */
+        .dashboard-page {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .dashboard-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .operations-panel {
+            background: #b15e6c;
+            width: 700px;
+            padding: 100px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .operation-btn {
+            display: block;
+            width: 100%;
+            padding: 23px;
+            margin: 15px 0;
+            background: #2c3e50;
+            color: #ceef49;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .operation-btn:hover {
+            background: #ceef49;
+            color: black;
+            font-weight: bold;
+        }
+        
+        .datetime {
+            color: #ceef49;
+            font-size: 14px;
+            margin-left: auto;
+            padding-right: 20px;
+        }
+
+        /* Supplier Information Page */
+        .supplier-info-page {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .supplier-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .supplier-box {
+            background: white;
+            width: 95%;
+            max-width: 1200px;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .supplier-box h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .supplier-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .supplier-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            width: calc(33.33% - 20px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+        }
+
+        .supplier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #b15e6c;
+        }
+
+        .supplier-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .supplier-card p {
+            color: #666;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .products-container {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .products-container h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b15e6c;
+        }
+
+        .back-btn {
+            background: #b15e6c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #8a4a56;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .products-table th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .products-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .products-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .products-table tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* PO Creation Page - Enlarged */
+        .po-creation-page {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .po-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .po-form {
+            background: white;
+            width: 95%;
+            max-width: 1200px;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .po-form h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .form-row {
+            display: flex;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        .form-label {
+            width: 200px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+
+        .form-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+
+        .form-textarea {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 18px;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .form-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #1a2635;
+        }
+
+        .cancel-btn {
+            background: #b15e6c;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #8a4a56;
+        }
+
+        .edit-btn {
+            background: #2196F3;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background: #0b7dda;
+        }
+
+        .items-section {
+            margin-top: 40px;
+            border-top: 2px solid #eee;
+            padding-top: 30px;
+        }
+
+        .items-header h3 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        #itemsContainer {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+        }
+
+        .item-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .item-select {
+            flex: 2;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .item-quantity {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .item-price {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        .item-total {
+            flex: 1;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .remove-item {
+            background: #b15e6c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .remove-item:hover {
+            background: #8a4a56;
+        }
+
+        .add-item-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .add-item-btn:hover {
+            background: #1a2635;
+        }
+
+        .summary-section {
+            margin-top: 40px;
+            border-top: 2px solid #eee;
+            padding-top: 30px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .summary-value {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* PO Confirmation Page */
+        .po-confirmation-page {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .confirmation-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex: 1;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .confirmation-box {
+            background: white;
+            width: 95%;
+            max-width: 1200px;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .confirmation-box h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .confirmation-details {
+            margin-bottom: 40px;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .detail-label {
+            width: 200px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .detail-value {
+            flex: 1;
+            font-weight: normal;
+        }
+
+        .shipping-address {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            white-space: pre-line;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+
+        .items-table th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .items-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .items-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .confirmation-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .print-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .print-btn:hover {
+            background: #1a2635;
+        }
+
+        .new-po-btn {
+            background: #b15e6c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .new-po-btn:hover {
+            background: #8a4a56;
+        }
+
+        .qr-code-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .qr-code-btn:hover {
+            background: #1a2635;
+        }
+
+        .qr-code-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        #qrCode {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+        }
+
+        /* Order Tracking Page */
+        .order-tracking-page {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .tracking-container {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        /* Classification Bar */
+        .classification-bar {
+            width: 250px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-right: 20px;
+        }
+
+        .classification-bar h3 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b15e6c;
+        }
+
+        .filter-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .filter-all {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .filter-completed {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .filter-delivery {
+            background: #FFC107;
+            color: black;
+        }
+
+        .filter-canceled {
+            background: #F44336;
+            color: white;
+        }
+
+        .filter-btn:hover {
+            opacity: 0.9;
+            transform: translateX(5px);
+        }
+
+        /* Orders Container */
+        .orders-container {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .orders-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .orders-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .status-completed {
+            background-color: #4CAF50;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .status-delivery {
+            background-color: #FFC107;
+            color: black;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .status-canceled {
+            background-color: #F44336;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .view-btn {
+            background: #2196F3;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #F44336;
+            color: white;
+        }
+
+        .complete-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .edit-order-btn {
+            background: #2196F3;
+            color: white;
+        }
+
+        .qr-cell {
+            text-align: center;
+        }
+
+        .qr-small {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: white;
+        }
+
+        /* QR Code Modal */
+        .qr-modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .qr-modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: black;
+        }
+
+        #largeQrCode {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+        }
+
+        .order-details {
+            text-align: left;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+        }
+
+        /* Order Image Styles */
+        .order-image-container {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .order-image {
+            max-width: 100%;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+        }
+
+        /* Chat Bubble */
+        .chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #2c3e50;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.1);
+            background-color: #1a2635;
+        }
+
+        .chat-bubble i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .close-chat {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .incoming {
+            background-color: #e5e5ea;
+            color: black;
+            align-self: flex-start;
+        }
+
+        .outgoing {
+            background-color: #2c3e50;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chat-footer {
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            display: flex;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .send-btn {
+            margin-left: 10px;
+            padding: 10px 15px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Location Selection Styles */
+        .location-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .location-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .location-label {
+            width: 200px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .location-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .calculate-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .calculate-btn:hover {
+            background: #1a2635;
+        }
+
+        .travel-time-result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e5e5ea;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+    <!-- Include QR Code library -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=places&callback=initMap" async defer></script>
+</head>
+<body>
+    <!-- Login Page (Visible by default) -->
+    <div class="login-page" id="loginPage">
+        <div class="nav-bar">
+            <div class="brand">CTS</div>
+            <div class="top-nav">
+                <a href="#">Services</a>
+                <a href="#">About us</a>
+                <a href="#">Sign up</a>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="header">
+                <div class="logo">
+                    <h1>CARGO TRACKING</h1>
+                    <h1>SYSTEM</h1>
+                </div>
+            </div>
+            
+            <div class="main-container">
+                <div class="app-buttons">
+                    <a href="#" class="app-btn">Get it on the App Store</a>
+                    <a href="#" class="app-btn">Get it on Google Play</a>
+                </div>
+                
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="username">Account</label>
+                        <input type="text" id="username" placeholder="Enter your account">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password">
+                    </div>
+                    <button onclick="showDashboard()">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dashboard Page -->
+    <div class="dashboard-page" id="dashboardPage">
+        <div class="nav-bar">
+            <div class="brand">CTS</div>
+            <div class="top-nav">
+                <div class="datetime" id="datetime"></div>
+                <a href="#" onclick="showLogin()">Logout</a>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="operations-panel">
+                <button class="operation-btn" onclick="showPoCreation()">CREATE PO</button>
+                <button class="operation-btn" onclick="showOrderTracking()">TRACK DELIVERY</button>
+                <button class="operation-btn" onclick="showSupplierInfo()">SUPPLIER INFORMATION</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supplier Information Page -->
+    <div class="supplier-info-page" id="supplierInfoPage">
+        <div class="nav-bar">
+            <div class="brand">CTS</div>
+            <div class="top-nav">
+                <div class="datetime" id="supplierDatetime"></div>
+                <a href="#" onclick="showDashboard()">Back to Dashboard</a>
+            </div>
+        </div>
+        
+        <div class="supplier-container">
+            <div class="supplier-box">
+                <h2>Supplier Information</h2>
+                
+                <div id="supplierListContainer">
+                    <div class="supplier-list" id="supplierList">
+                        <!-- Suppliers will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="products-container" id="productsContainer">
+                    <button class="back-btn" onclick="backToSupplierList()">Back to Suppliers</button>
+                    <h3 id="supplierProductsTitle">Products</h3>
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Product Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Products will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PO Creation Page -->
+    <div class="po-creation-page" id="poCreationPage">
+        <div class="nav-bar">
+            <div class="brand">CTS</div>
+            <div class="top-nav">
+                <div class="datetime" id="poDatetime"></div>
+                <a href="#" onclick="showDashboard()">Back to Dashboard</a>
+            </div>
+        </div>
+        
+        <div class="po-form-container">
+            <div class="po-form">
+                <h2 id="poFormTitle">Create Production Order</h2>
+                
+                <div class="form-row">
+                    <div class="form-label">PO Number:</div>
+                    <input type="text" class="form-input" id="poNumber" placeholder="PO-2023-001" readonly>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Supplier:</div>
+                    <select class="form-input" id="supplierSelect" onchange="updateSupplierLocation()">
+                        <option value="">Select Supplier</option>
+                        <option value="supplier1">Nam Phát</option>
+                        <option value="supplier2">Phương Viên</option>
+                        <option value="supplier3">Quốc tế sao việt</option>
+                        <option value="supplier4">Galvanizing jv</option>
+                        <option value="supplier5">Đức thành</option>
+                        <option value="supplier6">Giang Sơn Thịnh</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Delivery Date:</div>
+                    <input type="date" class="form-input" id="deliveryDate">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label">Shipping Address:</div>
+                    <textarea class="form-textarea" id="shippingAddress" placeholder="Enter full shipping address including recipient name, company, street, city, state, postal code, and country"></textarea>
+                </div>
+
+                <div class="items-section">
+                    <div class="items-header">
+                        <h3>Items</h3>
+                    </div>
+                    
+                    <div id="itemsContainer">
+                        <!-- Items will be added here dynamically -->
+                    </div>
+                    
+                    <button class="add-item-btn" onclick="addItemRow()">+ Add Item</button>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-row">
+                        <span class="summary-label">Total:</span>
+                        <span class="summary-value" id="total">$0.00</span>
+                    </div>
+                </div>
+
+                <!-- Location Selection Section -->
+                <div class="location-section">
+                    <h3>Delivery Time Calculation</h3>
+                    <div class="location-row">
+                        <div class="location-label">From Location:</div>
+                        <input type="text" class="location-input" id="fromLocation" placeholder="Supplier address will be auto-filled">
+                    </div>
+                    <div class="location-row">
+                        <div class="location-label">To Location:</div>
+                        <input type="text" class="location-input" id="toLocation" value="số 15 đường An Trì, Phường Hùng Vương, Quận Hồng Bàng, thành phố Hải Phòng" readonly>
+                    </div>
+                    <div class="travel-time-result" id="travelTimeResult">
+                        Direct travel time will be displayed here when supplier is selected
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="form-btn cancel-btn" onclick="showDashboard()">Cancel</button>
+                    <button class="form-btn submit-btn" onclick="submitPO()">Submit PO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PO Confirmation Page -->
+    <div class="po-confirmation-page" id="poConfirmationPage">
+        <div class="nav-bar">
+            <div class="brand">CTS</div>
+            <div class="top-nav">
+                <div class="datetime" id="confirmationDatetime"></div>
+                <a href="#" onclick="showDashboard()">Back to Dashboard</a>
+            </div>
+        </div>
+        
+        <div class="confirmation-container">
+            <div class="confirmation-box">
+                <h2>Production Order Confirmation</h2>
+                
+                <div class="confirmation-details">
+                    <div class="detail-row">
+                        <div class="detail-label">PO Number:</div>
+                        <div class="detail-value" id="confirmationPoNumber"></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Supplier:</div>
+                        <div class="detail-value" id="confirmationSupplier"></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Delivery Date:</div>
+                        <div class="detail-value" id="confirmationDeliveryDate"></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Order Date:</div>
+                        <div class="detail-value" id="confirmationOrderDate"></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Shipping Address:</div>
+                        <div class="detail-value">
+                            <div class="shipping-address" id="confirmationShippingAddress"></div>
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Estimated Travel Time:</div>
+                        <div class="detail-value" id="confirmationTravelTime"></div>
+                    </div>
+                </div>
+                
+                <h3>Ordered Items</h3>
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="confirmationItems">
+                        <!-- Items will be added here dynamically -->
+                    </tbody>
+                </table>
+                
+                <div class="summary-section">
+                    <div class="summary-row">
+                        <span class="summary-label">Total:</span>
+                        <span class="summary-value" id="confirmationTotal"></span>
+                    </div>
+                </div>
+
+                <!-- QR Code Container -->
+                <div class="qr-code-container" id="qrCodeContainer">
+                    <div id="qrCode"></div>
+                </div>
+                
+                <!-- Order Image Container (hidden by default) -->
+                <div class="order-image-container" id="orderImageContainer">
+                    <img src="" class="order-image" id="orderImage" alt="Order Image">
+                </div>
+                
+                <div class="confirmation-actions">
+                    <button class="print-btn" onclick="window.print()">Print PO</button>
+                    <button class="new-po-btn" onclick="showPoCreation()">Create New PO</button>
+                    <button class="qr-code-btn" onclick="toggleOrderImage()">Show Order Image</button>
+                    <button class="edit-btn" id="editPoBtn" onclick="editPO()">Edit PO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Tracking Page -->
+    <div class="order-tracking-page" id="orderTrackingPage">
+        <div class="nav-bar">
+            <div class="brand">CTS</div>
+            <div class="top-nav">
+                <div class="datetime" id="trackingDatetime"></div>
+                <a href="#" onclick="showDashboard()">Back to Dashboard</a>
+            </div>
+        </div>
+        
+        <div class="tracking-container">
+            <!-- Classification Bar -->
+            <div class="classification-bar">
+                <h3>Filter Orders</h3>
+                <button class="filter-btn filter-all" onclick="filterOrders('all')">All Orders</button>
+                <button class="filter-btn filter-completed" onclick="filterOrders('completed')">Completed</button>
+                <button class="filter-btn filter-delivery" onclick="filterOrders('delivery')">In Delivery</button>
+                <button class="filter-btn filter-canceled" onclick="filterOrders('canceled')">Delay</button>
+            </div>
+            
+            <!-- Orders Container -->
+            <div class="orders-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>PO Number</th>
+                            <th>Supplier</th>
+                            <th>Shipping Address</th>
+                            <th>Order Date</th>
+                            <th>Delivery Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>QR Code</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersList">
+                        <!-- Orders will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="qr-modal">
+        <div class="qr-modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Order Details QR Code</h3>
+            <div id="largeQrCode"></div>
+            <!-- Order Image Container (hidden by default) -->
+            <div class="order-image-container" id="modalOrderImageContainer">
+                <img src="" class="order-image" id="modalOrderImage" alt="Order Image">
+            </div>
+            <div class="order-details" id="modalOrderDetails">
+                <!-- Order details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Bubble -->
+    <div class="chat-bubble" id="chatBubble" onclick="toggleChatWindow()">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <div class="chat-title">Connect with Suppliers</div>
+            <div class="close-chat" onclick="toggleChatWindow()">×</div>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="supplier-list" id="chatSupplierList">
+                <div class="supplier-item" onclick="startChat('Global Suppliers Inc.')">
+                    <div class="supplier-name">Global Suppliers Inc.</div>
+                    <div class="supplier-status online">Online</div>
+                </div>
+                <div class="supplier-item" onclick="startChat('Oceanic Imports')">
+                    <div class="supplier-name">Oceanic Imports</div>
+                    <div class="supplier-status online">Online</div>
+                </div>
+                <div class="supplier-item" onclick="startChat('Mountain Trading Co.')">
+                    <div class="supplier-name">Mountain Trading Co.</div>
+                    <div class="supplier-status offline">Offline</div>
+                </div>
+                <div class="supplier-item" onclick="startChat('Continental Exports')">
+                    <div class="supplier-name">Continental Exports</div>
+                    <div class="supplier-status online">Online</div>
+                </div>
+            </div>
+            <div id="chatMessages" style="display: none;">
+                <!-- Chat messages will be added here dynamically -->
+            </div>
+        </div>
+        <div class="chat-footer" id="chatFooter" style="display: none;">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message...">
+            <button class="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Sample inventory data with Vietnamese characters
+        const inventoryItems = [
+            { id: 'item1', name: 'Mạ kẽm nhúng nóng thép khe co giãn', price:4900},
+            { id: 'item2', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 220', price: 4900 },
+            { id: 'item3', name: 'Mạ kẽm nhúng nóng kẽm nhúng nóng tấm thép đệm ray 370', price: 4900 },
+            { id: 'item4', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', price:4900 },
+            { id: 'item5', name: 'Mạ kẽm nhúng nóng thép V50', price:4900 },
+            { id: 'item6', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', price:4900 },
+            { id: 'item7', name: 'Mạ kẽm nhúng nóng', price:5300 },
+            { id: 'item8', name: 'Mạ kẽm nhúng nóng V75', price:5300 },
+            { id: 'item9', name: 'Mạ kẽm nhúng nóng Thép tấm', price:4900 },
+            { id: 'item10', name: 'Mạ kẽm nhúng nóng Thép', price:5300 },
+            { id: 'item11', name: 'Mạ kẽm nhúng nóng Thép V dập', price:5300 },
+            { id: 'item12', name: 'Mạ kẽm nhúng nóng Tấm thép đệm ray', price:4900 },
+            { id: 'item13', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', price:4900 }
+        ];
+
+        // Supplier data with products (Vietnamese names) and travel times
+        const suppliers = [
+            {
+                id: 'supplier1',
+                name: 'Công Ty TNHH Tiếp Vận Nam Phát',
+                contact: 'Đỗ Hoàng Long',
+                email: 'namphatlogistic@gmail.com',
+                phone: '0225 382 5393',
+                address: 'Tầng 3 Tòa nhà Hải Minh,ĐB Nguyễn Bỉnh Khiêm, Phường Đông Hải 2, Quận Hải An, Tp. Hải Phòng, Hải Phòng',
+                travelTime: '35 phút',
+                products: [
+                    { model: 'NP-001', name: 'Mạ kẽm nhúng nóng thép khe co giãn', description: 'Thép mạ kẽm chất lượng cao', price: 4900 },
+                    { model: 'NP-002', name: 'Tấm thép đệm ray 220', description: 'Tấm thép đệm ray kích thước 220', price: 4900 },
+                    { model: 'NP-003', name: 'Thép V50', description: 'Thép chữ V kích thước 50', price: 4900 }
+                ]
+            },
+            {
+                id: 'supplier2',
+                name: 'CÔNG TY TNHH CAO SU VÀ THƯƠNG MẠI PHƯƠNG VIÊN',
+                contact: 'Trần Văn Đức',
+                email: 'phuongviencaosu@gmail.com',
+                phone: '0225 373 1702',
+                address: 'số 81 đường An Đà, Ngô Quyền, Hải Phòng',
+                travelTime: '40 phút',
+                products: [
+                    { model: 'PV-101', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: 'Tấm Panel hở mạ kẽm', price: 4900 },
+                    { model: 'PV-102', name: 'Thép V75', description: 'Thép chữ V kích thước 75', price: 5300 },
+                    { model: 'PV-103', name: 'Thép tấm', description: 'Thép tấm các loại', price: 4900 }
+                ]
+            },
+            {
+                id: 'supplier3',
+                name: 'Công ty CP quốc tế Sao Việt',
+                contact: 'Trần Duy Khánh',
+                email: 'kinhdoanh1@vinastar.com.vn',
+                phone: '0243 376 6611',
+                address: 'Cụm CN Hà Bình Phương, xã Hà Hồi, huyện Thường Tín, TP Hà Nội',
+                travelTime: '3 giờ',
+                products: [
+                    { model: 'SV-201', name: 'Mạ kẽm nhúng nóng Thép V dập', description: 'Thép V dập mạ kẽm', price: 5300 },
+                    { model: 'SV-202', name: 'Tấm thép đệm ray 370', description: 'Tấm thép đệm ray kích thước 370', price: 4900 },
+                    { model: 'SV-203', name: 'Kết cấu thép (phụ kiện tang cáp)', description: 'Phụ kiện kết cấu thép cho tang cáp', price: 4900 }
+                ]
+            },
+            {
+                id: 'supplier4',
+                name: 'CÔNG TY TNHH TV GALVANIZING JV',
+                contact: 'Vũ Ngọc Bích',
+                email: 'info@vcoating.vn',
+                phone: '0321 628 1999',
+                address: 'KCN Dệt May Phố Nối, Xã Liêu Xá, Huyện Yên Mỹ, Tỉnh Hưng Yên',
+                travelTime: '2 giờ 15 phút',
+                products: [
+                    { model: 'GV-201', name: 'Mạ kẽm nóng Thép V dập', description: 'Thép V dập mạ kẽm', price: 5300 },
+                    { model: 'GV-202', name: 'Tấm thép ray 370', description: 'Tấm thép đệm ray kích thước 370', price: 4900 },
+                    { model: 'GV-203', name: 'Kết cấu thép', description: 'Phụ kiện kết cấu thép cho tang cáp', price: 4900 }
+                ]
+            },
+            {
+                id: 'supplier5',
+                name: 'Công ty TNHH CƠ KHÍ ĐỨC THÀNH',
+                contact: 'Đặng Hải Yến',
+                email: 'cokhiducthanh@gmail.com',
+                phone: '0912 273 216',
+                address: 'Khu 7 Tầng, Văn Miếu Đường Lâm, Thị Xã Sơn Tây, Hà Nội',
+                travelTime: '3 giờ 30 phút',
+                products: [
+                    { model: 'SV-201', name: 'Mạ kẽm nhúng nóng Thép V dập', description: 'Thép V dập mạ kẽm', price: 5300 },
+                    { model: 'SV-202', name: 'Tấm thép đệm ray 370', description: 'Tấm thép đệm ray kích thước 370', price: 4900 },
+                    { model: 'SV-203', name: 'Kết cấu thép (phụ kiện tang cáp)', description: 'Phụ kiện kết cấu thép cho tang cáp', price: 4900 }
+                ]
+            },
+            {
+                id: 'supplier6',
+                name: 'Công ty TNHH đầu tư thương mại thép Giang Sơn Thịnh',
+                contact: 'Phạm Thuỳ An',
+                email: 'kinhdoanh1@vinastar.com.vn',
+                phone: '0909 185 797',
+                address: '15/23 đường TL50, KP2, P.Thạnh Lộc, Q.12, TP.Hồ Chí Minh',
+                travelTime: '35 giờ',
+                products: [
+                    { model: 'SV-201', name: 'Mạ kẽm nhúng nóng Thép V dập', description: 'Thép V dập mạ kẽm', price: 5300 },
+                    { model: 'SV-202', name: 'Tấm thép đệm ray 370', description: 'Tấm thép đệm ray kích thước 370', price: 4900 },
+                    { model: 'SV-203', name: 'Kết cấu thép (phụ kiện tang cáp)', description: 'Phụ kiện kết cấu thép cho tang cáp', price: 4900 }
+                ]
+            }
+        ];
+
+        // Current PO data
+        let currentPO = null;
+        let isEditingPO = false;
+        
+        // Sample orders data with QR codes and order images
+        let orders = [
+            {
+                poNumber: 'PO-20250420-6437',
+                supplier: 'Nam Phát',
+                orderDate: '2025-04-20',
+                deliveryDate: '2025-05-15',
+                shippingAddress: 'Tầng 3 Tòa nhà Hải Minh,ĐB Nguyễn Bỉnh Khiêm, Phường Đông Hải 2, Quận Hải An, Tp. Hải Phòng, Hải Phòng',
+                total: '14.700.000 VND',
+                status: 'delivery',
+                qrCodeData: '',
+                orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1001',
+                items: [
+                    { itemName: 'Mạ kẽm nhúng nóng thép khe co giãn', quantity: 10, price: 4900, total: 49000 },
+                    { itemName: 'Tấm thép đệm ray 220', quantity: 20, price: 4900, total: 98000 }
+                ],
+                travelTime: '2 giờ 30 phút'
+            },
+            {
+                poNumber: 'PO-20241203-2302',
+                supplier: 'Galvanizing JV',
+                orderDate: '2024-11-18',
+                deliveryDate: '2024-12-03',
+                shippingAddress: 'KCN Dệt May Phố Nối, Xã Liêu Xá, Huyện Yên Mỹ, Tỉnh Hưng Yên',
+                total: '24.500.000 VND',
+                status: 'completed',
+                qrCodeData: '',
+                orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1002',
+                items: [
+                    { itemName: 'Mạ kẽm nhúng nóng Tấm Panel hở', quantity: 50, price: 4900, total: 245000 }
+                ],
+                travelTime: '3 giờ 15 phút'
+            },
+            {
+                poNumber: 'PO-20240523-8272',
+                supplier: 'Quốc tế Sao Việt',
+                orderDate: '2024-05-20',
+                deliveryDate: '2024-06-27',
+                shippingAddress: 'Cụm CN Hà Bình Phương, xã Hà Hồi, huyện Thường Tín, TP Hà Nội',
+                total: '32.800.000 VND',
+                status: 'canceled',
+                qrCodeData: '',
+                orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1003',
+                items: [
+                    { itemName: 'Thép V dập', quantity: 40, price: 5300, total: 212000 }
+                ],
+                travelTime: '4 giờ'
+            },
+            {
+                poNumber: 'PO-20240714-1001',
+                supplier: 'Giang Sơn Thịnh',
+                orderDate: '2024-05-22',
+                deliveryDate: '2024-06-12',
+                shippingAddress: '15/23 đường TL50, KP2, P.Thạnh Lộc, Q.12, TP.Hồ Chí Minh',
+                total: '18.500.000 VND',
+                status: 'completed',
+                qrCodeData: '',
+                orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1004',
+                items: [
+                    { itemName: 'Thép tấm', quantity: 25, price: 4900, total: 122500 }
+                ],
+                travelTime: '2 giờ 45 phút'
+            }
+        ];
+
+        // Chat functionality variables
+        let currentChatSupplier = null;
+        const supplierMessages = {
+            'Global Suppliers Inc.': [
+                { sender: 'supplier', text: 'Hello! How can we help you today?' }
+            ],
+            'Oceanic Imports': [
+                { sender: 'supplier', text: 'Welcome to Oceanic Imports. What do you need?' }
+            ],
+            'Mountain Trading Co.': [
+                { sender: 'supplier', text: 'Thanks for contacting Mountain Trading Co.' }
+            ],
+            'Continental Exports': [
+                { sender: 'supplier', text: 'Continental Exports at your service!' }
+            ]
+        };
+
+        // Generate QR code data for sample orders
+        function initializeSampleOrders() {
+            orders.forEach(order => {
+                // Generate a URL that would display the order image when scanned
+                order.qrCodeData = generateQRCodeData(order);
+            });
+        }
+
+        // Initialize sample orders with QR code data
+        initializeSampleOrders();
+
+        // Generate PO number
+        function generatePONumber() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            return `PO-${year}${month}${day}-${randomNum}`;
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const options = { 
+                weekday: 'short', 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Generate QR code data string that will show the order image when scanned
+        function generateQRCodeData(order) {
+            // Create a simple object with the order image URL
+            const qrData = {
+                type: 'order_image',
+                poNumber: order.poNumber,
+                imageUrl: order.orderImage
+            };
+            
+            // Convert the object to a JSON string
+            return JSON.stringify(qrData);
+        }
+
+        // Generate QR code for an element
+        function generateQRCode(elementId, data) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = ''; // Clear previous QR code
+                new QRCode(element, {
+                    text: data,
+                    width: elementId === 'qrCode' || elementId === 'largeQrCode' ? 200 : 80,
+                    height: elementId === 'qrCode' || elementId === 'largeQrCode' ? 200 : 80,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+        }
+
+        // Toggle between QR code and order image
+        function toggleOrderImage() {
+            const qrContainer = document.getElementById('qrCodeContainer');
+            const orderImageContainer = document.getElementById('orderImageContainer');
+            const orderImage = document.getElementById('orderImage');
+            
+            if (qrContainer.style.display === 'none') {
+                qrContainer.style.display = 'flex';
+                orderImageContainer.style.display = 'none';
+            } else {
+                qrContainer.style.display = 'none';
+                orderImageContainer.style.display = 'block';
+                orderImage.src = currentPO.orderImage;
+            }
+        }
+
+        // Show QR code in modal
+        function showQrModal(poNumber) {
+            const order = orders.find(o => o.poNumber === poNumber);
+            if (!order) return;
+            
+            const modal = document.getElementById('qrModal');
+            const detailsContainer = document.getElementById('modalOrderDetails');
+            const orderImageContainer = document.getElementById('modalOrderImageContainer');
+            const orderImage = document.getElementById('modalOrderImage');
+            
+            // Generate detailed order information
+            let detailsHTML = `
+                <p><strong>Số PO:</strong> ${order.poNumber}</p>
+                <p><strong>Nhà cung cấp:</strong> ${order.supplier}</p>
+                <p><strong>Ngày đặt hàng:</strong> ${formatDate(order.orderDate)}</p>
+                <p><strong>Ngày giao hàng:</strong> ${formatDate(order.deliveryDate)}</p>
+                <p><strong>Địa chỉ giao hàng:</strong></p>
+                <p style="white-space: pre-line;">${order.shippingAddress}</p>
+                <p><strong>Thời gian vận chuyển ước tính:</strong> ${order.travelTime || 'Không tính toán'}</p>
+                <p><strong>Trạng thái:</strong> <span class="${order.status === 'completed' ? 'status-completed' : 
+                                                         order.status === 'delivery' ? 'status-delivery' : 'status-canceled'}">
+                    ${order.status === 'completed' ? 'Hoàn thành' : 
+                     order.status === 'delivery' ? 'Đang giao hàng' : 'Quá hạn'}
+                </span></p>
+                <p><strong>Tổng cộng:</strong> ${order.total}</p>
+                <p><strong>Chi tiết đơn hàng:</strong></p>
+                <ul>
+            `;
+            
+            order.items.forEach(item => {
+                detailsHTML += `
+                    <li>${item.itemName} - Số lượng: ${item.quantity} - Giá: ${item.price} - Tổng: ${item.total}</li>
+                `;
+            });
+            
+            detailsHTML += `</ul>`;
+            detailsContainer.innerHTML = detailsHTML;
+            
+            // Generate QR code
+            document.getElementById('largeQrCode').innerHTML = '';
+            generateQRCode('largeQrCode', order.qrCodeData);
+            
+            // Set the order image in modal
+            orderImage.src = order.orderImage;
+            orderImageContainer.style.display = 'none'; // Hide by default
+            
+            // Show modal
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('qrModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Update supplier location and travel time when supplier is selected
+        function updateSupplierLocation() {
+            const supplierSelect = document.getElementById('supplierSelect');
+            const selectedSupplierId = supplierSelect.value;
+            
+            if (!selectedSupplierId) {
+                document.getElementById('fromLocation').value = '';
+                document.getElementById('travelTimeResult').textContent = 'Direct travel time will be displayed here when supplier is selected';
+                return;
+            }
+            
+            // Find the selected supplier
+            const selectedSupplier = suppliers.find(s => s.id === selectedSupplierId);
+            if (selectedSupplier) {
+                // Update the from location with supplier's address
+                document.getElementById('fromLocation').value = selectedSupplier.address;
+                
+                // Display the predefined travel time
+                document.getElementById('travelTimeResult').textContent = `Direct travel time: ${selectedSupplier.travelTime}`;
+            }
+        }
+
+        // Add item row
+        function addItemRow() {
+            const container = document.getElementById('itemsContainer');
+            const rowId = 'item-' + Date.now();
+            
+            const itemRow = document.createElement('div');
+            itemRow.className = 'item-row';
+            itemRow.id = rowId;
+            
+            // Create item select dropdown
+            let itemSelect = '<select class="item-select" onchange="updateItemPrice(\'' + rowId + '\')">';
+            itemSelect += '<option value="">Chọn sản phẩm</option>';
+            inventoryItems.forEach(item => {
+                itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.price} VND)</option>`;
+            });
+            itemSelect += '</select>';
+            
+            itemRow.innerHTML = `
+                ${itemSelect}
+                <input type="number" class="item-quantity" min="1" value="1" onchange="calculateRowTotal('${rowId}')">
+                <input type="text" class="item-price" readonly>
+                <input type="text" class="item-total" readonly>
+                <button class="remove-item" onclick="removeItemRow('${rowId}')">×</button>
+            `;
+            
+            container.appendChild(itemRow);
+            calculateTotals();
+        }
+
+        // Update item price when selection changes
+        function updateItemPrice(rowId) {
+            const row = document.getElementById(rowId);
+            const select = row.querySelector('.item-select');
+            const priceInput = row.querySelector('.item-price');
+            const selectedOption = select.options[select.selectedIndex];
+            
+            if (selectedOption.value) {
+                priceInput.value = selectedOption.getAttribute('data-price');
+                calculateRowTotal(rowId);
+            } else {
+                priceInput.value = '';
+                row.querySelector('.item-total').value = '';
+            }
+        }
+
+        // Calculate row total
+        function calculateRowTotal(rowId) {
+            const row = document.getElementById(rowId);
+            const quantity = parseFloat(row.querySelector('.item-quantity').value) || 0;
+            const price = parseFloat(row.querySelector('.item-price').value) || 0;
+            const total = (quantity * price).toFixed(2);
+            
+            row.querySelector('.item-total').value = total ? total + ' VND' : '';
+            calculateTotals();
+        }
+
+        // Remove item row
+        function removeItemRow(rowId) {
+            document.getElementById(rowId).remove();
+            calculateTotals();
+        }
+
+        // Calculate all totals
+        function calculateTotals() {
+            let total = 0;
+            const totals = document.querySelectorAll('.item-total');
+            
+            totals.forEach(itemTotal => {
+                const value = parseFloat(itemTotal.value.replace(' VND', '')) || 0;
+                total += value;
+            });
+            
+            document.getElementById('total').textContent = total.toLocaleString('vi-VN') + ' VND';
+        }
+
+        // Submit PO
+        function submitPO() {
+            const poNumber = document.getElementById('poNumber').value;
+            const supplier = document.getElementById('supplierSelect').value;
+            const supplierText = document.getElementById('supplierSelect').options[document.getElementById('supplierSelect').selectedIndex].text;
+            const deliveryDate = document.getElementById('deliveryDate').value;
+            const shippingAddress = document.getElementById('shippingAddress').value;
+            const travelTime = document.getElementById('travelTimeResult').textContent.replace('Direct travel time: ', '');
+            
+            if (!supplier) {
+                alert('Vui lòng chọn nhà cung cấp');
+                return;
+            }
+            
+            if (!deliveryDate) {
+                alert('Vui lòng chọn ngày giao hàng');
+                return;
+            }
+            
+            if (!shippingAddress) {
+                alert('Vui lòng nhập địa chỉ giao hàng');
+                return;
+            }
+            
+            const items = [];
+            document.querySelectorAll('.item-row').forEach(row => {
+                const select = row.querySelector('.item-select');
+                const quantity = row.querySelector('.item-quantity').value;
+                const price = row.querySelector('.item-price').value;
+                
+                if (select.value && quantity && price) {
+                    items.push({
+                        itemId: select.value,
+                        itemName: select.options[select.selectedIndex].text.split(' (')[0],
+                        quantity: quantity,
+                        price: price,
+                        total: (quantity * price).toFixed(2)
+                    });
+                }
+            });
+            
+            if (items.length === 0) {
+                alert('Vui lòng thêm ít nhất một sản phẩm');
+                return;
+            }
+            
+            // Generate order image URL
+            const orderDate = new Date().toISOString().split('T')[0];
+            const total = document.getElementById('total').textContent;
+            
+            // Check if we're editing an existing PO
+            if (isEditingPO && currentPO) {
+                // Update the existing PO
+                currentPO.supplier = supplierText;
+                currentPO.deliveryDate = deliveryDate;
+                currentPO.shippingAddress = shippingAddress;
+                currentPO.items = items;
+                currentPO.total = total;
+                currentPO.travelTime = travelTime;
+                
+                // Update the orders array
+                const index = orders.findIndex(o => o.poNumber === currentPO.poNumber);
+                if (index !== -1) {
+                    orders[index] = currentPO;
+                }
+                
+                // Reset editing flag
+                isEditingPO = false;
+            } else {
+                // Create a new PO
+                currentPO = {
+                    poNumber,
+                    supplier: supplierText,
+                    deliveryDate,
+                    shippingAddress,
+                    orderDate: orderDate,
+                    items,
+                    total: total,
+                    status: 'delivery',
+                    travelTime: travelTime,
+                    orderImage: `https://via.placeholder.com/400x400?text=Order+${poNumber}`,
+                    qrCodeData: '' // Will be generated below
+                };
+                
+                // Add to orders array
+                orders.unshift(currentPO);
+            }
+            
+            // Generate QR code data that will show the order image when scanned
+            currentPO.qrCodeData = generateQRCodeData(currentPO);
+            
+            showConfirmation();
+        }
+
+        // Edit an existing PO
+        function editPO() {
+            if (!currentPO) return;
+            
+            // Set editing flag
+            isEditingPO = true;
+            
+            // Show the PO creation page
+            showPoCreation();
+            
+            // Update form title
+            document.getElementById('poFormTitle').textContent = 'Edit Production Order';
+            
+            // Fill in the form with the current PO data
+            document.getElementById('poNumber').value = currentPO.poNumber;
+            
+            // Set supplier selection
+            const supplierSelect = document.getElementById('supplierSelect');
+            for (let i = 0; i < supplierSelect.options.length; i++) {
+                if (supplierSelect.options[i].text === currentPO.supplier) {
+                    supplierSelect.selectedIndex = i;
+                    break;
+                }
+            }
+            
+            document.getElementById('deliveryDate').value = currentPO.deliveryDate;
+            document.getElementById('shippingAddress').value = currentPO.shippingAddress;
+            
+            // Clear any existing items
+            document.getElementById('itemsContainer').innerHTML = '';
+            
+            // Add items from the current PO
+            currentPO.items.forEach(item => {
+                const rowId = 'item-' + Date.now();
+                const itemRow = document.createElement('div');
+                itemRow.className = 'item-row';
+                itemRow.id = rowId;
+                
+                // Create item select dropdown
+                let itemSelect = '<select class="item-select" onchange="updateItemPrice(\'' + rowId + '\')">';
+                itemSelect += '<option value="">Chọn sản phẩm</option>';
+                
+                inventoryItems.forEach(invItem => {
+                    const selected = invItem.name === item.itemName ? 'selected' : '';
+                    itemSelect += `<option value="${invItem.id}" data-price="${invItem.price}" ${selected}>${invItem.name} (${invItem.price} VND)</option>`;
+                });
+                
+                itemSelect += '</select>';
+                
+                itemRow.innerHTML = `
+                    ${itemSelect}
+                    <input type="number" class="item-quantity" min="1" value="${item.quantity}" onchange="calculateRowTotal('${rowId}')">
+                    <input type="text" class="item-price" readonly value="${item.price}">
+                    <input type="text" class="item-total" readonly value="${item.total} VND">
+                    <button class="remove-item" onclick="removeItemRow('${rowId}')">×</button>
+                `;
+                
+                document.getElementById('itemsContainer').appendChild(itemRow);
+            });
+            
+            // Update totals
+            calculateTotals();
+            
+            // Set travel time if available
+            if (currentPO.travelTime) {
+                document.getElementById('travelTimeResult').textContent = `Direct travel time: ${currentPO.travelTime}`;
+            }
+            
+            // Set supplier address if available
+            const selectedSupplier = suppliers.find(s => s.name === currentPO.supplier);
+            if (selectedSupplier) {
+                document.getElementById('fromLocation').value = selectedSupplier.address;
+            }
+        }
+
+        // Edit an existing order from the tracking page
+        function editExistingOrder(poNumber) {
+            const order = orders.find(o => o.poNumber === poNumber);
+            if (order) {
+                currentPO = order;
+                editPO();
+            }
+        }
+
+        // Show order tracking page
+        function showOrderTracking() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('dashboardPage').style.display = 'none';
+            document.getElementById('poCreationPage').style.display = 'none';
+            document.getElementById('poConfirmationPage').style.display = 'none';
+            document.getElementById('supplierInfoPage').style.display = 'none';
+            document.getElementById('orderTrackingPage').style.display = 'flex';
+            
+            // Load orders
+            filterOrders('all');
+            startDateTimeUpdates();
+        }
+
+        // Filter orders by status
+        function filterOrders(status) {
+            const ordersList = document.getElementById('ordersList');
+            ordersList.innerHTML = '';
+            
+            let filteredOrders = orders;
+            if (status !== 'all') {
+                filteredOrders = orders.filter(order => order.status === status);
+            }
+            
+            filteredOrders.forEach(order => {
+                const row = document.createElement('tr');
+                
+                // Determine status class and text
+                let statusClass = '';
+                let statusText = '';
+                switch(order.status) {
+                    case 'completed':
+                        statusClass = 'status-completed';
+                        statusText = 'Hoàn thành';
+                        break;
+                    case 'delivery':
+                        statusClass = 'status-delivery';
+                        statusText = 'Đang giao hàng';
+                        break;
+                    case 'canceled':
+                        statusClass = 'status-canceled';
+                        statusText = 'Quá hạn';
+                        break;
+                }
+                
+                // Create a unique ID for the QR code element
+                const qrCodeId = `qr-code-${order.poNumber.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                
+                // Determine action buttons based on status
+                let actionButtons = '';
+                if (order.status === 'delivery') {
+                    actionButtons = `
+                        <button class="action-btn complete-btn" onclick="updateOrderStatus('${order.poNumber}', 'completed')">Hoàn thành</button>
+                        <button class="action-btn cancel-btn" onclick="updateOrderStatus('${order.poNumber}', 'canceled')">Quá hạn</button>
+                        <button class="action-btn edit-order-btn" onclick="editExistingOrder('${order.poNumber}')">Sửa</button>
+                    `;
+                } else if (order.status === 'completed') {
+                    actionButtons = `
+                        <button class="action-btn edit-order-btn" onclick="editExistingOrder('${order.poNumber}')">Sửa</button>
+                    `;
+                } else if (order.status === 'canceled') {
+                    actionButtons = `
+                        <button class="action-btn edit-order-btn" onclick="editExistingOrder('${order.poNumber}')">Sửa</button>
+                    `;
+                }
+                
+                // Shorten shipping address for display
+                const shortAddress = order.shippingAddress.split('\n')[0] + '...';
+                
+                row.innerHTML = `
+                    <td>${order.poNumber}</td>
+                    <td>${order.supplier}</td>
+                    <td title="${order.shippingAddress.replace(/\n/g, ', ')}">${shortAddress}</td>
+                    <td>${formatDate(order.orderDate)}</td>
+                    <td>${formatDate(order.deliveryDate)}</td>
+                    <td>${order.total}</td>
+                    <td><span class="${statusClass}">${statusText}</span></td>
+                    <td class="qr-cell">
+                        <div id="${qrCodeId}" class="qr-small" onclick="showQrModal('${order.poNumber}')"></div>
+                    </td>
+                    <td>
+                        <button class="action-btn view-btn" onclick="viewOrderDetails('${order.poNumber}')">Xem</button>
+                        ${actionButtons}
+                    </td>
+                `;
+                
+                ordersList.appendChild(row);
+                
+                // Generate QR code for this order
+                setTimeout(() => {
+                    generateQRCode(qrCodeId, order.qrCodeData);
+                }, 100);
+            });
+        }
+
+        // Update order status
+        function updateOrderStatus(poNumber, newStatus) {
+            const orderIndex = orders.findIndex(order => order.poNumber === poNumber);
+            if (orderIndex !== -1) {
+                orders[orderIndex].status = newStatus;
+                
+                // Update QR code data with new status
+                const order = orders[orderIndex];
+                order.qrCodeData = generateQRCodeData(order);
+                
+                filterOrders('all'); // Refresh the list
+            }
+        }
+
+        // View order details
+        function viewOrderDetails(poNumber) {
+            const order = orders.find(order => order.poNumber === poNumber);
+            if (order) {
+                currentPO = order;
+                showConfirmation();
+            }
+        }
+
+        // Show confirmation page
+        function showConfirmation() {
+            if (!currentPO) return;
+            
+            // Set basic info
+            document.getElementById('confirmationPoNumber').textContent = currentPO.poNumber;
+            document.getElementById('confirmationSupplier').textContent = currentPO.supplier;
+            document.getElementById('confirmationDeliveryDate').textContent = formatDate(currentPO.deliveryDate);
+            document.getElementById('confirmationOrderDate').textContent = formatDate(currentPO.orderDate);
+            document.getElementById('confirmationShippingAddress').textContent = currentPO.shippingAddress;
+            document.getElementById('confirmationTravelTime').textContent = currentPO.travelTime || 'Không tính toán';
+            
+            // Set items
+            const itemsContainer = document.getElementById('confirmationItems');
+            itemsContainer.innerHTML = '';
+            
+            currentPO.items.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.itemName}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.price} VND</td>
+                    <td>${item.total} VND</td>
+                `;
+                itemsContainer.appendChild(row);
+            });
+            
+            // Set total
+            document.getElementById('confirmationTotal').textContent = currentPO.total;
+            
+            // Generate QR code
+            setTimeout(() => {
+                generateQRCode('qrCode', currentPO.qrCodeData);
+            }, 100);
+            
+            // Hide order image container by default
+            document.getElementById('orderImageContainer').style.display = 'none';
+            
+            // Show or hide edit button based on status
+            const editBtn = document.getElementById('editPoBtn');
+            if (currentPO.status === 'completed') {
+                editBtn.style.display = 'none'; // Don't allow editing completed orders
+            } else {
+                editBtn.style.display = 'block';
+            }
+            
+            // Show confirmation page
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('dashboardPage').style.display = 'none';
+            document.getElementById('poCreationPage').style.display = 'none';
+            document.getElementById('orderTrackingPage').style.display = 'none';
+            document.getElementById('supplierInfoPage').style.display = 'none';
+            document.getElementById('poConfirmationPage').style.display = 'flex';
+            startDateTimeUpdates();
+        }
+
+        // Initialize PO creation page
+        function initPOCreation() {
+            document.getElementById('poFormTitle').textContent = 'Create Production Order';
+            document.getElementById('poNumber').value = generatePONumber();
+            // Set default delivery date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('deliveryDate').valueAsDate = tomorrow;
+            // Clear any existing items
+            document.getElementById('itemsContainer').innerHTML = '';
+            // Clear shipping address
+            document.getElementById('shippingAddress').value = '';
+            // Reset supplier selection
+            document.getElementById('supplierSelect').selectedIndex = 0;
+            // Add first item row
+            addItemRow();
+            // Reset totals
+            calculateTotals();
+            // Set default to location
+            document.getElementById('toLocation').value = 'số 15 đường An Trì, Phường Hùng Vương, Quận Hồng Bàng, thành phố Hải Phòng';
+            // Clear from location
+            document.getElementById('fromLocation').value = '';
+            // Reset travel time result
+            document.getElementById('travelTimeResult').textContent = 'Direct travel time will be displayed here when supplier is selected';
+            // Reset editing flag
+            isEditingPO = false;
+        }
+
+        // Show supplier information page
+        function showSupplierInfo() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('dashboardPage').style.display = 'none';
+            document.getElementById('poCreationPage').style.display = 'none';
+            document.getElementById('poConfirmationPage').style.display = 'none';
+            document.getElementById('orderTrackingPage').style.display = 'none';
+            document.getElementById('supplierInfoPage').style.display = 'flex';
+            
+            // Load suppliers
+            loadSuppliers();
+            startDateTimeUpdates();
+        }
+
+        // Load suppliers list
+        function loadSuppliers() {
+            const supplierList = document.getElementById('supplierList');
+            supplierList.innerHTML = '';
+            
+            suppliers.forEach(supplier => {
+                const supplierCard = document.createElement('div');
+                supplierCard.className = 'supplier-card';
+                supplierCard.onclick = () => showSupplierProducts(supplier);
+                
+                supplierCard.innerHTML = `
+                    <h3>${supplier.name}</h3>
+                    <p><strong>Người liên hệ:</strong> ${supplier.contact}</p>
+                    <p><strong>Email:</strong> ${supplier.email}</p>
+                    <p><strong>Điện thoại:</strong> ${supplier.phone}</p>
+                    <p><strong>Địa chỉ:</strong> ${supplier.address}</p>
+                    <p><strong>Thời gian vận chuyển:</strong> ${supplier.travelTime}</p>
+                `;
+                
+                supplierList.appendChild(supplierCard);
+            });
+            
+            // Show supplier list and hide products container
+            document.getElementById('supplierListContainer').style.display = 'block';
+            document.getElementById('productsContainer').style.display = 'none';
+        }
+
+        // Show products for a specific supplier
+        function showSupplierProducts(supplier) {
+            const productsTableBody = document.getElementById('productsTableBody');
+            productsTableBody.innerHTML = '';
+            
+            // Set supplier title
+            document.getElementById('supplierProductsTitle').textContent = `Sản phẩm từ ${supplier.name}`;
+            
+            // Add products to table
+            supplier.products.forEach(product => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.model}</td>
+                    <td>${product.name}</td>
+                    <td>${product.description}</td>
+                    <td>${product.price.toLocaleString('vi-VN')} VND</td>
+                `;
+                productsTableBody.appendChild(row);
+            });
+            
+            // Show products container and hide supplier list
+            document.getElementById('supplierListContainer').style.display = 'none';
+            document.getElementById('productsContainer').style.display = 'block';
+        }
+
+        // Back to supplier list
+        function backToSupplierList() {
+            document.getElementById('supplierListContainer').style.display = 'block';
+            document.getElementById('productsContainer').style.display = 'none';
+        }
+
+        // Toggle chat window visibility
+        function toggleChatWindow() {
+            const chatWindow = document.getElementById('chatWindow');
+            if (chatWindow.style.display === 'flex') {
+                chatWindow.style.display = 'none';
+            } else {
+                chatWindow.style.display = 'flex';
+                // Reset to supplier list when opening
+                if (currentChatSupplier) {
+                    currentChatSupplier = null;
+                    document.getElementById('chatSupplierList').style.display = 'block';
+                    document.getElementById('chatMessages').style.display = 'none';
+                    document.getElementById('chatFooter').style.display = 'none';
+                }
+            }
+        }
+
+        // Start chat with a supplier
+        function startChat(supplierName) {
+            currentChatSupplier = supplierName;
+            document.getElementById('chatSupplierList').style.display = 'none';
+            document.getElementById('chatMessages').style.display = 'block';
+            document.getElementById('chatFooter').style.display = 'flex';
+            
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = '';
+            
+            // Add existing messages
+            supplierMessages[supplierName].forEach(msg => {
+                addChatMessage(msg.sender, msg.text);
+            });
+            
+            // Update chat title
+            document.querySelector('.chat-title').textContent = `Trò chuyện với ${supplierName}`;
+        }
+
+        // Add a message to the chat
+        function addChatMessage(sender, text) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender === 'supplier' ? 'incoming' : 'outgoing'}`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Send a message
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message && currentChatSupplier) {
+                // Add to our messages array
+                supplierMessages[currentChatSupplier].push({
+                    sender: 'user',
+                    text: message
+                });
+                
+                // Add to chat display
+                addChatMessage('user', message);
+                
+                // Clear input
+                input.value = '';
+                
+                // Simulate response after a delay
+                setTimeout(() => {
+                    const responses = [
+                        "Chúng tôi sẽ kiểm tra thông tin cho bạn.",
+                        "Cảm ơn tin nhắn của bạn.",
+                        "Nhân viên của chúng tôi sẽ liên hệ với bạn sớm.",
+                        "Chúng tôi đánh giá cao hợp tác của bạn.",
+                        "Câu hỏi hay, để tôi kiểm tra thông tin."
+                    ];
+                    const response = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    supplierMessages[currentChatSupplier].push({
+                        sender: 'supplier',
+                        text: response
+                    });
+                    
+                    addChatMessage('supplier', response);
+                }, 1000 + Math.random() * 2000);
+            }
+        }
+
+        // Handle Enter key in chat input
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Global timer variable
+        let datetimeInterval;
+        
+        // Navigation functions
+        function showDashboard() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('poCreationPage').style.display = 'none';
+            document.getElementById('poConfirmationPage').style.display = 'none';
+            document.getElementById('orderTrackingPage').style.display = 'none';
+            document.getElementById('supplierInfoPage').style.display = 'none';
+            document.getElementById('dashboardPage').style.display = 'flex';
+            startDateTimeUpdates();
+            
+            // Show chat bubble after login
+            document.getElementById('chatBubble').style.display = 'flex';
+        }
+        
+        function showLogin() {
+            document.getElementById('dashboardPage').style.display = 'none';
+            document.getElementById('poCreationPage').style.display = 'none';
+            document.getElementById('poConfirmationPage').style.display = 'none';
+            document.getElementById('orderTrackingPage').style.display = 'none';
+            document.getElementById('supplierInfoPage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            stopDateTimeUpdates();
+            
+            // Hide chat bubble when logged out
+            document.getElementById('chatBubble').style.display = 'none';
+            document.getElementById('chatWindow').style.display = 'none';
+        }
+
+        function showPoCreation() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('dashboardPage').style.display = 'none';
+            document.getElementById('poConfirmationPage').style.display = 'none';
+            document.getElementById('orderTrackingPage').style.display = 'none';
+            document.getElementById('supplierInfoPage').style.display = 'none';
+            document.getElementById('poCreationPage').style.display = 'flex';
+            initPOCreation();
+            startDateTimeUpdates();
+        }
+
+        // Date/time functions
+        function updateAllDateTimes() {
+            const now = new Date();
+            const options = { 
+                weekday: 'short', 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            const datetimeString = now.toLocaleDateString('en-US', options);
+            
+            // Update all datetime displays
+            const datetimeElements = document.querySelectorAll('.datetime');
+            datetimeElements.forEach(element => {
+                element.textContent = datetimeString;
+            });
+        }
+
+        function startDateTimeUpdates() {
+            // Clear any existing interval
+            if (datetimeInterval) {
+                clearInterval(datetimeInterval);
+            }
+            // Update immediately
+            updateAllDateTimes();
+            // Set interval for continuous updates
+            datetimeInterval = setInterval(updateAllDateTimes, 1000);
+        }
+
+        function stopDateTimeUpdates() {
+            if (datetimeInterval) {
+                clearInterval(datetimeInterval);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            startDateTimeUpdates();
+            // Hide chat bubble initially (will show after login)
+            document.getElementById('chatBubble').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
