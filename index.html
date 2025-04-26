@@ -1206,7 +1206,9 @@
                                 <th>Model</th>
                                 <th>Product Name</th>
                                 <th>Description</th>
-                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Price per unit</th>
+                                <th>Total Price</th>
                             </tr>
                         </thead>
                         <tbody id="productsTableBody">
@@ -1480,19 +1482,41 @@
     <script>
         // Sample inventory data with Vietnamese characters
         const inventoryItems = [
-            { id: 'item1', name: 'Mạ kẽm nhúng nóng thép khe co giãn', price:4900},
-            { id: 'item2', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 220', price: 4900 },
-            { id: 'item3', name: 'Mạ kẽm nhúng nóng kẽm nhúng nóng tấm thép đệm ray 370', price: 4900 },
-            { id: 'item4', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', price:4900 },
-            { id: 'item5', name: 'Mạ kẽm nhúng nóng thép V50', price:4900 },
-            { id: 'item6', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', price:4900 },
-            { id: 'item7', name: 'Mạ kẽm nhúng nóng', price:5300 },
-            { id: 'item8', name: 'Mạ kẽm nhúng nóng V75', price:5300 },
-            { id: 'item9', name: 'Mạ kẽm nhúng nóng Thép tấm', price:4900 },
-            { id: 'item10', name: 'Mạ kẽm nhúng nóng Thép', price:5300 },
-            { id: 'item11', name: 'Mạ kẽm nhúng nóng Thép V dập', price:5300 },
-            { id: 'item12', name: 'Mạ kẽm nhúng nóng Tấm thép đệm ray', price:4900 },
-            { id: 'item13', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', price:4900 }
+            { id: 'item1', name: 'Lập là', description: '10lyx520x3420', price: 2220037.50 },
+            { id: 'item2', name: 'Lập là', description: '10lyx320x3320', price: 1326325.00 },
+            { id: 'item3', name: 'Lập là', description: '10lyx100x3400', price: 424331.25 },
+            { id: 'item4', name: 'Lập là', description: '10lyx100x2000', price: 247679.17 },
+            { id: 'item5', name: 'Lập là', description: '10ly x 93 x 3300', price: 382925.00 },
+            { id: 'item6', name: 'Lập là', description: '10ly x 93 x 1800', price: 208687.50 },
+            { id: 'item7', name: 'Lập là', description: '10ly x 140 x 3420', price: 597575.00 },
+            { id: 'item8', name: 'Lập là', description: '10ly x 140 x 535', price: 93467.71 },
+            { id: 'item9', name: 'Lập là', description: '10ly x 140 x 492', price: 86014.58 },
+            { id: 'item10', name: 'Lập là', description: '10ly x 140 x 408', price: 71329.17 },
+            { id: 'item11', name: 'Lập là', description: '10ly x 140 x 1980', price: 345825.00 },
+            { id: 'item12', name: 'Thép tấm Q235B/SS400', description: '20x1500x5980mm', price: 22036690.48 },
+            { id: 'item13', name: 'Thép cuộn cán nóng', description: '1.2 x 600', price: 400666.67 },
+            { id: 'item14', name: 'Thép cuộn cán nóng', description: '25x2200', price: 58275000.00 },
+            { id: 'item15', name: 'Tấm inox 304', description: '20x1500x6000mm', price: 84337499.88 },
+            { id: 'item16', name: 'Thép chịu mài mòn', description: '6x1250x2500', price: 10360000.00 },
+            { id: 'item17', name: 'Thép chịu mài mòn', description: '50x2000x4000', price: 314000000.00 },
+            { id: 'item18', name: 'Hộp thép đen', description: '0.8x3000', price: 124300.00 },
+            { id: 'item19', name: 'Hộp thép đen', description: '5x12000', price: 141309.09 },
+            { id: 'item20', name: 'Mạ kẽm nhúng nóng thép khe co giãn', description: 'V50x50x5x1500', price: 4900.00 },
+            { id: 'item21', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 220', description: '', price: 4900.00 },
+            { id: 'item22', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 370', description: '', price: 4900.00 },
+            { id: 'item23', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: '1500x2200x165', price: 4900.00 },
+            { id: 'item24', name: 'Mạ kẽm nhúng nóng thép V50', description: '', price: 4900.00 },
+            { id: 'item25', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', price: 4900.00 },
+            { id: 'item26', name: 'Mạ kẽm nhúng nóng', description: 'V50x50x5', price: 5300.00 },
+            { id: 'item27', name: 'Mạ kẽm nhúng nóng', description: 'V75x75x5', price: 5300.00 },
+            { id: 'item28', name: 'Mạ kẽm nhúng nóng Thép tấm', description: '5x100x6000', price: 4900.00 },
+            { id: 'item29', name: 'Mạ kẽm nhúng nóng Thép', description: 'V100x100x10x6000', price: 5300.00 },
+            { id: 'item30', name: 'Mạ kẽm nhúng nóng Thép V dập', description: '50x50x6x3000', price: 5300.00 },
+            { id: 'item31', name: 'Mạ kẽm nhúng nóng Tấm thép đệm ray', description: '220x20', price: 4900.00 },
+            { id: 'item32', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', price: 4900.00 },
+            { id: 'item33', name: 'Bulong M72x850', description: 'ren dài 120, mạ kẽm nhúng nóng phần ren', price: 830000.00 },
+            { id: 'item34', name: 'Ty ren 1 đầu ren', description: 'M20x150 (ren dài 30, phần ko ren D20)', price: 30000.00 },
+            { id: 'item35', name: 'Bộ bulong inox 304', description: 'ống ren D74.5, M50x150 + bulong ren suốt M50x250', price: 970000.00 }
         ];
 
         // Supplier data with products (Vietnamese names) and travel times
@@ -1506,9 +1530,17 @@
                 address: 'Tầng 3 Tòa nhà Hải Minh,ĐB Nguyễn Bỉnh Khiêm, Phường Đông Hải 2, Quận Hải An, Tp. Hải Phòng, Hải Phòng',
                 travelTime: '35 phút',
                 products: [
-                    { model: 'NP-001', name: 'Mạ kẽm nhúng nóng thép khe co giãn', description: 'Thép mạ kẽm chất lượng cao', price: 4900 },
-                    { model: 'NP-002', name: 'Tấm thép đệm ray 220', description: 'Tấm thép đệm ray kích thước 220', price: 4900 },
-                    { model: 'NP-003', name: 'Thép V50', description: 'Thép chữ V kích thước 50', price: 4900 }
+                    { id: 'item1', model: '', name: 'Lập là', description: '10lyx520x3420', quantity: 24, price: 2220037.50, total: 53280900.00 },
+                    { id: 'item2', model: '', name: 'Lập là', description: '10lyx320x3320', quantity: 24, price: 1326325.00, total: 31831800.00 },
+                    { id: 'item3', model: '', name: 'Lập là', description: '10lyx100x3400', quantity: 48, price: 424331.25, total: 20367900.00 },
+                    { id: 'item4', model: '', name: 'Lập là', description: '10lyx100x2000', quantity: 24, price: 247679.17, total: 5944300.00 },
+                    { id: 'item5', model: '', name: 'Lập là', description: '10ly x 93 x 3300', quantity: 48, price: 382925.00, total: 18380400.00 },
+                    { id: 'item6', model: '', name: 'Lập là', description: '10ly x 93 x 1800', quantity: 24, price: 208687.50, total: 5008500.00 },
+                    { id: 'item7', model: '', name: 'Lập là', description: '10ly x 140 x 3420', quantity: 72, price: 597575.00, total: 43025400.00 },
+                    { id: 'item8', model: '', name: 'Lập là', description: '10ly x 140 x 535', quantity: 288, price: 93467.71, total: 26918700.00 },
+                    { id: 'item9', model: '', name: 'Lập là', description: '10ly x 140 x 492', quantity: 144, price: 86014.58, total: 12386100.00 },
+                    { id: 'item10', model: '', name: 'Lập là', description: '10ly x 140 x 408', quantity: 144, price: 71329.17, total: 10271400.00 },
+                    { id: 'item11', model: '', name: 'Lập là', description: '10ly x 140 x 1980', quantity: 24, price: 345825.00, total: 8299800.00 }
                 ]
             },
             {
@@ -1520,9 +1552,9 @@
                 address: 'số 81 đường An Đà, Ngô Quyền, Hải Phòng',
                 travelTime: '40 phút',
                 products: [
-                    { model: 'PV-101', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: 'Tấm Panel hở mạ kẽm', price: 4900 },
-                    { model: 'PV-102', name: 'Thép V75', description: 'Thép chữ V kích thước 75', price: 5300 },
-                    { model: 'PV-103', name: 'Thép tấm', description: 'Thép tấm các loại', price: 4900 }
+                    { id: 'item12', model: 'SS400', name: 'Thép tấm Q235B/SS400', description: '20x1500x5980mm', quantity: 21, price: 22036690.48, total: 462770500.00 },
+                    { id: 'item13', model: 'Q355B', name: 'Thép cuộn cán nóng', description: '1.2 x 600', quantity: 150, price: 400666.67, total: 60100000.00 },
+                    { id: 'item14', model: '', name: 'Thép cuộn cán nóng', description: '25x2200', quantity: 12, price: 58275000.00, total: 699300000.00 }
                 ]
             },
             {
@@ -1534,9 +1566,11 @@
                 address: 'Cụm CN Hà Bình Phương, xã Hà Hồi, huyện Thường Tín, TP Hà Nội',
                 travelTime: '3 giờ',
                 products: [
-                    { model: 'SV-201', name: 'Mạ kẽm nhúng nóng Thép V dập', description: 'Thép V dập mạ kẽm', price: 5300 },
-                    { model: 'SV-202', name: 'Tấm thép đệm ray 370', description: 'Tấm thép đệm ray kích thước 370', price: 4900 },
-                    { model: 'SV-203', name: 'Kết cấu thép (phụ kiện tang cáp)', description: 'Phụ kiện kết cấu thép cho tang cáp', price: 4900 }
+                    { id: 'item15', model: '', name: 'Tấm inox 304', description: '20x1500x6000mm', quantity: 8, price: 84337499.88, total: 674699999.00 },
+                    { id: 'item16', model: '', name: 'Thép chịu mài mòn', description: '6x1250x2500', quantity: 60, price: 10360000.00, total: 621600000.00 },
+                    { id: 'item17', model: '', name: 'Thép chịu mài mòn', description: '50x2000x4000', quantity: 2, price: 314000000.00, total: 628000000.00 },
+                    { id: 'item18', model: '', name: 'Hộp thép đen', description: '0.8x3000', quantity: 7500, price: 124300.00, total: 932250000.00 },
+                    { id: 'item19', model: '', name: 'Hộp thép đen', description: '5x12000', quantity: 550, price: 141309.09, total: 77720000.00 }
                 ]
             },
             {
@@ -1548,9 +1582,19 @@
                 address: 'KCN Dệt May Phố Nối, Xã Liêu Xá, Huyện Yên Mỹ, Tỉnh Hưng Yên',
                 travelTime: '2 giờ 15 phút',
                 products: [
-                    { model: 'GV-201', name: 'Mạ kẽm nóng Thép V dập', description: 'Thép V dập mạ kẽm', price: 5300 },
-                    { model: 'GV-202', name: 'Tấm thép ray 370', description: 'Tấm thép đệm ray kích thước 370', price: 4900 },
-                    { model: 'GV-203', name: 'Kết cấu thép', description: 'Phụ kiện kết cấu thép cho tang cáp', price: 4900 }
+                    { id: 'item20', model: '', name: 'Mạ kẽm nhúng nóng thép khe co giãn', description: 'V50x50x5x1500', quantity: 3733, price: 4900.00, total: 18291700.00 },
+                    { id: 'item21', model: '', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 220', description: '', quantity: 5450, price: 4900.00, total: 26705000.00 },
+                    { id: 'item22', model: '', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 370', description: '', quantity: 15425, price: 4900.00, total: 75582500.00 },
+                    { id: 'item23', model: '', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: '1500x2200x165', quantity: 3500, price: 4900.00, total: 17150000.00 },
+                    { id: 'item24', model: '', name: 'Mạ kẽm nhúng nóng thép V50', description: '', quantity: 7927, price: 4900.00, total: 38842300.00 },
+                    { id: 'item25', model: '', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', quantity: 6900, price: 4900.00, total: 33810000.00 },
+                    { id: 'item26', model: '', name: 'Mạ kẽm nhúng nóng', description: 'V50x50x5', quantity: 50000, price: 5300.00, total: 265000000.00 },
+                    { id: 'item27', model: '', name: 'Mạ kẽm nhúng nóng', description: 'V75x75x5', quantity: 50000, price: 5300.00, total: 265000000.00 },
+                    { id: 'item28', model: '', name: 'Mạ kẽm nhúng nóng Thép tấm', description: '5x100x6000', quantity: 50000, price: 4900.00, total: 245000000.00 },
+                    { id: 'item29', model: '', name: 'Mạ kẽm nhúng nóng Thép', description: 'V100x100x10x6000', quantity: 50000, price: 5300.00, total: 265000000.00 },
+                    { id: 'item30', model: '', name: 'Mạ kẽm nhúng nóng Thép V dập', description: '50x50x6x3000', quantity: 50000, price: 5300.00, total: 265000000.00 },
+                    { id: 'item31', model: '', name: 'Mạ kẽm nhúng nóng Tấm thép đệm ray', description: '220x20', quantity: 50000, price: 4900.00, total: 245000000.00 },
+                    { id: 'item32', model: '', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', quantity: 50000, price: 4900.00, total: 245000000.00 }
                 ]
             },
             {
@@ -1562,9 +1606,7 @@
                 address: 'Khu 7 Tầng, Văn Miếu Đường Lâm, Thị Xã Sơn Tây, Hà Nội',
                 travelTime: '3 giờ 30 phút',
                 products: [
-                    { model: 'SV-201', name: 'Mạ kẽm nhúng nóng Thép V dập', description: 'Thép V dập mạ kẽm', price: 5300 },
-                    { model: 'SV-202', name: 'Tấm thép đệm ray 370', description: 'Tấm thép đệm ray kích thước 370', price: 4900 },
-                    { model: 'SV-203', name: 'Kết cấu thép (phụ kiện tang cáp)', description: 'Phụ kiện kết cấu thép cho tang cáp', price: 4900 }
+                    { id: 'item33', model: 'S45C', name: 'Bulong M72x850', description: 'ren dài 120, mạ kẽm nhúng nóng phần ren', quantity: 165, price: 830000.00, total: 136950000.00 }
                 ]
             },
             {
@@ -1576,9 +1618,8 @@
                 address: '15/23 đường TL50, KP2, P.Thạnh Lộc, Q.12, TP.Hồ Chí Minh',
                 travelTime: '35 giờ',
                 products: [
-                    { model: 'SV-201', name: 'Mạ kẽm nhúng nóng Thép V dập', description: 'Thép V dập mạ kẽm', price: 5300 },
-                    { model: 'SV-202', name: 'Tấm thép đệm ray 370', description: 'Tấm thép đệm ray kích thước 370', price: 4900 },
-                    { model: 'SV-203', name: 'Kết cấu thép (phụ kiện tang cáp)', description: 'Phụ kiện kết cấu thép cho tang cáp', price: 4900 }
+                    { id: 'item34', model: '', name: 'Ty ren 1 đầu ren', description: 'M20x150 (ren dài 30, phần ko ren D20)', quantity: 3000, price: 30000.00, total: 90000000.00 },
+                    { id: 'item35', model: '', name: 'Bộ bulong inox 304', description: 'ống ren D74.5, M50x150 + bulong ren suốt M50x250', quantity: 102, price: 970000.00, total: 98940000.00 }
                 ]
             }
         ];
@@ -1600,8 +1641,8 @@
                 qrCodeData: '',
                 orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1001',
                 items: [
-                    { itemName: 'Mạ kẽm nhúng nóng thép khe co giãn', quantity: 10, price: 4900, total: 49000 },
-                    { itemName: 'Tấm thép đệm ray 220', quantity: 20, price: 4900, total: 98000 }
+                    { itemName: 'Lập là', description: '10lyx520x3420', quantity: 10, price: 2220037.50, total: 22200375.00 },
+                    { itemName: 'Lập là', description: '10lyx320x3320', quantity: 20, price: 1326325.00, total: 26526500.00 }
                 ],
                 travelTime: '2 giờ 30 phút'
             },
@@ -1616,7 +1657,7 @@
                 qrCodeData: '',
                 orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1002',
                 items: [
-                    { itemName: 'Mạ kẽm nhúng nóng Tấm Panel hở', quantity: 50, price: 4900, total: 245000 }
+                    { itemName: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: '1500x2200x165', quantity: 50, price: 4900.00, total: 245000.00 }
                 ],
                 travelTime: '3 giờ 15 phút'
             },
@@ -1631,7 +1672,7 @@
                 qrCodeData: '',
                 orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1003',
                 items: [
-                    { itemName: 'Thép V dập', quantity: 40, price: 5300, total: 212000 }
+                    { itemName: 'Thép V dập', description: '50x50x6x3000', quantity: 40, price: 5300.00, total: 212000.00 }
                 ],
                 travelTime: '4 giờ'
             },
@@ -1646,7 +1687,7 @@
                 qrCodeData: '',
                 orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1004',
                 items: [
-                    { itemName: 'Thép tấm', quantity: 25, price: 4900, total: 122500 }
+                    { itemName: 'Thép tấm', description: '5x100x6000', quantity: 25, price: 4900.00, total: 122500.00 }
                 ],
                 travelTime: '2 giờ 45 phút'
             }
@@ -1704,6 +1745,11 @@
             };
             
             return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Format currency for display
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
         }
 
         // Generate QR code data string that will show the order image when scanned
@@ -1780,7 +1826,7 @@
             
             order.items.forEach(item => {
                 detailsHTML += `
-                    <li>${item.itemName} - Số lượng: ${item.quantity} - Giá: ${item.price} - Tổng: ${item.total}</li>
+                    <li>${item.itemName} (${item.description}) - Số lượng: ${item.quantity} - Giá: ${formatCurrency(item.price)} - Tổng: ${formatCurrency(item.total)}</li>
                 `;
             });
             
@@ -1831,24 +1877,51 @@
                 
                 // Display the predefined travel time
                 document.getElementById('travelTimeResult').textContent = `Direct travel time: ${selectedSupplier.travelTime}`;
+                
+                // Clear any existing items
+                document.getElementById('itemsContainer').innerHTML = '';
+                
+                // Add first item row with filtered products
+                addItemRow();
             }
         }
 
-        // Add item row
+        // Add item row with filtered products based on selected supplier
         function addItemRow() {
             const container = document.getElementById('itemsContainer');
             const rowId = 'item-' + Date.now();
+            const supplierSelect = document.getElementById('supplierSelect');
+            const selectedSupplierId = supplierSelect.value;
             
             const itemRow = document.createElement('div');
             itemRow.className = 'item-row';
             itemRow.id = rowId;
             
-            // Create item select dropdown
+            // Get the selected supplier's products
+            let supplierProducts = [];
+            if (selectedSupplierId) {
+                const selectedSupplier = suppliers.find(s => s.id === selectedSupplierId);
+                if (selectedSupplier) {
+                    supplierProducts = selectedSupplier.products;
+                }
+            }
+            
+            // Create item select dropdown with filtered products
             let itemSelect = '<select class="item-select" onchange="updateItemPrice(\'' + rowId + '\')">';
             itemSelect += '<option value="">Chọn sản phẩm</option>';
-            inventoryItems.forEach(item => {
-                itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.price} VND)</option>`;
-            });
+            
+            if (supplierProducts.length > 0) {
+                // Show only the selected supplier's products
+                supplierProducts.forEach(item => {
+                    itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.description}) - ${formatCurrency(item.price)}</option>`;
+                });
+            } else {
+                // If no supplier selected, show all products
+                inventoryItems.forEach(item => {
+                    itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.description}) - ${formatCurrency(item.price)}</option>`;
+                });
+            }
+            
             itemSelect += '</select>';
             
             itemRow.innerHTML = `
@@ -1886,7 +1959,7 @@
             const price = parseFloat(row.querySelector('.item-price').value) || 0;
             const total = (quantity * price).toFixed(2);
             
-            row.querySelector('.item-total').value = total ? total + ' VND' : '';
+            row.querySelector('.item-total').value = total ? formatCurrency(total) : '';
             calculateTotals();
         }
 
@@ -1902,11 +1975,11 @@
             const totals = document.querySelectorAll('.item-total');
             
             totals.forEach(itemTotal => {
-                const value = parseFloat(itemTotal.value.replace(' VND', '')) || 0;
+                const value = parseFloat(itemTotal.value.replace(/[^0-9.-]+/g,"")) || 0;
                 total += value;
             });
             
-            document.getElementById('total').textContent = total.toLocaleString('vi-VN') + ' VND';
+            document.getElementById('total').textContent = formatCurrency(total);
         }
 
         // Submit PO
@@ -1932,11 +2005,17 @@
                 const select = row.querySelector('.item-select');
                 const quantity = row.querySelector('.item-quantity').value;
                 const price = row.querySelector('.item-price').value;
+                const selectedOption = select.options[select.selectedIndex];
                 
                 if (select.value && quantity && price) {
+                    // Extract description from the option text
+                    const optionText = selectedOption.text;
+                    const description = optionText.match(/\(([^)]+)\)/)[1];
+                    
                     items.push({
                         itemId: select.value,
-                        itemName: select.options[select.selectedIndex].text.split(' (')[0],
+                        itemName: selectedOption.text.split(' (')[0],
+                        description: description,
                         quantity: quantity,
                         price: price,
                         total: (quantity * price).toFixed(2)
@@ -2036,10 +2115,20 @@
                 let itemSelect = '<select class="item-select" onchange="updateItemPrice(\'' + rowId + '\')">';
                 itemSelect += '<option value="">Chọn sản phẩm</option>';
                 
-                inventoryItems.forEach(invItem => {
-                    const selected = invItem.name === item.itemName ? 'selected' : '';
-                    itemSelect += `<option value="${invItem.id}" data-price="${invItem.price}" ${selected}>${invItem.name} (${invItem.price} VND)</option>`;
-                });
+                // Get the selected supplier's products
+                const selectedSupplier = suppliers.find(s => s.name === currentPO.supplier);
+                if (selectedSupplier) {
+                    selectedSupplier.products.forEach(prod => {
+                        const selected = prod.name === item.itemName && prod.description === item.description ? 'selected' : '';
+                        itemSelect += `<option value="${prod.id}" data-price="${prod.price}" ${selected}>${prod.name} (${prod.description}) - ${formatCurrency(prod.price)}</option>`;
+                    });
+                } else {
+                    // If supplier not found, show all products
+                    inventoryItems.forEach(invItem => {
+                        const selected = invItem.name === item.itemName && invItem.description === item.description ? 'selected' : '';
+                        itemSelect += `<option value="${invItem.id}" data-price="${invItem.price}" ${selected}>${invItem.name} (${invItem.description}) - ${formatCurrency(invItem.price)}</option>`;
+                    });
+                }
                 
                 itemSelect += '</select>';
                 
@@ -2047,7 +2136,7 @@
                     ${itemSelect}
                     <input type="number" class="item-quantity" min="1" value="${item.quantity}" onchange="calculateRowTotal('${rowId}')">
                     <input type="text" class="item-price" readonly value="${item.price}">
-                    <input type="text" class="item-total" readonly value="${item.total} VND">
+                    <input type="text" class="item-total" readonly value="${formatCurrency(item.total)}">
                     <button class="remove-item" onclick="removeItemRow('${rowId}')">×</button>
                 `;
                 
@@ -2214,10 +2303,10 @@
             currentPO.items.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${item.itemName}</td>
+                    <td>${item.itemName} (${item.description})</td>
                     <td>${item.quantity}</td>
-                    <td>${item.price} VND</td>
-                    <td>${item.total} VND</td>
+                    <td>${formatCurrency(item.price)}</td>
+                    <td>${formatCurrency(item.total)}</td>
                 `;
                 itemsContainer.appendChild(row);
             });
@@ -2333,7 +2422,9 @@
                     <td>${product.model}</td>
                     <td>${product.name}</td>
                     <td>${product.description}</td>
-                    <td>${product.price.toLocaleString('vi-VN')} VND</td>
+                    <td>${product.quantity}</td>
+                    <td>${formatCurrency(product.price)}</td>
+                    <td>${formatCurrency(product.total)}</td>
                 `;
                 productsTableBody.appendChild(row);
             });
