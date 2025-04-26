@@ -1913,12 +1913,12 @@
             if (supplierProducts.length > 0) {
                 // Show only the selected supplier's products
                 supplierProducts.forEach(item => {
-                    itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.description}) - ${formatCurrency(item.price)}</option>`;
+                    itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.description})</option>`;
                 });
             } else {
                 // If no supplier selected, show all products
                 inventoryItems.forEach(item => {
-                    itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.description}) - ${formatCurrency(item.price)}</option>`;
+                    itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.description})</option>`;
                 });
             }
             
@@ -2120,13 +2120,13 @@
                 if (selectedSupplier) {
                     selectedSupplier.products.forEach(prod => {
                         const selected = prod.name === item.itemName && prod.description === item.description ? 'selected' : '';
-                        itemSelect += `<option value="${prod.id}" data-price="${prod.price}" ${selected}>${prod.name} (${prod.description}) - ${formatCurrency(prod.price)}</option>`;
+                        itemSelect += `<option value="${prod.id}" data-price="${prod.price}" ${selected}>${prod.name} (${prod.description})</option>`;
                     });
                 } else {
                     // If supplier not found, show all products
                     inventoryItems.forEach(invItem => {
                         const selected = invItem.name === item.itemName && invItem.description === item.description ? 'selected' : '';
-                        itemSelect += `<option value="${invItem.id}" data-price="${invItem.price}" ${selected}>${invItem.name} (${invItem.description}) - ${formatCurrency(invItem.price)}</option>`;
+                        itemSelect += `<option value="${invItem.id}" data-price="${invItem.price}" ${selected}>${invItem.name} (${invItem.description})</option>`;
                     });
                 }
                 
