@@ -1109,6 +1109,21 @@
             border-radius: 5px;
             font-size: 16px;
         }
+
+        /* Delivery time input */
+        .delivery-time-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* Time container */
+        .time-container {
+            display: flex;
+            gap: 10px;
+        }
     </style>
     <!-- Include QR Code library -->
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
@@ -1252,7 +1267,10 @@
                 
                 <div class="form-row">
                     <div class="form-label">Delivery Date:</div>
-                    <input type="date" class="form-input" id="deliveryDate">
+                    <div class="time-container">
+                        <input type="date" class="form-input" id="deliveryDate">
+                        <input type="time" class="delivery-time-input" id="deliveryTime" value="09:00">
+                    </div>
                 </div>
 
                 <div class="items-section">
@@ -1322,12 +1340,12 @@
                         <div class="detail-value" id="confirmationSupplier"></div>
                     </div>
                     <div class="detail-row">
-                        <div class="detail-label">Delivery Date:</div>
-                        <div class="detail-value" id="confirmationDeliveryDate"></div>
-                    </div>
-                    <div class="detail-row">
                         <div class="detail-label">Order Date:</div>
                         <div class="detail-value" id="confirmationOrderDate"></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Delivery Date:</div>
+                        <div class="detail-value" id="confirmationDeliveryDate"></div>
                     </div>
                     <div class="detail-row">
                         <div class="detail-label">Estimated Travel Time:</div>
@@ -1592,8 +1610,8 @@
             {
                 poNumber: 'PO-20250420-6437',
                 supplier: 'Nam Phát',
-                orderDate: '2025-04-20',
-                deliveryDate: '2025-05-15',
+                orderDate: '2025-04-20T14:30:00',
+                deliveryDate: '2025-05-15T09:00:00',
                 shippingAddress: 'Tầng 3 Tòa nhà Hải Minh,ĐB Nguyễn Bỉnh Khiêm, Phường Đông Hải 2, Quận Hải An, Tp. Hải Phòng, Hải Phòng',
                 total: '14.700.000 VND',
                 status: 'delivery',
@@ -1608,8 +1626,8 @@
             {
                 poNumber: 'PO-20241203-2302',
                 supplier: 'CÔNG TY TNHH TV GALVANIZING JV',
-                orderDate: '2024-11-18',
-                deliveryDate: '2024-12-03',
+                orderDate: '2024-11-18T10:15:00',
+                deliveryDate: '2024-12-03T14:00:00',
                 shippingAddress: 'KCN Dệt May Phố Nối, Xã Liêu Xá, Huyện Yên Mỹ, Tỉnh Hưng Yên',
                 total: '24.500.000 VND',
                 status: 'completed',
@@ -1623,8 +1641,8 @@
             {
                 poNumber: 'PO-20240523-8272',
                 supplier: 'Quốc tế Sao Việt',
-                orderDate: '2024-05-20',
-                deliveryDate: '2024-06-27',
+                orderDate: '2024-05-20T16:45:00',
+                deliveryDate: '2024-06-27T11:30:00',
                 shippingAddress: 'Cụm CN Hà Bình Phương, xã Hà Hồi, huyện Thường Tín, TP Hà Nội',
                 total: '32.800.000 VND',
                 status: 'canceled',
@@ -1638,8 +1656,8 @@
             {
                 poNumber: 'PO-20240714-1001',
                 supplier: 'Công ty TNHH đầu tư thương mại thép Giang Sơn Thịnh',
-                orderDate: '2024-05-22',
-                deliveryDate: '2024-06-12',
+                orderDate: '2024-05-22T09:20:00',
+                deliveryDate: '2024-06-12T15:45:00',
                 shippingAddress: '15/23 đường TL50, KP2, P.Thạnh Lộc, Q.12, TP.Hồ Chí Minh',
                 total: '18.500.000 VND',
                 status: 'completed',
@@ -1680,8 +1698,9 @@
             return `PO-${year}${month}${day}-${randomNum}`;
         }
 
-        // Format date for display
-        function formatDate(dateString) {
+        // Format date for display with time
+        function formatDateTime(dateString) {
+            const date = new Date(dateString);
             const options = { 
                 weekday: 'short', 
                 year: 'numeric', 
@@ -1689,11 +1708,10 @@
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
-                second: '2-digit',
                 hour12: false
             };
             
-            return new Date(dateString).toLocaleDateString('en-US', options);
+            return date.toLocaleDateString('en-US', options);
         }
 
         // Generate QR code data string that will show the order image when scanned
@@ -1755,8 +1773,8 @@
             let detailsHTML = `
                 <p><strong>Số PO:</strong> ${order.poNumber}</p>
                 <p><strong>Nhà cung cấp:</strong> ${order.supplier}</p>
-                <p><strong>Ngày đặt hàng:</strong> ${formatDate(order.orderDate)}</p>
-                <p><strong>Ngày giao hàng:</strong> ${formatDate(order.deliveryDate)}</p>
+                <p><strong>Ngày đặt hàng:</strong> ${formatDateTime(order.orderDate)}</p>
+                <p><strong>Ngày giao hàng:</strong> ${formatDateTime(order.deliveryDate)}</p>
                 <p><strong>Thời gian vận chuyển ước tính:</strong> ${order.travelTime || 'Không tính toán'}</p>
                 <p><strong>Trạng thái:</strong> <span class="${order.status === 'completed' ? 'status-completed' : 
                                                          order.status === 'delivery' ? 'status-delivery' : 'status-canceled'}">
@@ -1952,6 +1970,7 @@
             const supplier = document.getElementById('supplierSelect').value;
             const supplierText = document.getElementById('supplierSelect').options[document.getElementById('supplierSelect').selectedIndex].text;
             const deliveryDate = document.getElementById('deliveryDate').value;
+            const deliveryTime = document.getElementById('deliveryTime').value;
             const travelTime = document.getElementById('travelTimeResult').textContent.replace('Direct travel time: ', '');
             
             if (!supplier) {
@@ -1961,6 +1980,11 @@
             
             if (!deliveryDate) {
                 alert('Vui lòng chọn ngày giao hàng');
+                return;
+            }
+            
+            if (!deliveryTime) {
+                alert('Vui lòng chọn thời gian giao hàng');
                 return;
             }
             
@@ -1991,7 +2015,12 @@
             }
             
             // Generate order image URL
-            const orderDate = new Date().toISOString().split('T')[0];
+            const now = new Date();
+            const orderDateTime = now.toISOString();
+            
+            // Combine date and time for delivery
+            const deliveryDateTime = `${deliveryDate}T${deliveryTime}:00`;
+            
             const total = document.getElementById('total').textContent;
             
             // Get the selected supplier's address
@@ -2000,13 +2029,14 @@
             
             // Check if we're editing an existing PO
             if (isEditingPO && currentPO) {
-                // Update the existing PO
+                // Update the existing PO with current timestamp
                 currentPO.supplier = supplierText;
-                currentPO.deliveryDate = deliveryDate;
+                currentPO.deliveryDate = deliveryDateTime;
                 currentPO.items = items;
                 currentPO.total = total;
                 currentPO.travelTime = travelTime;
                 currentPO.shippingAddress = shippingAddress;
+                currentPO.orderDate = now.toISOString(); // Update order date to current time
                 
                 // Update the orders array
                 const index = orders.findIndex(o => o.poNumber === currentPO.poNumber);
@@ -2017,12 +2047,12 @@
                 // Reset editing flag
                 isEditingPO = false;
             } else {
-                // Create a new PO
+                // Create a new PO with current timestamp
                 currentPO = {
                     poNumber,
                     supplier: supplierText,
-                    deliveryDate,
-                    orderDate: orderDate,
+                    deliveryDate: deliveryDateTime,
+                    orderDate: orderDateTime,
                     items,
                     total: total,
                     status: 'delivery',
@@ -2067,7 +2097,17 @@
                 }
             }
             
-            document.getElementById('deliveryDate').value = currentPO.deliveryDate;
+            // Set delivery date and time
+            if (currentPO.deliveryDate) {
+                const deliveryDate = new Date(currentPO.deliveryDate);
+                const dateStr = deliveryDate.toISOString().split('T')[0];
+                const hours = String(deliveryDate.getHours()).padStart(2, '0');
+                const minutes = String(deliveryDate.getMinutes()).padStart(2, '0');
+                const timeStr = `${hours}:${minutes}`;
+                
+                document.getElementById('deliveryDate').value = dateStr;
+                document.getElementById('deliveryTime').value = timeStr;
+            }
             
             // Clear any existing items
             document.getElementById('itemsContainer').innerHTML = '';
@@ -2210,8 +2250,8 @@
                     <td>${order.poNumber}</td>
                     <td>${order.supplier}</td>
                     <td title="${order.shippingAddress.replace(/\n/g, ', ')}">${shortAddress}</td>
-                    <td>${formatDate(order.orderDate)}</td>
-                    <td>${formatDate(order.deliveryDate)}</td>
+                    <td>${formatDateTime(order.orderDate)}</td>
+                    <td>${formatDateTime(order.deliveryDate)}</td>
                     <td>${order.total}</td>
                     <td><span class="${statusClass}">${statusText}</span></td>
                     <td class="qr-cell">
@@ -2262,8 +2302,8 @@
             // Set basic info
             document.getElementById('confirmationPoNumber').textContent = currentPO.poNumber;
             document.getElementById('confirmationSupplier').textContent = currentPO.supplier;
-            document.getElementById('confirmationDeliveryDate').textContent = formatDate(currentPO.deliveryDate);
-            document.getElementById('confirmationOrderDate').textContent = formatDate(currentPO.orderDate);
+            document.getElementById('confirmationOrderDate').textContent = formatDateTime(currentPO.orderDate);
+            document.getElementById('confirmationDeliveryDate').textContent = formatDateTime(currentPO.deliveryDate);
             document.getElementById('confirmationTravelTime').textContent = currentPO.travelTime || 'Không tính toán';
             
             // Set items
@@ -2318,6 +2358,8 @@
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             document.getElementById('deliveryDate').valueAsDate = tomorrow;
+            // Set default delivery time to 09:00
+            document.getElementById('deliveryTime').value = '09:00';
             // Clear any existing items
             document.getElementById('itemsContainer').innerHTML = '';
             // Reset supplier selection
