@@ -1206,9 +1206,7 @@
                                 <th>Model</th>
                                 <th>Product Name</th>
                                 <th>Description</th>
-                                <th>Quantity</th>
-                                <th>Price per unit</th>
-                                <th>Total Price</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         <tbody id="productsTableBody">
@@ -1480,97 +1478,58 @@
     </div>
 
     <script>
-        // Sample inventory data with Vietnamese characters
-        const inventoryItems = [
-            { id: 'item1', name: 'Lập là', description: '10lyx520x3420', price: 2220037.50 },
-            { id: 'item2', name: 'Lập là', description: '10lyx320x3320', price: 1326325.00 },
-            { id: 'item3', name: 'Lập là', description: '10lyx100x3400', price: 424331.25 },
-            { id: 'item4', name: 'Lập là', description: '10lyx100x2000', price: 247679.17 },
-            { id: 'item5', name: 'Lập là', description: '10ly x 93 x 3300', price: 382925.00 },
-            { id: 'item6', name: 'Lập là', description: '10ly x 93 x 1800', price: 208687.50 },
-            { id: 'item7', name: 'Lập là', description: '10ly x 140 x 3420', price: 597575.00 },
-            { id: 'item8', name: 'Lập là', description: '10ly x 140 x 535', price: 93467.71 },
-            { id: 'item9', name: 'Lập là', description: '10ly x 140 x 492', price: 86014.58 },
-            { id: 'item10', name: 'Lập là', description: '10ly x 140 x 408', price: 71329.17 },
-            { id: 'item11', name: 'Lập là', description: '10ly x 140 x 1980', price: 345825.00 },
-            { id: 'item12', name: 'Thép tấm Q235B/SS400', description: '20x1500x5980mm', price: 22036690.48 },
-            { id: 'item13', name: 'Thép cuộn cán nóng', description: '1.2 x 600', price: 400666.67 },
-            { id: 'item14', name: 'Thép cuộn cán nóng', description: '25x2200', price: 58275000.00 },
-            { id: 'item15', name: 'Tấm inox 304', description: '20x1500x6000mm', price: 84337499.88 },
-            { id: 'item16', name: 'Thép chịu mài mòn', description: '6x1250x2500', price: 10360000.00 },
-            { id: 'item17', name: 'Thép chịu mài mòn', description: '50x2000x4000', price: 314000000.00 },
-            { id: 'item18', name: 'Hộp thép đen', description: '0.8x3000', price: 124300.00 },
-            { id: 'item19', name: 'Hộp thép đen', description: '5x12000', price: 141309.09 },
-            { id: 'item20', name: 'Mạ kẽm nhúng nóng thép khe co giãn', description: 'V50x50x5x1500', price: 4900.00 },
-            { id: 'item21', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 220', description: '', price: 4900.00 },
-            { id: 'item22', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 370', description: '', price: 4900.00 },
-            { id: 'item23', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: '1500x2200x165', price: 4900.00 },
-            { id: 'item24', name: 'Mạ kẽm nhúng nóng thép V50', description: '', price: 4900.00 },
-            { id: 'item25', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', price: 4900.00 },
-            { id: 'item26', name: 'Mạ kẽm nhúng nóng', description: 'V50x50x5', price: 5300.00 },
-            { id: 'item27', name: 'Mạ kẽm nhúng nóng', description: 'V75x75x5', price: 5300.00 },
-            { id: 'item28', name: 'Mạ kẽm nhúng nóng Thép tấm', description: '5x100x6000', price: 4900.00 },
-            { id: 'item29', name: 'Mạ kẽm nhúng nóng Thép', description: 'V100x100x10x6000', price: 5300.00 },
-            { id: 'item30', name: 'Mạ kẽm nhúng nóng Thép V dập', description: '50x50x6x3000', price: 5300.00 },
-            { id: 'item31', name: 'Mạ kẽm nhúng nóng Tấm thép đệm ray', description: '220x20', price: 4900.00 },
-            { id: 'item32', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', price: 4900.00 },
-            { id: 'item33', name: 'Bulong M72x850', description: 'ren dài 120, mạ kẽm nhúng nóng phần ren', price: 830000.00 },
-            { id: 'item34', name: 'Ty ren 1 đầu ren', description: 'M20x150 (ren dài 30, phần ko ren D20)', price: 30000.00 },
-            { id: 'item35', name: 'Bộ bulong inox 304', description: 'ống ren D74.5, M50x150 + bulong ren suốt M50x250', price: 970000.00 }
-        ];
-
         // Supplier data with products (Vietnamese names) and travel times
         const suppliers = [
             {
                 id: 'supplier1',
-                name: 'Công Ty TNHH Tiếp Vận Nam Phát',
+                name: 'Nam Phát',
                 contact: 'Đỗ Hoàng Long',
                 email: 'namphatlogistic@gmail.com',
                 phone: '0225 382 5393',
                 address: 'Tầng 3 Tòa nhà Hải Minh,ĐB Nguyễn Bỉnh Khiêm, Phường Đông Hải 2, Quận Hải An, Tp. Hải Phòng, Hải Phòng',
                 travelTime: '35 phút',
                 products: [
-                    { id: 'item1', model: '', name: 'Lập là', description: '10lyx520x3420', quantity: 24, price: 2220037.50, total: 53280900.00 },
-                    { id: 'item2', model: '', name: 'Lập là', description: '10lyx320x3320', quantity: 24, price: 1326325.00, total: 31831800.00 },
-                    { id: 'item3', model: '', name: 'Lập là', description: '10lyx100x3400', quantity: 48, price: 424331.25, total: 20367900.00 },
-                    { id: 'item4', model: '', name: 'Lập là', description: '10lyx100x2000', quantity: 24, price: 247679.17, total: 5944300.00 },
-                    { id: 'item5', model: '', name: 'Lập là', description: '10ly x 93 x 3300', quantity: 48, price: 382925.00, total: 18380400.00 },
-                    { id: 'item6', model: '', name: 'Lập là', description: '10ly x 93 x 1800', quantity: 24, price: 208687.50, total: 5008500.00 },
-                    { id: 'item7', model: '', name: 'Lập là', description: '10ly x 140 x 3420', quantity: 72, price: 597575.00, total: 43025400.00 },
-                    { id: 'item8', model: '', name: 'Lập là', description: '10ly x 140 x 535', quantity: 288, price: 93467.71, total: 26918700.00 },
-                    { id: 'item9', model: '', name: 'Lập là', description: '10ly x 140 x 492', quantity: 144, price: 86014.58, total: 12386100.00 },
-                    { id: 'item10', model: '', name: 'Lập là', description: '10ly x 140 x 408', quantity: 144, price: 71329.17, total: 10271400.00 },
-                    { id: 'item11', model: '', name: 'Lập là', description: '10ly x 140 x 1980', quantity: 24, price: 345825.00, total: 8299800.00 }
+                    { id: 'np1', model: '', name: 'Lập là', description: '10lyx520x3420', price: 2220037.50 },
+                    { id: 'np2', model: '', name: 'Lập là', description: '10lyx320x3320', price: 1326325.00 },
+                    { id: 'np3', model: '', name: 'Lập là', description: '10lyx100x3400', price: 424331.25 },
+                    { id: 'np4', model: '', name: 'Lập là', description: '10lyx100x2000', price: 247679.17 },
+                    { id: 'np5', model: '', name: 'Lập là', description: '10ly x 93 x 3300', price: 382925.00 },
+                    { id: 'np6', model: '', name: 'Lập là', description: '10ly x 93 x 1800', price: 208687.50 },
+                    { id: 'np7', model: '', name: 'Lập là', description: '10ly x 140 x 3420', price: 597575.00 },
+                    { id: 'np8', model: '', name: 'Lập là', description: '10ly x 140 x 535', price: 93467.71 },
+                    { id: 'np9', model: '', name: 'Lập là', description: '10ly x 140 x 492', price: 86014.58 },
+                    { id: 'np10', model: '', name: 'Lập là', description: '10ly x 140 x 408', price: 71329.17 },
+                    { id: 'np11', model: '', name: 'Lập là', description: '10ly x 140 x 1980', price: 345825.00 }
                 ]
             },
             {
                 id: 'supplier2',
-                name: 'CÔNG TY TNHH CAO SU VÀ THƯƠNG MẠI PHƯƠNG VIÊN',
+                name: 'Phương Viên',
                 contact: 'Trần Văn Đức',
                 email: 'phuongviencaosu@gmail.com',
                 phone: '0225 373 1702',
                 address: 'số 81 đường An Đà, Ngô Quyền, Hải Phòng',
                 travelTime: '40 phút',
                 products: [
-                    { id: 'item12', model: 'SS400', name: 'Thép tấm Q235B/SS400', description: '20x1500x5980mm', quantity: 21, price: 22036690.48, total: 462770500.00 },
-                    { id: 'item13', model: 'Q355B', name: 'Thép cuộn cán nóng', description: '1.2 x 600', quantity: 150, price: 400666.67, total: 60100000.00 },
-                    { id: 'item14', model: '', name: 'Thép cuộn cán nóng', description: '25x2200', quantity: 12, price: 58275000.00, total: 699300000.00 }
+                    { id: 'pv1', model: 'SS400', name: 'Thép tấm Q235B/SS400', description: '20x1500x5980mm', price: 22036690.48 },
+                    { id: 'pv2', model: 'Q355B', name: 'Thép cuộn cán nóng', description: '1.2 x 600', price: 400666.67 },
+                    { id: 'pv3', model: '', name: 'Thép cuộn cán nóng', description: '25x2200', price: 58275000.00 }
                 ]
             },
             {
                 id: 'supplier3',
-                name: 'Công ty CP quốc tế Sao Việt',
+                name: 'Quốc tế Sao Việt',
                 contact: 'Trần Duy Khánh',
                 email: 'kinhdoanh1@vinastar.com.vn',
                 phone: '0243 376 6611',
                 address: 'Cụm CN Hà Bình Phương, xã Hà Hồi, huyện Thường Tín, TP Hà Nội',
                 travelTime: '3 giờ',
                 products: [
-                    { id: 'item15', model: '', name: 'Tấm inox 304', description: '20x1500x6000mm', quantity: 8, price: 84337499.88, total: 674699999.00 },
-                    { id: 'item16', model: '', name: 'Thép chịu mài mòn', description: '6x1250x2500', quantity: 60, price: 10360000.00, total: 621600000.00 },
-                    { id: 'item17', model: '', name: 'Thép chịu mài mòn', description: '50x2000x4000', quantity: 2, price: 314000000.00, total: 628000000.00 },
-                    { id: 'item18', model: '', name: 'Hộp thép đen', description: '0.8x3000', quantity: 7500, price: 124300.00, total: 932250000.00 },
-                    { id: 'item19', model: '', name: 'Hộp thép đen', description: '5x12000', quantity: 550, price: 141309.09, total: 77720000.00 }
+                    { id: 'sv1', model: '', name: 'Tấm inox 304', description: '20x1500x6000mm', price: 84337499.88 },
+                    { id: 'sv2', model: '', name: 'Thép chịu mài mòn', description: '6x1250x2500', price: 10360000.00 },
+                    { id: 'sv3', model: '', name: 'Thép chịu mài mòn', description: '50x2000x4000', price: 314000000.00 },
+                    { id: 'sv4', model: '', name: 'Hộp thép đen', description: '0.8x3000', price: 124300.00 },
+                    { id: 'sv5', model: '', name: 'Hộp thép đen', description: '5x12000', price: 141309.09 }
                 ]
             },
             {
@@ -1582,31 +1541,31 @@
                 address: 'KCN Dệt May Phố Nối, Xã Liêu Xá, Huyện Yên Mỹ, Tỉnh Hưng Yên',
                 travelTime: '2 giờ 15 phút',
                 products: [
-                    { id: 'item20', model: '', name: 'Mạ kẽm nhúng nóng thép khe co giãn', description: 'V50x50x5x1500', quantity: 3733, price: 4900.00, total: 18291700.00 },
-                    { id: 'item21', model: '', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 220', description: '', quantity: 5450, price: 4900.00, total: 26705000.00 },
-                    { id: 'item22', model: '', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 370', description: '', quantity: 15425, price: 4900.00, total: 75582500.00 },
-                    { id: 'item23', model: '', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: '1500x2200x165', quantity: 3500, price: 4900.00, total: 17150000.00 },
-                    { id: 'item24', model: '', name: 'Mạ kẽm nhúng nóng thép V50', description: '', quantity: 7927, price: 4900.00, total: 38842300.00 },
-                    { id: 'item25', model: '', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', quantity: 6900, price: 4900.00, total: 33810000.00 },
-                    { id: 'item26', model: '', name: 'Mạ kẽm nhúng nóng', description: 'V50x50x5', quantity: 50000, price: 5300.00, total: 265000000.00 },
-                    { id: 'item27', model: '', name: 'Mạ kẽm nhúng nóng', description: 'V75x75x5', quantity: 50000, price: 5300.00, total: 265000000.00 },
-                    { id: 'item28', model: '', name: 'Mạ kẽm nhúng nóng Thép tấm', description: '5x100x6000', quantity: 50000, price: 4900.00, total: 245000000.00 },
-                    { id: 'item29', model: '', name: 'Mạ kẽm nhúng nóng Thép', description: 'V100x100x10x6000', quantity: 50000, price: 5300.00, total: 265000000.00 },
-                    { id: 'item30', model: '', name: 'Mạ kẽm nhúng nóng Thép V dập', description: '50x50x6x3000', quantity: 50000, price: 5300.00, total: 265000000.00 },
-                    { id: 'item31', model: '', name: 'Mạ kẽm nhúng nóng Tấm thép đệm ray', description: '220x20', quantity: 50000, price: 4900.00, total: 245000000.00 },
-                    { id: 'item32', model: '', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', quantity: 50000, price: 4900.00, total: 245000000.00 }
+                    { id: 'gv1', model: '', name: 'Mạ kẽm nhúng nóng thép khe co giãn', description: 'V50x50x5x1500', price: 4900.00 },
+                    { id: 'gv2', model: '', name: 'Mạ kẽm nhúng nóng tấm thép đệm ray 220', description: '', price: 4900.00 },
+                    { id: 'gv3', model: '', name: 'Mạ kẽm nhúng nóng kẽm nhúng nóng tấm thép đệm ray 370', description: '', price: 4900.00 },
+                    { id: 'gv4', model: '', name: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: '1500x2200x165', price: 4900.00 },
+                    { id: 'gv5', model: '', name: 'Mạ kẽm nhúng nóng thép V50', description: '', price: 4900.00 },
+                    { id: 'gv6', model: '', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', price: 4900.00 },
+                    { id: 'gv7', model: '', name: 'Mạ kẽm nhúng nóng', description: 'V50x50x5', price: 5300.00 },
+                    { id: 'gv8', model: '', name: 'Mạ kẽm nhúng nóng', description: 'V75x75x5', price: 5300.00 },
+                    { id: 'gv9', model: '', name: 'Mạ kẽm nhúng nóng Thép tấm', description: '5x100x6000', price: 4900.00 },
+                    { id: 'gv10', model: '', name: 'Mạ kẽm nhúng nóng Thép', description: 'V100x100x10x6000', price: 5300.00 },
+                    { id: 'gv11', model: '', name: 'Mạ kẽm nhúng nóng Thép V dập', description: '50x50x6x3000', price: 5300.00 },
+                    { id: 'gv12', model: '', name: 'Mạ kẽm nhúng nóng Tấm thép đệm ray', description: '220x20', price: 4900.00 },
+                    { id: 'gv13', model: '', name: 'Mạ kẽm nhúng nóng Kết cấu thép (phụ kiện tang cáp)', description: '', price: 4900.00 }
                 ]
             },
             {
                 id: 'supplier5',
-                name: 'Công ty TNHH CƠ KHÍ ĐỨC THÀNH',
+                name: 'CÔNG TY TNHH CK ĐỨC THANH',
                 contact: 'Đặng Hải Yến',
                 email: 'cokhiducthanh@gmail.com',
                 phone: '0912 273 216',
                 address: 'Khu 7 Tầng, Văn Miếu Đường Lâm, Thị Xã Sơn Tây, Hà Nội',
                 travelTime: '3 giờ 30 phút',
                 products: [
-                    { id: 'item33', model: 'S45C', name: 'Bulong M72x850', description: 'ren dài 120, mạ kẽm nhúng nóng phần ren', quantity: 165, price: 830000.00, total: 136950000.00 }
+                    { id: 'dt1', model: 'S45C', name: 'Bulong M72x850', description: '(ren dài 120, mạ kẽm nhúng nóng phần ren)', price: 830000.00 }
                 ]
             },
             {
@@ -1618,8 +1577,8 @@
                 address: '15/23 đường TL50, KP2, P.Thạnh Lộc, Q.12, TP.Hồ Chí Minh',
                 travelTime: '35 giờ',
                 products: [
-                    { id: 'item34', model: '', name: 'Ty ren 1 đầu ren', description: 'M20x150 (ren dài 30, phần ko ren D20)', quantity: 3000, price: 30000.00, total: 90000000.00 },
-                    { id: 'item35', model: '', name: 'Bộ bulong inox 304', description: 'ống ren D74.5, M50x150 + bulong ren suốt M50x250', quantity: 102, price: 970000.00, total: 98940000.00 }
+                    { id: 'gst1', model: '', name: 'Ty ren 1 đầu ren', description: 'M20x150 ( ren dài 30, phần ko ren D20 )', price: 30000.00 },
+                    { id: 'gst2', model: '', name: 'Bộ bulong inox 304', description: 'ống ren D74.5, M50x150 + bulong ren suốt M50x250', price: 970000.00 }
                 ]
             }
         ];
@@ -1641,14 +1600,14 @@
                 qrCodeData: '',
                 orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1001',
                 items: [
-                    { itemName: 'Lập là', description: '10lyx520x3420', quantity: 10, price: 2220037.50, total: 22200375.00 },
-                    { itemName: 'Lập là', description: '10lyx320x3320', quantity: 20, price: 1326325.00, total: 26526500.00 }
+                    { itemName: 'Lập là (10lyx520x3420)', quantity: 10, price: 2220037.50, total: 22200375.00 },
+                    { itemName: 'Lập là (10lyx320x3320)', quantity: 20, price: 1326325.00, total: 26526500.00 }
                 ],
                 travelTime: '2 giờ 30 phút'
             },
             {
                 poNumber: 'PO-20241203-2302',
-                supplier: 'Galvanizing JV',
+                supplier: 'CÔNG TY TNHH TV GALVANIZING JV',
                 orderDate: '2024-11-18',
                 deliveryDate: '2024-12-03',
                 shippingAddress: 'KCN Dệt May Phố Nối, Xã Liêu Xá, Huyện Yên Mỹ, Tỉnh Hưng Yên',
@@ -1657,7 +1616,7 @@
                 qrCodeData: '',
                 orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1002',
                 items: [
-                    { itemName: 'Mạ kẽm nhúng nóng Tấm Panel hở', description: '1500x2200x165', quantity: 50, price: 4900.00, total: 245000.00 }
+                    { itemName: 'Mạ kẽm nhúng nóng Tấm Panel hở (1500x2200x165)', quantity: 50, price: 4900.00, total: 245000.00 }
                 ],
                 travelTime: '3 giờ 15 phút'
             },
@@ -1672,13 +1631,13 @@
                 qrCodeData: '',
                 orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1003',
                 items: [
-                    { itemName: 'Thép V dập', description: '50x50x6x3000', quantity: 40, price: 5300.00, total: 212000.00 }
+                    { itemName: 'Thép chịu mài mòn (50x2000x4000)', quantity: 40, price: 314000000.00, total: 12560000000.00 }
                 ],
                 travelTime: '4 giờ'
             },
             {
                 poNumber: 'PO-20240714-1001',
-                supplier: 'Giang Sơn Thịnh',
+                supplier: 'Công ty TNHH đầu tư thương mại thép Giang Sơn Thịnh',
                 orderDate: '2024-05-22',
                 deliveryDate: '2024-06-12',
                 shippingAddress: '15/23 đường TL50, KP2, P.Thạnh Lộc, Q.12, TP.Hồ Chí Minh',
@@ -1687,7 +1646,7 @@
                 qrCodeData: '',
                 orderImage: 'https://via.placeholder.com/400x400?text=Order+PO-2023-1004',
                 items: [
-                    { itemName: 'Thép tấm', description: '5x100x6000', quantity: 25, price: 4900.00, total: 122500.00 }
+                    { itemName: 'Ty ren 1 đầu ren (M20x150)', quantity: 25, price: 30000.00, total: 750000.00 }
                 ],
                 travelTime: '2 giờ 45 phút'
             }
@@ -1697,29 +1656,19 @@
         let currentChatSupplier = null;
         const supplierMessages = {
             'Global Suppliers Inc.': [
-                { sender: 'supplier', text: 'Hello! How can we help you today?' }
+                { sender: 'supplier', text: 'Xin chào! Chúng tôi có thể giúp gì cho bạn?' },
+                { sender: 'user', text: 'Tôi muốn hỏi về tình trạng đơn hàng PO-2023-1001' }
             ],
             'Oceanic Imports': [
-                { sender: 'supplier', text: 'Welcome to Oceanic Imports. What do you need?' }
+                { sender: 'supplier', text: 'Chào bạn! Bạn cần thông tin gì từ chúng tôi?' }
             ],
             'Mountain Trading Co.': [
-                { sender: 'supplier', text: 'Thanks for contacting Mountain Trading Co.' }
+                { sender: 'supplier', text: 'Cảm ơn bạn đã liên hệ với Mountain Trading Co.' }
             ],
             'Continental Exports': [
-                { sender: 'supplier', text: 'Continental Exports at your service!' }
+                { sender: 'supplier', text: 'Xin chào! Chúng tôi sẵn sàng hỗ trợ bạn.' }
             ]
         };
-
-        // Generate QR code data for sample orders
-        function initializeSampleOrders() {
-            orders.forEach(order => {
-                // Generate a URL that would display the order image when scanned
-                order.qrCodeData = generateQRCodeData(order);
-            });
-        }
-
-        // Initialize sample orders with QR code data
-        initializeSampleOrders();
 
         // Generate PO number
         function generatePONumber() {
@@ -1745,11 +1694,6 @@
             };
             
             return new Date(dateString).toLocaleDateString('en-US', options);
-        }
-
-        // Format currency for display
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
         }
 
         // Generate QR code data string that will show the order image when scanned
@@ -1826,7 +1770,7 @@
             
             order.items.forEach(item => {
                 detailsHTML += `
-                    <li>${item.itemName} (${item.description}) - Số lượng: ${item.quantity} - Giá: ${formatCurrency(item.price)} - Tổng: ${formatCurrency(item.total)}</li>
+                    <li>${item.itemName} - Số lượng: ${item.quantity} - Giá: ${item.price.toLocaleString('vi-VN')} VND - Tổng: ${item.total.toLocaleString('vi-VN')} VND</li>
                 `;
             });
             
@@ -1878,47 +1822,67 @@
                 // Display the predefined travel time
                 document.getElementById('travelTimeResult').textContent = `Direct travel time: ${selectedSupplier.travelTime}`;
                 
-                // Clear any existing items
-                document.getElementById('itemsContainer').innerHTML = '';
-                
-                // Add first item row with filtered products
-                addItemRow();
+                // Update the items dropdown for this supplier
+                updateItemDropdown(selectedSupplier);
             }
         }
+        
+        // Update item dropdown based on selected supplier
+        function updateItemDropdown(supplier) {
+            // Get all item rows
+            const itemRows = document.querySelectorAll('.item-row');
+            
+            // Update each item row's dropdown
+            itemRows.forEach(row => {
+                const select = row.querySelector('.item-select');
+                const currentSelectedValue = select.value;
+                
+                // Clear existing options
+                select.innerHTML = '<option value="">Chọn sản phẩm</option>';
+                
+                // Add products from selected supplier
+                supplier.products.forEach(product => {
+                    const option = document.createElement('option');
+                    option.value = product.id;
+                    option.textContent = `${product.name} (${product.description})`;
+                    option.setAttribute('data-price', product.price);
+                    select.appendChild(option);
+                });
+                
+                // Try to restore the previous selection if it exists in the new options
+                if (currentSelectedValue) {
+                    const optionToSelect = Array.from(select.options).find(opt => opt.value === currentSelectedValue);
+                    if (optionToSelect) {
+                        select.value = currentSelectedValue;
+                        // Update the price if an item was selected
+                        updateItemPrice(row.id);
+                    }
+                }
+            });
+        }
 
-        // Add item row with filtered products based on selected supplier
+        // Add item row
         function addItemRow() {
             const container = document.getElementById('itemsContainer');
             const rowId = 'item-' + Date.now();
-            const supplierSelect = document.getElementById('supplierSelect');
-            const selectedSupplierId = supplierSelect.value;
             
             const itemRow = document.createElement('div');
             itemRow.className = 'item-row';
             itemRow.id = rowId;
             
-            // Get the selected supplier's products
-            let supplierProducts = [];
-            if (selectedSupplierId) {
-                const selectedSupplier = suppliers.find(s => s.id === selectedSupplierId);
-                if (selectedSupplier) {
-                    supplierProducts = selectedSupplier.products;
-                }
-            }
+            // Get selected supplier
+            const supplierSelect = document.getElementById('supplierSelect');
+            const selectedSupplierId = supplierSelect.value;
+            const selectedSupplier = suppliers.find(s => s.id === selectedSupplierId);
             
-            // Create item select dropdown with filtered products
+            // Create item select dropdown
             let itemSelect = '<select class="item-select" onchange="updateItemPrice(\'' + rowId + '\')">';
             itemSelect += '<option value="">Chọn sản phẩm</option>';
             
-            if (supplierProducts.length > 0) {
-                // Show only the selected supplier's products
-                supplierProducts.forEach(item => {
-                    itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.description})</option>`;
-                });
-            } else {
-                // If no supplier selected, show all products
-                inventoryItems.forEach(item => {
-                    itemSelect += `<option value="${item.id}" data-price="${item.price}">${item.name} (${item.description})</option>`;
+            // If a supplier is selected, add their products
+            if (selectedSupplier) {
+                selectedSupplier.products.forEach(product => {
+                    itemSelect += `<option value="${product.id}" data-price="${product.price}">${product.name} (${product.description})</option>`;
                 });
             }
             
@@ -1959,7 +1923,7 @@
             const price = parseFloat(row.querySelector('.item-price').value) || 0;
             const total = (quantity * price).toFixed(2);
             
-            row.querySelector('.item-total').value = total ? formatCurrency(total) : '';
+            row.querySelector('.item-total').value = total ? total.toLocaleString('vi-VN') + ' VND' : '';
             calculateTotals();
         }
 
@@ -1975,11 +1939,11 @@
             const totals = document.querySelectorAll('.item-total');
             
             totals.forEach(itemTotal => {
-                const value = parseFloat(itemTotal.value.replace(/[^0-9.-]+/g,"")) || 0;
+                const value = parseFloat(itemTotal.value.replace(/[^0-9.]/g, '')) || 0;
                 total += value;
             });
             
-            document.getElementById('total').textContent = formatCurrency(total);
+            document.getElementById('total').textContent = total.toLocaleString('vi-VN') + ' VND';
         }
 
         // Submit PO
@@ -2005,17 +1969,15 @@
                 const select = row.querySelector('.item-select');
                 const quantity = row.querySelector('.item-quantity').value;
                 const price = row.querySelector('.item-price').value;
-                const selectedOption = select.options[select.selectedIndex];
                 
                 if (select.value && quantity && price) {
-                    // Extract description from the option text
-                    const optionText = selectedOption.text;
-                    const description = optionText.match(/\(([^)]+)\)/)[1];
+                    const selectedOption = select.options[select.selectedIndex];
+                    const productName = selectedOption.text.split(' (')[0];
+                    const productDescription = selectedOption.text.match(/\(([^)]+)\)/)[1];
                     
                     items.push({
                         itemId: select.value,
-                        itemName: selectedOption.text.split(' (')[0],
-                        description: description,
+                        itemName: `${productName} (${productDescription})`,
                         quantity: quantity,
                         price: price,
                         total: (quantity * price).toFixed(2)
@@ -2032,6 +1994,10 @@
             const orderDate = new Date().toISOString().split('T')[0];
             const total = document.getElementById('total').textContent;
             
+            // Get the selected supplier's address
+            const selectedSupplier = suppliers.find(s => s.id === supplier);
+            const shippingAddress = selectedSupplier ? selectedSupplier.address : '';
+            
             // Check if we're editing an existing PO
             if (isEditingPO && currentPO) {
                 // Update the existing PO
@@ -2040,6 +2006,7 @@
                 currentPO.items = items;
                 currentPO.total = total;
                 currentPO.travelTime = travelTime;
+                currentPO.shippingAddress = shippingAddress;
                 
                 // Update the orders array
                 const index = orders.findIndex(o => o.poNumber === currentPO.poNumber);
@@ -2060,11 +2027,12 @@
                     total: total,
                     status: 'delivery',
                     travelTime: travelTime,
+                    shippingAddress: shippingAddress,
                     orderImage: `https://via.placeholder.com/400x400?text=Order+${poNumber}`,
                     qrCodeData: '' // Will be generated below
                 };
                 
-                // Add to orders array
+                // Add to orders array (at the beginning)
                 orders.unshift(currentPO);
             }
             
@@ -2111,22 +2079,17 @@
                 itemRow.className = 'item-row';
                 itemRow.id = rowId;
                 
+                // Get the selected supplier
+                const selectedSupplier = suppliers.find(s => s.name === currentPO.supplier);
+                
                 // Create item select dropdown
                 let itemSelect = '<select class="item-select" onchange="updateItemPrice(\'' + rowId + '\')">';
                 itemSelect += '<option value="">Chọn sản phẩm</option>';
                 
-                // Get the selected supplier's products
-                const selectedSupplier = suppliers.find(s => s.name === currentPO.supplier);
                 if (selectedSupplier) {
-                    selectedSupplier.products.forEach(prod => {
-                        const selected = prod.name === item.itemName && prod.description === item.description ? 'selected' : '';
-                        itemSelect += `<option value="${prod.id}" data-price="${prod.price}" ${selected}>${prod.name} (${prod.description})</option>`;
-                    });
-                } else {
-                    // If supplier not found, show all products
-                    inventoryItems.forEach(invItem => {
-                        const selected = invItem.name === item.itemName && invItem.description === item.description ? 'selected' : '';
-                        itemSelect += `<option value="${invItem.id}" data-price="${invItem.price}" ${selected}>${invItem.name} (${invItem.description})</option>`;
+                    selectedSupplier.products.forEach(product => {
+                        const selected = item.itemName.includes(product.name) && item.itemName.includes(product.description) ? 'selected' : '';
+                        itemSelect += `<option value="${product.id}" data-price="${product.price}" ${selected}>${product.name} (${product.description})</option>`;
                     });
                 }
                 
@@ -2136,7 +2099,7 @@
                     ${itemSelect}
                     <input type="number" class="item-quantity" min="1" value="${item.quantity}" onchange="calculateRowTotal('${rowId}')">
                     <input type="text" class="item-price" readonly value="${item.price}">
-                    <input type="text" class="item-total" readonly value="${formatCurrency(item.total)}">
+                    <input type="text" class="item-total" readonly value="${parseFloat(item.total).toLocaleString('vi-VN')} VND">
                     <button class="remove-item" onclick="removeItemRow('${rowId}')">×</button>
                 `;
                 
@@ -2176,7 +2139,14 @@
             document.getElementById('supplierInfoPage').style.display = 'none';
             document.getElementById('orderTrackingPage').style.display = 'flex';
             
-            // Load orders
+            // Initialize QR code data for sample orders if not already done
+            orders.forEach(order => {
+                if (!order.qrCodeData) {
+                    order.qrCodeData = generateQRCodeData(order);
+                }
+            });
+            
+            // Load all orders by default
             filterOrders('all');
             startDateTimeUpdates();
         }
@@ -2186,10 +2156,8 @@
             const ordersList = document.getElementById('ordersList');
             ordersList.innerHTML = '';
             
-            let filteredOrders = orders;
-            if (status !== 'all') {
-                filteredOrders = orders.filter(order => order.status === status);
-            }
+            // Always show all orders regardless of the filter
+            const filteredOrders = orders;
             
             filteredOrders.forEach(order => {
                 const row = document.createElement('tr');
@@ -2234,7 +2202,9 @@
                 }
                 
                 // Shorten shipping address for display
-                const shortAddress = order.shippingAddress.split('\n')[0] + '...';
+                const shortAddress = order.shippingAddress.length > 30 ? 
+                    order.shippingAddress.substring(0, 30) + '...' : 
+                    order.shippingAddress;
                 
                 row.innerHTML = `
                     <td>${order.poNumber}</td>
@@ -2303,10 +2273,10 @@
             currentPO.items.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${item.itemName} (${item.description})</td>
+                    <td>${item.itemName}</td>
                     <td>${item.quantity}</td>
-                    <td>${formatCurrency(item.price)}</td>
-                    <td>${formatCurrency(item.total)}</td>
+                    <td>${parseFloat(item.price).toLocaleString('vi-VN')} VND</td>
+                    <td>${parseFloat(item.total).toLocaleString('vi-VN')} VND</td>
                 `;
                 itemsContainer.appendChild(row);
             });
@@ -2422,9 +2392,7 @@
                     <td>${product.model}</td>
                     <td>${product.name}</td>
                     <td>${product.description}</td>
-                    <td>${product.quantity}</td>
-                    <td>${formatCurrency(product.price)}</td>
-                    <td>${formatCurrency(product.total)}</td>
+                    <td>${product.price.toLocaleString('vi-VN')} VND</td>
                 `;
                 productsTableBody.appendChild(row);
             });
@@ -2618,10 +2586,21 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize QR code data for sample orders
+            initializeSampleOrders();
             startDateTimeUpdates();
             // Hide chat bubble initially (will show after login)
             document.getElementById('chatBubble').style.display = 'none';
         });
+
+        // Initialize sample orders with QR code data
+        function initializeSampleOrders() {
+            orders.forEach(order => {
+                if (!order.qrCodeData) {
+                    order.qrCodeData = generateQRCodeData(order);
+                }
+            });
+        }
     </script>
 </body>
 </html>
