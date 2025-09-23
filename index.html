@@ -1134,15 +1134,67 @@
         }
 
         .performance-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
+            display: flex;
             flex: 1;
-            margin-top: 20px;
+            margin: 20px;
+            gap: 20px;
+        }
+        
+        /* Control Bar */
+        .control-bar {
+            width: 250px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .control-bar h3 {
+            font-size: 20px;
+            color: #2c3e50;
             margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b15e6c;
+            text-align: center;
+        }
+        
+        .control-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .control-btn.active {
+            background: #b15e6c;
+            font-weight: bold;
+        }
+        
+        .control-btn:hover {
+            opacity: 0.9;
+            transform: translateX(5px);
+        }
+        
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         
         .performance-header {
@@ -1201,6 +1253,8 @@
         
         .performance-content {
             padding: 20px;
+            flex: 1;
+            overflow-y: auto;
         }
         
         .performance-summary-cards {
@@ -1378,7 +1432,331 @@
             background: #7f8c8d;
         }
         
+        /* AI Analysis Section */
+        .ai-analysis-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 5px solid #2c3e50;
+        }
+        
+        .ai-analysis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .ai-analysis-header h3 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .ai-icon {
+            font-size: 24px;
+            color: #2c3e50;
+        }
+        
+        .ai-analysis-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .ai-insights {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .ai-insights h4 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b15e6c;
+        }
+        
+        .ai-insight-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 3px solid #2c3e50;
+        }
+        
+        .ai-insight-item h5 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .ai-insight-item p {
+            font-size: 14px;
+            color: #495057;
+            margin: 0;
+        }
+        
+        .ai-recommendations {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .ai-recommendations h4 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b15e6c;
+        }
+        
+        .ai-recommendation-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 3px solid #27ae60;
+        }
+        
+        .ai-recommendation-item h5 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .ai-recommendation-item p {
+            font-size: 14px;
+            color: #495057;
+            margin: 0;
+        }
+        
+        .ai-prediction {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+        
+        .ai-prediction h4 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b15e6c;
+        }
+        
+        .ai-prediction-content {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .ai-prediction-chart {
+            flex: 1;
+            height: 200px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .ai-prediction-text {
+            flex: 1;
+            font-size: 14px;
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        .ai-analysis-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .ai-analysis-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-analysis-btn-primary {
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .ai-analysis-btn-primary:hover {
+            background: #1a2635;
+        }
+        
+        .ai-analysis-btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .ai-analysis-btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        /* AI Chat Section */
+        .ai-chat-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-radius: 10px;
+            border-left: 5px solid #2196F3;
+        }
+        
+        .ai-chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .ai-chat-header h3 {
+            font-size: 22px;
+            color: #2196F3;
+            margin: 0;
+        }
+        
+        .ai-chat-icon {
+            font-size: 24px;
+            color: #2196F3;
+        }
+        
+        .ai-chat-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ai-chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .ai-chat-message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+        
+        .ai-chat-message.user {
+            background-color: #2196F3;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .ai-chat-message.ai {
+            background-color: #f0f0f0;
+            color: #333;
+            align-self: flex-start;
+        }
+        
+        .ai-chat-input-container {
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .ai-chat-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+        }
+        
+        .ai-chat-send-btn {
+            padding: 12px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-chat-send-btn:hover {
+            background-color: #0b7dda;
+        }
+        
+        .ai-chat-send-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .ai-chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .ai-chat-suggestion {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-chat-suggestion:hover {
+            background: #bbdefb;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
         @media (max-width: 768px) {
+            .performance-container {
+                flex-direction: column;
+            }
+            
+            .control-bar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
             .performance-charts-container {
                 grid-template-columns: 1fr;
             }
@@ -1395,6 +1773,14 @@
             
             .performance-filter-group select, .performance-filter-group input {
                 width: 100%;
+            }
+            
+            .ai-analysis-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-prediction-content {
+                flex-direction: column;
             }
         }
     </style>
@@ -1726,106 +2112,214 @@
         </div>
         
         <div class="performance-container">
-            <div class="performance-header">
-                <h1>Supplier Performance Report</h1>
-                <p>Ranking suppliers based on delivery performance and product volume</p>
+            <!-- Control Bar -->
+            <div class="control-bar">
+                <h3>Reports</h3>
+                <button class="control-btn active" id="performanceReportBtn" onclick="showContent('performanceReport')">Supplier Performance Report</button>
+                <button class="control-btn" id="aiInsightsBtn" onclick="showContent('aiInsights')">AI-Powered Business Insights</button>
             </div>
             
-            <div class="performance-filters">
-                <div class="performance-filter-group">
-                    <label for="time-period">Time Period:</label>
-                    <select id="time-period">
-                        <option value="7">Last 7 Days</option>
-                        <option value="30" selected>Last 30 Days</option>
-                        <option value="90">Last 90 Days</option>
-                        <option value="180">Last 6 Months</option>
-                        <option value="365">Last Year</option>
-                        <option value="custom">Custom Range</option>
-                    </select>
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="performance-header">
+                    <h1 id="contentTitle">Supplier Performance Report</h1>
+                    <p id="contentDescription">Ranking suppliers based on delivery performance and product volume</p>
                 </div>
                 
-                <div class="performance-filter-group performance-date-range" id="custom-date-range" style="display: none;">
-                    <label for="start-date">From:</label>
-                    <input type="date" id="start-date">
-                    <span>to</span>
-                    <input type="date" id="end-date">
-                </div>
-                
-                <div class="performance-filter-group">
-                    <label for="sort-by">Sort By:</label>
-                    <select id="sort-by">
-                        <option value="deliveryRate">Delivery Rate</option>
-                        <option value="totalProducts">Total Products</option>
-                        <option value="onTimeRate">On-Time Rate</option>
-                        <option value="name">Supplier Name</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="performance-content">
-                <div class="performance-summary-cards">
-                    <div class="performance-summary-card">
-                        <h3>Total Suppliers</h3>
-                        <div class="value" id="total-suppliers">6</div>
-                        <div class="trend">Active in system</div>
-                    </div>
-                    
-                    <div class="performance-summary-card">
-                        <h3>Average Delivery Rate</h3>
-                        <div class="value" id="avg-delivery-rate">87.5%</div>
-                        <div class="performance-trend up">+2.5% from last period</div>
-                    </div>
-                    
-                    <div class="performance-summary-card">
-                        <h3>Total Products Delivered</h3>
-                        <div class="value" id="total-products">4,285</div>
-                        <div class="performance-trend up">+328 from last period</div>
-                    </div>
-                    
-                    <div class="performance-summary-card">
-                        <h3>On-Time Delivery Rate</h3>
-                        <div class="value" id="ontime-rate">82.3%</div>
-                        <div class="performance-trend up">+3.7% from last period</div>
-                    </div>
-                </div>
-                
-                <table class="performance-table">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Supplier</th>
-                            <th>Delivery Rate</th>
-                            <th>Total Products</th>
-                            <th>On-Time Rate</th>
-                            <th>Avg. Delivery Time</th>
-                            <th>Rating</th>
-                        </tr>
-                    </thead>
-                    <tbody id="supplier-data">
-                        <!-- Supplier data will be populated here -->
-                    </tbody>
-                </table>
-                
-                <div class="performance-charts-container">
-                    <div class="performance-chart">
-                        <h3>Delivery Performance Comparison</h3>
-                        <div class="performance-chart-placeholder">
-                            <canvas id="deliveryChart"></canvas>
+                <!-- Supplier Performance Report Content -->
+                <div class="content-section active" id="performanceReport">
+                    <div class="performance-filters">
+                        <div class="performance-filter-group">
+                            <label for="time-period">Time Period:</label>
+                            <select id="time-period">
+                                <option value="7">Last 7 Days</option>
+                                <option value="30" selected>Last 30 Days</option>
+                                <option value="90">Last 90 Days</option>
+                                <option value="180">Last 6 Months</option>
+                                <option value="365">Last Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                        
+                        <div class="performance-filter-group performance-date-range" id="custom-date-range" style="display: none;">
+                            <label for="start-date">From:</label>
+                            <input type="date" id="start-date">
+                            <span>to</span>
+                            <input type="date" id="end-date">
+                        </div>
+                        
+                        <div class="performance-filter-group">
+                            <label for="sort-by">Sort By:</label>
+                            <select id="sort-by">
+                                <option value="deliveryRate">Delivery Rate</option>
+                                <option value="totalProducts">Total Products</option>
+                                <option value="onTimeRate">On-Time Rate</option>
+                                <option value="name">Supplier Name</option>
+                            </select>
                         </div>
                     </div>
                     
-                    <div class="performance-chart">
-                        <h3>Product Volume by Supplier</h3>
-                        <div class="performance-chart-placeholder">
-                            <canvas id="volumeChart"></canvas>
+                    <div class="performance-content">
+                        <div class="performance-summary-cards">
+                            <div class="performance-summary-card">
+                                <h3>Total Suppliers</h3>
+                                <div class="value" id="total-suppliers">6</div>
+                                <div class="trend">Active in system</div>
+                            </div>
+                            
+                            <div class="performance-summary-card">
+                                <h3>Average Delivery Rate</h3>
+                                <div class="value" id="avg-delivery-rate">87.5%</div>
+                                <div class="performance-trend up">+2.5% from last period</div>
+                            </div>
+                            
+                            <div class="performance-summary-card">
+                                <h3>Total Products Delivered</h3>
+                                <div class="value" id="total-products">4,285</div>
+                                <div class="performance-trend up">+328 from last period</div>
+                            </div>
+                            
+                            <div class="performance-summary-card">
+                                <h3>On-Time Delivery Rate</h3>
+                                <div class="value" id="ontime-rate">82.3%</div>
+                                <div class="performance-trend up">+3.7% from last period</div>
+                            </div>
+                        </div>
+                        
+                        <table class="performance-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Supplier</th>
+                                    <th>Delivery Rate</th>
+                                    <th>Total Products</th>
+                                    <th>On-Time Rate</th>
+                                    <th>Avg. Delivery Time</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody id="supplier-data">
+                                <!-- Supplier data will be populated here -->
+                            </tbody>
+                        </table>
+                        
+                        <div class="performance-charts-container">
+                            <div class="performance-chart">
+                                <h3>Delivery Performance Comparison</h3>
+                                <div class="performance-chart-placeholder">
+                                    <canvas id="deliveryChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="performance-chart">
+                                <h3>Product Volume by Supplier</h3>
+                                <div class="performance-chart-placeholder">
+                                    <canvas id="volumeChart"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
+                    <div class="performance-actions">
+                        <button class="performance-btn performance-btn-secondary" onclick="printReport()">Print Report</button>
+                        <button class="performance-btn performance-btn-primary" onclick="exportToCSV()">Export to CSV</button>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="performance-actions">
-                <button class="performance-btn performance-btn-secondary" onclick="printReport()">Print Report</button>
-                <button class="performance-btn performance-btn-primary" onclick="exportToCSV()">Export to CSV</button>
+                
+                <!-- AI-Powered Business Insights Content -->
+                <div class="content-section" id="aiInsights">
+                    <div class="performance-content">
+                        <!-- AI Analysis Section -->
+                        <div class="ai-analysis-section">
+                            <div class="ai-analysis-header">
+                                <h3><i class="fas fa-robot ai-icon"></i> AI-Powered Business Insights</h3>
+                                <div class="ai-analysis-actions">
+                                    <button class="ai-analysis-btn ai-analysis-btn-secondary" onclick="generateAIAnalysis()">
+                                        <i class="fas fa-sync-alt"></i> Regenerate Analysis
+                                    </button>
+                                    <button class="ai-analysis-btn ai-analysis-btn-primary" onclick="exportAIAnalysis()">
+                                        <i class="fas fa-download"></i> Export Insights
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-analysis-content">
+                                <div class="ai-insights">
+                                    <h4>Key Insights</h4>
+                                    <div id="aiInsightsContent">
+                                        <!-- AI insights will be populated here -->
+                                    </div>
+                                </div>
+                                
+                                <div class="ai-recommendations">
+                                    <h4>Strategic Recommendations</h4>
+                                    <div id="aiRecommendations">
+                                        <!-- AI recommendations will be populated here -->
+                                    </div>
+                                </div>
+                                
+                                <div class="ai-prediction">
+                                    <h4>Future Performance Prediction</h4>
+                                    <div class="ai-prediction-content">
+                                        <div class="ai-prediction-chart">
+                                            <canvas id="predictionChart"></canvas>
+                                        </div>
+                                        <div class="ai-prediction-text" id="aiPredictionText">
+                                            <!-- AI prediction text will be populated here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Chat Section -->
+                        <div class="ai-chat-section">
+                            <div class="ai-chat-header">
+                                <h3><i class="fas fa-comments ai-chat-icon"></i> Ask AI Assistant</h3>
+                                <div class="ai-analysis-actions">
+                                    <button class="ai-analysis-btn ai-analysis-btn-secondary" onclick="clearAIChat()">
+                                        <i class="fas fa-trash"></i> Clear Chat
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="ai-chat-container">
+                                <div class="ai-chat-messages" id="aiChatMessages">
+                                    <div class="ai-chat-message ai">
+                                        Hello! I'm your AI assistant for supplier performance analysis. I can help you understand trends, identify opportunities, and answer questions about your supplier data. What would you like to know?
+                                    </div>
+                                </div>
+                                
+                                <div class="ai-chat-input-container">
+                                    <input type="text" class="ai-chat-input" id="aiChatInput" placeholder="Ask a question about supplier performance..." onkeypress="handleAIChatKeypress(event)">
+                                    <button class="ai-chat-send-btn" id="aiChatSendBtn" onclick="sendAIChatMessage()">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="ai-chat-suggestions">
+                                    <div class="ai-chat-suggestion" onclick="useAISuggestion('Which supplier has the best delivery rate?')">
+                                        Which supplier has the best delivery rate?
+                                    </div>
+                                    <div class="ai-chat-suggestion" onclick="useAISuggestion('How can I improve supplier performance?')">
+                                        How can I improve supplier performance?
+                                    </div>
+                                    <div class="ai-chat-suggestion" onclick="useAISuggestion('Show me trends for the last quarter')">
+                                        Show me trends for the last quarter
+                                    </div>
+                                    <div class="ai-chat-suggestion" onclick="useAISuggestion('What risks should I be aware of?')">
+                                        What risks should I be aware of?
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-actions">
+                        <button class="performance-btn performance-btn-secondary" onclick="printReport()">Print Report</button>
+                        <button class="performance-btn performance-btn-primary" onclick="exportAIAnalysis()">Export Insights</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2222,6 +2716,370 @@
                 { sender: 'supplier', text: 'Xin chào! Chúng tôi sẵn sàng hỗ trợ bạn.' }
             ]
         };
+
+        // AI Chat functionality
+        let aiChatHistory = [
+            { sender: 'ai', text: 'Hello! I\'m your AI assistant for supplier performance analysis. I can help you understand trends, identify opportunities, and answer questions about your supplier data. What would you like to know?' }
+        ];
+
+        // Function to switch between content sections
+        function showContent(sectionId) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected content section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active button
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (sectionId === 'performanceReport') {
+                document.getElementById('performanceReportBtn').classList.add('active');
+                document.getElementById('contentTitle').textContent = 'Supplier Performance Report';
+                document.getElementById('contentDescription').textContent = 'Ranking suppliers based on delivery performance and product volume';
+            } else if (sectionId === 'aiInsights') {
+                document.getElementById('aiInsightsBtn').classList.add('active');
+                document.getElementById('contentTitle').textContent = 'AI-Powered Business Insights';
+                document.getElementById('contentDescription').textContent = 'Advanced analytics and predictions for supplier performance optimization';
+                
+                // Generate AI analysis when switching to AI Insights
+                generateAIAnalysis();
+                
+                // Render AI chat messages
+                renderAIChatMessages();
+            }
+        }
+
+        // AI Chat Functions
+        function renderAIChatMessages() {
+            const chatMessagesContainer = document.getElementById('aiChatMessages');
+            chatMessagesContainer.innerHTML = '';
+            
+            aiChatHistory.forEach(message => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `ai-chat-message ${message.sender}`;
+                messageDiv.textContent = message.text;
+                chatMessagesContainer.appendChild(messageDiv);
+            });
+            
+            // Scroll to bottom
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
+
+        function handleAIChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendAIChatMessage();
+            }
+        }
+
+        function useAISuggestion(suggestion) {
+            document.getElementById('aiChatInput').value = suggestion;
+            sendAIChatMessage();
+        }
+
+        function sendAIChatMessage() {
+            const input = document.getElementById('aiChatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message to chat history
+                aiChatHistory.push({ sender: 'user', text: message });
+                
+                // Clear input
+                input.value = '';
+                
+                // Disable send button while processing
+                const sendBtn = document.getElementById('aiChatSendBtn');
+                sendBtn.disabled = true;
+                sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                
+                // Render updated chat
+                renderAIChatMessages();
+                
+                // Simulate AI processing delay
+                setTimeout(() => {
+                    // Generate AI response
+                    const aiResponse = generateAIResponse(message);
+                    aiChatHistory.push({ sender: 'ai', text: aiResponse });
+                    
+                    // Render updated chat
+                    renderAIChatMessages();
+                    
+                    // Re-enable send button
+                    sendBtn.disabled = false;
+                    sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+                }, 1000 + Math.random() * 2000);
+            }
+        }
+
+        function generateAIResponse(userMessage) {
+            // Simple keyword-based response system
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Check for specific keywords and patterns
+            if (lowerMessage.includes('best') && lowerMessage.includes('supplier')) {
+                const bestSupplier = supplierPerformance.reduce((prev, current) => 
+                    (prev.deliveryRate > current.deliveryRate) ? prev : current
+                );
+                return `Based on delivery performance, ${bestSupplier.name} is your best supplier with a ${bestSupplier.deliveryRate}% delivery rate and ${bestSupplier.onTimeRate}% on-time delivery rate.`;
+            }
+            
+            if (lowerMessage.includes('worst') && lowerMessage.includes('supplier')) {
+                const worstSupplier = supplierPerformance.reduce((prev, current) => 
+                    (prev.deliveryRate < current.deliveryRate) ? prev : current
+                );
+                return `${worstSupplier.name} has the lowest performance with a ${worstSupplier.deliveryRate}% delivery rate. Consider working with them to improve their processes or diversifying your sourcing.`;
+            }
+            
+            if (lowerMessage.includes('improve') && lowerMessage.includes('performance')) {
+                const needsImprovement = supplierPerformance.filter(s => s.deliveryRate < 85);
+                if (needsImprovement.length > 0) {
+                    const supplierNames = needsImprovement.map(s => s.name).join(', ');
+                    return `To improve supplier performance, focus on ${supplierNames}. Consider implementing performance metrics, regular reviews, and collaborative improvement plans. You might also explore diversifying your supplier base to reduce risk.`;
+                } else {
+                    return 'Your suppliers are performing well overall! To maintain this, continue monitoring performance metrics and consider implementing incentive programs for consistent excellence.';
+                }
+            }
+            
+            if (lowerMessage.includes('trend') || lowerMessage.includes('quarter') || lowerMessage.includes('last')) {
+                const avgDeliveryRate = supplierPerformance.reduce((sum, supplier) => 
+                    sum + supplier.deliveryRate, 0) / supplierPerformance.length;
+                const trend = avgDeliveryRate > 85 ? 'positive' : 'needs attention';
+                return `Based on the last quarter, supplier performance shows a ${trend} trend with an average delivery rate of ${avgDeliveryRate.toFixed(1)}%. ${trend === 'positive' ? 'Keep up the good work!' : 'Consider implementing improvement strategies.'}`;
+            }
+            
+            if (lowerMessage.includes('risk') || lowerMessage.includes('problem')) {
+                const riskySuppliers = supplierPerformance.filter(s => s.deliveryRate < 80 || s.onTimeRate < 75);
+                if (riskySuppliers.length > 0) {
+                    const supplierNames = riskySuppliers.map(s => s.name).join(', ');
+                    return `Potential risks identified with ${supplierNames}. These suppliers have lower performance metrics that could impact your supply chain. Consider developing contingency plans and exploring alternative suppliers.`;
+                } else {
+                    return 'No significant risks detected in your current supplier portfolio. Your suppliers are performing at acceptable levels. Continue monitoring for any changes.';
+                }
+            }
+            
+            if (lowerMessage.includes('recommend') || lowerMessage.includes('suggestion')) {
+                return 'Based on your supplier data, I recommend:\n1. Focus on relationship building with top performers\n2. Implement a supplier development program for those needing improvement\n3. Diversify your supplier base to mitigate risks\n4. Establish clear performance metrics and regular review cycles';
+            }
+            
+            if (lowerMessage.includes('delivery') && lowerMessage.includes('rate')) {
+                const avgDeliveryRate = supplierPerformance.reduce((sum, supplier) => 
+                    sum + supplier.deliveryRate, 0) / supplierPerformance.length;
+                return `Your average delivery rate across all suppliers is ${avgDeliveryRate.toFixed(1)}%. The industry benchmark is typically around 85%, so you're ${avgDeliveryRate >= 85 ? 'above' : 'below'} average.`;
+            }
+            
+            if (lowerMessage.includes('thank') || lowerMessage.includes('thanks')) {
+                return 'You\'re welcome! Is there anything else about your supplier performance you\'d like to know?';
+            }
+            
+            // Default response for unrecognized queries
+            return 'I understand you\'re asking about supplier performance. Could you please clarify your question? For example, you could ask about specific suppliers, performance trends, or recommendations for improvement.';
+        }
+
+        function clearAIChat() {
+            aiChatHistory = [
+                { sender: 'ai', text: 'Hello! I\'m your AI assistant for supplier performance analysis. I can help you understand trends, identify opportunities, and answer questions about your supplier data. What would you like to know?' }
+            ];
+            renderAIChatMessages();
+        }
+
+        // AI Analysis Functions
+        function generateAIAnalysis() {
+            // Show loading state
+            document.getElementById('aiInsightsContent').innerHTML = '<div class="ai-insight-item"><p>Analyzing supplier data...</p></div>';
+            document.getElementById('aiRecommendations').innerHTML = '<div class="ai-recommendation-item"><p>Generating recommendations...</p></div>';
+            document.getElementById('aiPredictionText').innerHTML = '<p>Predicting future trends...</p>';
+            
+            // Simulate AI processing delay
+            setTimeout(() => {
+                // Generate AI insights
+                const insights = generateAIInsights();
+                document.getElementById('aiInsightsContent').innerHTML = insights;
+                
+                // Generate AI recommendations
+                const recommendations = generateAIRecommendations();
+                document.getElementById('aiRecommendations').innerHTML = recommendations;
+                
+                // Generate AI predictions
+                const predictionText = generateAIPredictions();
+                document.getElementById('aiPredictionText').innerHTML = predictionText;
+                
+                // Update prediction chart
+                updatePredictionChart();
+            }, 1500);
+        }
+        
+        function generateAIInsights() {
+            // Find top performer
+            const topPerformer = supplierPerformance.reduce((prev, current) => 
+                (prev.deliveryRate > current.deliveryRate) ? prev : current
+            );
+            
+            // Find worst performer
+            const worstPerformer = supplierPerformance.reduce((prev, current) => 
+                (prev.deliveryRate < current.deliveryRate) ? prev : current
+            );
+            
+            // Calculate average metrics
+            const avgDeliveryRate = supplierPerformance.reduce((sum, supplier) => 
+                sum + supplier.deliveryRate, 0) / supplierPerformance.length;
+            
+            const avgOnTimeRate = supplierPerformance.reduce((sum, supplier) => 
+                sum + supplier.onTimeRate, 0) / supplierPerformance.length;
+            
+            // Identify trends
+            const improvingSuppliers = supplierPerformance.filter(s => s.deliveryRate > 90).length;
+            const decliningSuppliers = supplierPerformance.filter(s => s.deliveryRate < 80).length;
+            
+            return `
+                <div class="ai-insight-item">
+                    <h5>Top Performer</h5>
+                    <p>${topPerformer.name} leads with ${topPerformer.deliveryRate}% delivery rate and ${topPerformer.onTimeRate}% on-time rate.</p>
+                </div>
+                <div class="ai-insight-item">
+                    <h5>Performance Gap</h5>
+                    <p>There's a ${(topPerformer.deliveryRate - worstPerformer.deliveryRate).toFixed(1)}% gap between best and worst performers.</p>
+                </div>
+                <div class="ai-insight-item">
+                    <h5>Supplier Health</h5>
+                    <p>${improvingSuppliers} suppliers show excellent performance (>90%), while ${decliningSuppliers} need improvement (<80%).</p>
+                </div>
+                <div class="ai-insight-item">
+                    <h5>Delivery Efficiency</h5>
+                    <p>Average delivery rate is ${avgDeliveryRate.toFixed(1)}% with ${avgOnTimeRate.toFixed(1)}% on-time delivery across all suppliers.</p>
+                </div>
+            `;
+        }
+        
+        function generateAIRecommendations() {
+            // Find suppliers needing improvement
+            const needsImprovement = supplierPerformance.filter(s => s.deliveryRate < 85);
+            const excellentPerformers = supplierPerformance.filter(s => s.deliveryRate > 90);
+            
+            return `
+                <div class="ai-recommendation-item">
+                    <h5>Supplier Development</h5>
+                    <p>Work with ${needsImprovement.map(s => s.name).join(', ')} to improve delivery processes and reduce delays.</p>
+                </div>
+                <div class="ai-recommendation-item">
+                    <h5>Strategic Partnerships</h5>
+                    <p>Consider increasing order volume with ${excellentPerformers.map(s => s.name).join(', ')} to leverage their reliability.</p>
+                </div>
+                <div class="ai-recommendation-item">
+                    <h5>Risk Mitigation</h5>
+                    <p>Diversify sourcing for critical components to reduce dependency on lower-performing suppliers.</p>
+                </div>
+                <div class="ai-recommendation-item">
+                    <h5>Performance Incentives</h5>
+                    <p>Implement a supplier incentive program to reward consistent on-time delivery and quality performance.</p>
+                </div>
+            `;
+        }
+        
+        function generateAIPredictions() {
+            // Calculate trend projections
+            const avgDeliveryRate = supplierPerformance.reduce((sum, supplier) => 
+                sum + supplier.deliveryRate, 0) / supplierPerformance.length;
+            
+            const projectedImprovement = 2.5; // Based on historical trends
+            const projectedDeliveryRate = Math.min(100, avgDeliveryRate + projectedImprovement);
+            
+            // Identify growth opportunities
+            const highVolumeSuppliers = supplierPerformance.filter(s => s.totalProducts > 800);
+            const emergingSuppliers = supplierPerformance.filter(s => s.totalProducts < 500 && s.deliveryRate > 85);
+            
+            return `
+                <p>Based on current trends, the overall supplier delivery rate is projected to reach <strong>${projectedDeliveryRate.toFixed(1)}%</strong> in the next quarter.</p>
+                <p>${highVolumeSuppliers.map(s => s.name).join(', ')} show strong capacity for increased order volumes.</p>
+                <p>${emergingSuppliers.map(s => s.name).join(', ')} represent growth opportunities with their solid performance metrics.</p>
+                <p>AI recommends focusing supplier development efforts on improving delivery times by 10-15% through process optimization.</p>
+            `;
+        }
+        
+        function updatePredictionChart() {
+            const ctx = document.getElementById('predictionChart').getContext('2d');
+            
+            // Clear previous chart if exists
+            if (window.predictionChartInstance) {
+                window.predictionChartInstance.destroy();
+            }
+            
+            // Generate projection data
+            const currentQuarter = supplierPerformance.reduce((sum, supplier) => 
+                sum + supplier.deliveryRate, 0) / supplierPerformance.length;
+            
+            const projections = [
+                currentQuarter,
+                Math.min(100, currentQuarter + 1.2),
+                Math.min(100, currentQuarter + 2.5),
+                Math.min(100, currentQuarter + 3.8)
+            ];
+            
+            window.predictionChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Current', 'Q+1', 'Q+2', 'Q+3'],
+                    datasets: [{
+                        label: 'Projected Delivery Rate (%)',
+                        data: projections,
+                        borderColor: '#2c3e50',
+                        backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Delivery Rate %'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function exportAIAnalysis() {
+            // Create a comprehensive report with insights and recommendations
+            const report = `
+                AI-POWERED SUPPLIER PERFORMANCE ANALYSIS
+                ========================================
+                
+                KEY INSIGHTS:
+                ${document.getElementById('aiInsightsContent').innerText}
+                
+                STRATEGIC RECOMMENDATIONS:
+                ${document.getElementById('aiRecommendations').innerText}
+                
+                FUTURE PREDICTIONS:
+                ${document.getElementById('aiPredictionText').innerText}
+                
+                Generated on: ${new Date().toLocaleDateString()}
+            `;
+            
+            // Create download link
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'supplier_ai_analysis_report.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
 
         // Generate PO number
         function generatePONumber() {
@@ -3387,3 +4245,4 @@
         }
     </script>
 </body>
+</html>
