@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cargo Tracking System</title>
+    <title>Cargo Tracking System - Strategic View</title>
     <style>
+        /* All existing styles remain the same */
         * {
             margin: 0;
             padding: 0;
@@ -1125,76 +1126,82 @@
             gap: 10px;
         }
 
-        /* Supplier Performance Report Page */
-        .supplier-performance-page {
+        /* Strategic View Page */
+        .strategic-view-page {
             display: none;
             flex-direction: column;
             min-height: 100vh;
             background-color: #f5f7fa;
         }
 
-        .performance-container {
+        .strategic-view-container {
             display: flex;
             flex: 1;
-            margin: 20px;
-            gap: 20px;
+            padding: 20px;
+            width: 100%;
         }
-        
-        /* Control Bar */
-        .control-bar {
+
+        /* Sidebar for Strategic View */
+        .strategic-sidebar {
             width: 250px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            margin-right: 20px;
         }
-        
-        .control-bar h3 {
+
+        .strategic-sidebar h3 {
             font-size: 20px;
             color: #2c3e50;
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid #b15e6c;
-            text-align: center;
         }
-        
-        .control-btn {
+
+        .strategic-sidebar-btn {
             display: block;
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             margin-bottom: 10px;
             border: none;
             border-radius: 4px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
+            text-align: left;
             background: #2c3e50;
             color: white;
         }
-        
-        .control-btn.active {
+
+        .strategic-sidebar-btn.active {
             background: #b15e6c;
             font-weight: bold;
         }
-        
-        .control-btn:hover {
+
+        .strategic-sidebar-btn:hover {
             opacity: 0.9;
             transform: translateX(5px);
         }
-        
-        /* Content Area */
-        .content-area {
+
+        .strategic-main-content {
             flex: 1;
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        /* Supplier Performance Report */
+        .performance-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            flex: 1;
         }
         
         .performance-header {
@@ -1253,8 +1260,6 @@
         
         .performance-content {
             padding: 20px;
-            flex: 1;
-            overflow-y: auto;
         }
         
         .performance-summary-cards {
@@ -1432,328 +1437,151 @@
             background: #7f8c8d;
         }
         
-        /* AI Analysis Section */
-        .ai-analysis-section {
-            margin-top: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        /* AI Prediction Page */
+        .ai-prediction-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
             border-radius: 10px;
-            border-left: 5px solid #2c3e50;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            flex: 1;
         }
         
-        .ai-analysis-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .ai-analysis-header h3 {
-            font-size: 22px;
-            color: #2c3e50;
-            margin: 0;
-        }
-        
-        .ai-icon {
-            font-size: 24px;
-            color: #2c3e50;
-        }
-        
-        .ai-analysis-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        .ai-insights {
-            background: white;
-            border-radius: 8px;
+        .ai-prediction-header {
+            background: #2c3e50;
+            color: white;
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
         }
         
-        .ai-insights h4 {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #b15e6c;
+        .ai-prediction-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
         }
         
-        .ai-insight-item {
-            margin-bottom: 15px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            border-left: 3px solid #2c3e50;
-        }
-        
-        .ai-insight-item h5 {
+        .ai-prediction-header p {
             font-size: 16px;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        
-        .ai-insight-item p {
-            font-size: 14px;
-            color: #495057;
-            margin: 0;
-        }
-        
-        .ai-recommendations {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .ai-recommendations h4 {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #b15e6c;
-        }
-        
-        .ai-recommendation-item {
-            margin-bottom: 15px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            border-left: 3px solid #27ae60;
-        }
-        
-        .ai-recommendation-item h5 {
-            font-size: 16px;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        
-        .ai-recommendation-item p {
-            font-size: 14px;
-            color: #495057;
-            margin: 0;
-        }
-        
-        .ai-prediction {
-            grid-column: 1 / -1;
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-top: 20px;
-        }
-        
-        .ai-prediction h4 {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #b15e6c;
+            opacity: 0.9;
         }
         
         .ai-prediction-content {
+            padding: 20px;
+        }
+        
+        .prediction-tabs {
             display: flex;
-            gap: 20px;
-        }
-        
-        .ai-prediction-chart {
-            flex: 1;
-            height: 200px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #7f8c8d;
-            font-style: italic;
-        }
-        
-        .ai-prediction-text {
-            flex: 1;
-            font-size: 14px;
-            color: #495057;
-            line-height: 1.6;
-        }
-        
-        .ai-analysis-actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
-            gap: 10px;
-        }
-        
-        .ai-analysis-btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .ai-analysis-btn-primary {
-            background: #2c3e50;
-            color: white;
-        }
-        
-        .ai-analysis-btn-primary:hover {
-            background: #1a2635;
-        }
-        
-        .ai-analysis-btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
-        
-        .ai-analysis-btn-secondary:hover {
-            background: #7f8c8d;
-        }
-        
-        /* AI Chat Section */
-        .ai-chat-section {
-            margin-top: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-            border-radius: 10px;
-            border-left: 5px solid #2196F3;
-        }
-        
-        .ai-chat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
         }
         
-        .ai-chat-header h3 {
-            font-size: 22px;
-            color: #2196F3;
-            margin: 0;
+        .prediction-tab {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            color: black; /* Changed to black as requested */
         }
         
-        .ai-chat-icon {
-            font-size: 24px;
-            color: #2196F3;
+        .prediction-tab.active {
+            background: white;
+            border-bottom: 3px solid #2c3e50;
+            font-weight: bold;
         }
         
-        .ai-chat-container {
+        .prediction-content {
+            display: none;
+            padding: 20px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            overflow: hidden;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
         }
         
-        .ai-chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .ai-chat-message {
-            max-width: 80%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            word-wrap: break-word;
-        }
-        
-        .ai-chat-message.user {
-            background-color: #2196F3;
-            color: white;
-            align-self: flex-end;
-            margin-left: auto;
-        }
-        
-        .ai-chat-message.ai {
-            background-color: #f0f0f0;
-            color: #333;
-            align-self: flex-start;
-        }
-        
-        .ai-chat-input-container {
-            padding: 15px;
-            background: #f8f9fa;
-            border-top: 1px solid #eee;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .ai-chat-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            outline: none;
-            font-size: 14px;
-        }
-        
-        .ai-chat-send-btn {
-            padding: 12px 20px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        
-        .ai-chat-send-btn:hover {
-            background-color: #0b7dda;
-        }
-        
-        .ai-chat-send-btn:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        
-        .ai-chat-suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .ai-chat-suggestion {
-            background: #e3f2fd;
-            color: #1976d2;
-            border: 1px solid #bbdefb;
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .ai-chat-suggestion:hover {
-            background: #bbdefb;
-        }
-        
-        /* Content Sections */
-        .content-section {
-            display: none;
-            padding: 20px;
-            flex: 1;
-            overflow-y: auto;
-        }
-        
-        .content-section.active {
+        .prediction-content.active {
             display: block;
         }
         
+        .prediction-analysis {
+            margin-bottom: 20px;
+        }
+        
+        .prediction-analysis h3 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .prediction-analysis p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .prediction-list {
+            list-style-type: none;
+        }
+        
+        .prediction-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .prediction-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .prediction-list strong {
+            color: #2c3e50;
+        }
+        
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .project-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #2c3e50;
+        }
+        
+        .project-card h4 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .project-card p {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .project-category {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .material-prediction-chart {
+            height: 400px;
+            margin-top: 20px;
+        }
+        
         @media (max-width: 768px) {
-            .performance-container {
+            .strategic-view-container {
                 flex-direction: column;
             }
             
-            .control-bar {
+            .strategic-sidebar {
                 width: 100%;
+                margin-right: 0;
                 margin-bottom: 20px;
             }
             
@@ -1775,12 +1603,8 @@
                 width: 100%;
             }
             
-            .ai-analysis-content {
+            .project-list {
                 grid-template-columns: 1fr;
-            }
-            
-            .ai-prediction-content {
-                flex-direction: column;
             }
         }
     </style>
@@ -1849,7 +1673,7 @@
                 <button class="operation-btn" onclick="showPoCreation()">CREATE PO</button>
                 <button class="operation-btn" onclick="showOrderTracking()">TRACK DELIVERY</button>
                 <button class="operation-btn" onclick="showSupplierInfo()">SUPPLIER INFORMATION</button>
-                <button class="operation-btn" onclick="showSupplierPerformance()">SUPPLIER PERFORMANCE REPORT</button>
+                <button class="operation-btn" onclick="showStrategicView()">STRATEGIC VIEW</button>
             </div>
         </div>
     </div>
@@ -2101,223 +1925,265 @@
         </div>
     </div>
 
-    <!-- Supplier Performance Report Page -->
-    <div class="supplier-performance-page" id="supplierPerformancePage">
+    <!-- Strategic View Page -->
+    <div class="strategic-view-page" id="strategicViewPage">
         <div class="nav-bar">
             <div class="brand">CTS</div>
             <div class="top-nav">
-                <div class="datetime" id="performanceDatetime"></div>
+                <div class="datetime" id="strategicViewDatetime"></div>
                 <a href="#" onclick="showDashboard()">Back to Dashboard</a>
             </div>
         </div>
         
-        <div class="performance-container">
-            <!-- Control Bar -->
-            <div class="control-bar">
-                <h3>Reports</h3>
-                <button class="control-btn active" id="performanceReportBtn" onclick="showContent('performanceReport')">Supplier Performance Report</button>
-                <button class="control-btn" id="aiInsightsBtn" onclick="showContent('aiInsights')">AI-Powered Business Insights</button>
+        <div class="strategic-view-container">
+            <!-- Sidebar for Strategic View -->
+            <div class="strategic-sidebar">
+                <h3>Strategic View</h3>
+                <button class="strategic-sidebar-btn active" onclick="showStrategicViewContent('performance')">Supplier Performance Report</button>
+                <button class="strategic-sidebar-btn" onclick="showStrategicViewContent('prediction')">AI-Powered Future Demand Prediction</button>
             </div>
             
-            <!-- Content Area -->
-            <div class="content-area">
-                <div class="performance-header">
-                    <h1 id="contentTitle">Supplier Performance Report</h1>
-                    <p id="contentDescription">Ranking suppliers based on delivery performance and product volume</p>
-                </div>
-                
+            <!-- Main Content Area -->
+            <div class="strategic-main-content">
                 <!-- Supplier Performance Report Content -->
-                <div class="content-section active" id="performanceReport">
-                    <div class="performance-filters">
-                        <div class="performance-filter-group">
-                            <label for="time-period">Time Period:</label>
-                            <select id="time-period">
-                                <option value="7">Last 7 Days</option>
-                                <option value="30" selected>Last 30 Days</option>
-                                <option value="90">Last 90 Days</option>
-                                <option value="180">Last 6 Months</option>
-                                <option value="365">Last Year</option>
-                                <option value="custom">Custom Range</option>
-                            </select>
+                <div id="performance-content" class="strategic-content-section">
+                    <div class="performance-container">
+                        <div class="performance-header">
+                            <h1>Supplier Performance Report</h1>
+                            <p>Ranking suppliers based on delivery performance and product volume</p>
                         </div>
                         
-                        <div class="performance-filter-group performance-date-range" id="custom-date-range" style="display: none;">
-                            <label for="start-date">From:</label>
-                            <input type="date" id="start-date">
-                            <span>to</span>
-                            <input type="date" id="end-date">
-                        </div>
-                        
-                        <div class="performance-filter-group">
-                            <label for="sort-by">Sort By:</label>
-                            <select id="sort-by">
-                                <option value="deliveryRate">Delivery Rate</option>
-                                <option value="totalProducts">Total Products</option>
-                                <option value="onTimeRate">On-Time Rate</option>
-                                <option value="name">Supplier Name</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="performance-content">
-                        <div class="performance-summary-cards">
-                            <div class="performance-summary-card">
-                                <h3>Total Suppliers</h3>
-                                <div class="value" id="total-suppliers">6</div>
-                                <div class="trend">Active in system</div>
+                        <div class="performance-filters">
+                            <div class="performance-filter-group">
+                                <label for="time-period">Time Period:</label>
+                                <select id="time-period">
+                                    <option value="7">Last 7 Days</option>
+                                    <option value="30" selected>Last 30 Days</option>
+                                    <option value="90">Last 90 Days</option>
+                                    <option value="180">Last 6 Months</option>
+                                    <option value="365">Last Year</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
                             </div>
                             
-                            <div class="performance-summary-card">
-                                <h3>Average Delivery Rate</h3>
-                                <div class="value" id="avg-delivery-rate">87.5%</div>
-                                <div class="performance-trend up">+2.5% from last period</div>
+                            <div class="performance-filter-group performance-date-range" id="custom-date-range" style="display: none;">
+                                <label for="start-date">From:</label>
+                                <input type="date" id="start-date">
+                                <span>to</span>
+                                <input type="date" id="end-date">
                             </div>
                             
-                            <div class="performance-summary-card">
-                                <h3>Total Products Delivered</h3>
-                                <div class="value" id="total-products">4,285</div>
-                                <div class="performance-trend up">+328 from last period</div>
-                            </div>
-                            
-                            <div class="performance-summary-card">
-                                <h3>On-Time Delivery Rate</h3>
-                                <div class="value" id="ontime-rate">82.3%</div>
-                                <div class="performance-trend up">+3.7% from last period</div>
+                            <div class="performance-filter-group">
+                                <label for="sort-by">Sort By:</label>
+                                <select id="sort-by">
+                                    <option value="deliveryRate">Delivery Rate</option>
+                                    <option value="totalProducts">Total Products</option>
+                                    <option value="onTimeRate">On-Time Rate</option>
+                                    <option value="name">Supplier Name</option>
+                                </select>
                             </div>
                         </div>
                         
-                        <table class="performance-table">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Supplier</th>
-                                    <th>Delivery Rate</th>
-                                    <th>Total Products</th>
-                                    <th>On-Time Rate</th>
-                                    <th>Avg. Delivery Time</th>
-                                    <th>Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody id="supplier-data">
-                                <!-- Supplier data will be populated here -->
-                            </tbody>
-                        </table>
-                        
-                        <div class="performance-charts-container">
-                            <div class="performance-chart">
-                                <h3>Delivery Performance Comparison</h3>
-                                <div class="performance-chart-placeholder">
-                                    <canvas id="deliveryChart"></canvas>
+                        <div class="performance-content">
+                            <div class="performance-summary-cards">
+                                <div class="performance-summary-card">
+                                    <h3>Total Suppliers</h3>
+                                    <div class="value" id="total-suppliers">6</div>
+                                    <div class="trend">Active in system</div>
+                                </div>
+                                
+                                <div class="performance-summary-card">
+                                    <h3>Average Delivery Rate</h3>
+                                    <div class="value" id="avg-delivery-rate">87.5%</div>
+                                    <div class="performance-trend up">+2.5% from last period</div>
+                                </div>
+                                
+                                <div class="performance-summary-card">
+                                    <h3>Total Products Delivered</h3>
+                                    <div class="value" id="total-products">4,285</div>
+                                    <div class="performance-trend up">+328 from last period</div>
+                                </div>
+                                
+                                <div class="performance-summary-card">
+                                    <h3>On-Time Delivery Rate</h3>
+                                    <div class="value" id="ontime-rate">82.3%</div>
+                                    <div class="performance-trend up">+3.7% from last period</div>
                                 </div>
                             </div>
                             
-                            <div class="performance-chart">
-                                <h3>Product Volume by Supplier</h3>
-                                <div class="performance-chart-placeholder">
-                                    <canvas id="volumeChart"></canvas>
+                            <table class="performance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Supplier</th>
+                                        <th>Delivery Rate</th>
+                                        <th>Total Products</th>
+                                        <th>On-Time Rate</th>
+                                        <th>Avg. Delivery Time</th>
+                                        <th>Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="supplier-data">
+                                    <!-- Supplier data will be populated here -->
+                                </tbody>
+                            </table>
+                            
+                            <div class="performance-charts-container">
+                                <div class="performance-chart">
+                                    <h3>Delivery Performance Comparison</h3>
+                                    <div class="performance-chart-placeholder">
+                                        <canvas id="deliveryChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="performance-chart">
+                                    <h3>Product Volume by Supplier</h3>
+                                    <div class="performance-chart-placeholder">
+                                        <canvas id="volumeChart"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="performance-actions">
-                        <button class="performance-btn performance-btn-secondary" onclick="printReport()">Print Report</button>
-                        <button class="performance-btn performance-btn-primary" onclick="exportToCSV()">Export to CSV</button>
+                        
+                        <div class="performance-actions">
+                            <button class="performance-btn performance-btn-secondary" onclick="printReport()">Print Report</button>
+                            <button class="performance-btn performance-btn-primary" onclick="exportToCSV()">Export to CSV</button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- AI-Powered Business Insights Content -->
-                <div class="content-section" id="aiInsights">
-                    <div class="performance-content">
-                        <!-- AI Analysis Section -->
-                        <div class="ai-analysis-section">
-                            <div class="ai-analysis-header">
-                                <h3><i class="fas fa-robot ai-icon"></i> AI-Powered Business Insights</h3>
-                                <div class="ai-analysis-actions">
-                                    <button class="ai-analysis-btn ai-analysis-btn-secondary" onclick="generateAIAnalysis()">
-                                        <i class="fas fa-sync-alt"></i> Regenerate Analysis
-                                    </button>
-                                    <button class="ai-analysis-btn ai-analysis-btn-primary" onclick="exportAIAnalysis()">
-                                        <i class="fas fa-download"></i> Export Insights
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="ai-analysis-content">
-                                <div class="ai-insights">
-                                    <h4>Key Insights</h4>
-                                    <div id="aiInsightsContent">
-                                        <!-- AI insights will be populated here -->
-                                    </div>
-                                </div>
-                                
-                                <div class="ai-recommendations">
-                                    <h4>Strategic Recommendations</h4>
-                                    <div id="aiRecommendations">
-                                        <!-- AI recommendations will be populated here -->
-                                    </div>
-                                </div>
-                                
-                                <div class="ai-prediction">
-                                    <h4>Future Performance Prediction</h4>
-                                    <div class="ai-prediction-content">
-                                        <div class="ai-prediction-chart">
-                                            <canvas id="predictionChart"></canvas>
-                                        </div>
-                                        <div class="ai-prediction-text" id="aiPredictionText">
-                                            <!-- AI prediction text will be populated here -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- AI Prediction Content -->
+                <div id="prediction-content" class="strategic-content-section" style="display: none;">
+                    <div class="ai-prediction-container">
+                        <div class="ai-prediction-header">
+                            <h1>Dự Báo Nhu Cầu Tương Lai Sử Dụng AI</h1>
+                            <p>Dự báo nhu cầu tương lai dựa trên dữ liệu lịch sử và phân tích thị trường</p>
                         </div>
                         
-                        <!-- AI Chat Section -->
-                        <div class="ai-chat-section">
-                            <div class="ai-chat-header">
-                                <h3><i class="fas fa-comments ai-chat-icon"></i> Ask AI Assistant</h3>
-                                <div class="ai-analysis-actions">
-                                    <button class="ai-analysis-btn ai-analysis-btn-secondary" onclick="clearAIChat()">
-                                        <i class="fas fa-trash"></i> Clear Chat
-                                    </button>
+                        <div class="ai-prediction-content">
+                            <div class="prediction-tabs">
+                                <button class="prediction-tab active" onclick="openPredictionTab(event, 'business-analysis')">Phân Tích Kinh Doanh</button>
+                                <button class="prediction-tab" onclick="openPredictionTab(event, 'future-projects')">Dự Án Tương Lai (2026-2030)</button>
+                                <button class="prediction-tab" onclick="openPredictionTab(event, 'material-prediction')">Dự Báo Sử Dụng Vật Liệu</button>
+                            </div>
+                            
+                            <div id="business-analysis" class="prediction-content active">
+                                <div class="prediction-analysis">
+                                    <h3>Xu Hướng Hiệu Suất Nhà Cung Cấp & Triển Vọng Tương Lai</h3>
+                                    <p>Dựa trên dữ liệu lịch sử và phân tích thị trường, hệ thống AI của chúng tôi dự đoán các xu hướng sau cho các nhà cung cấp của bạn:</p>
+                                    
+                                    <ul class="prediction-list">
+                                        <li><strong>Nam Phát:</strong> Dự kiến duy trì hiệu suất xuất sắc với khả năng tăng trưởng 5-7% về năng lực giao hàng vào năm 2026. Cân nhắc mở rộng hợp tác cho các dự án quy mô lớn.</li>
+                                        <li><strong>Phương Viên:</strong> Thể hiện sự cải thiện ổn định. AI dự đoán tăng 3-5% tỷ lệ giao hàng đúng hạn trong 2 năm tới. Phù hợp cho các dự án quy mô trung bình.</li>
+                                        <li><strong>Quốc tế Sao Việt:</strong> Hiệu suất trung bình với tiềm năng cải thiện. AI đề xuất áp dụng thời gian giao hàng nghiêm ngặt hơn để nâng cao độ tin cậy.</li>
+                                        <li><strong>Galvanizing JV:</strong> Khả năng kỹ thuật mạnh nhưng thời gian giao hàng cần tối ưu hóa. AI đề xuất phối hợp chặt chẽ hơn cho các dự án nhạy cảm về thời gian.</li>
+                                        <li><strong>Đức Thành:</strong> Hiệu suất dưới mức trung bình. AI đề xuất tìm kiếm nhà cung cấp thay thế cho các thành phần quan trọng trong khi duy trì mối quan hệ hiện tại cho các mặt hàng chuyên biệt.</li>
+                                        <li><strong>Giang Sơn Thịnh:</strong> Dữ liệu hạn chế nhưng thể hiện tiềm năng. AI đề xuất tăng dần khối lượng đặt hàng để kiểm tra năng lực và độ tin cậy.</li>
+                                    </ul>
+                                    
+                                    <p><strong>Triển Vọng Thị Trường Tổng Thể:</strong> Nhu cầu vật liệu xây dựng tại Hải Phòng và miền Bắc Việt Nam dự kiến tăng trưởng 12-15% hàng năm cho đến năm 2030, được thúc đẩy bởi các dự án phát triển cơ sở hạ tầng.</p>
                                 </div>
                             </div>
                             
-                            <div class="ai-chat-container">
-                                <div class="ai-chat-messages" id="aiChatMessages">
-                                    <div class="ai-chat-message ai">
-                                        Hello! I'm your AI assistant for supplier performance analysis. I can help you understand trends, identify opportunities, and answer questions about your supplier data. What would you like to know?
+                            <div id="future-projects" class="prediction-content">
+                                <div class="prediction-analysis">
+                                    <h3>Các Dự Án Hạ Tầng Lớn tại Việt Nam (2026-2030)</h3>
+                                    <p>Các dự án sau đây dự kiến sẽ thúc đẩy nhu cầu đáng kể về vật liệu xây dựng trong những năm tới:</p>
+                                    
+                                    <div class="project-list">
+                                        <div class="project-card">
+                                            <h4>Cao Tốc Bắc - Nam Giai Đoạn 3</h4>
+                                            <p><strong>Địa điểm:</strong> Nhiều tỉnh thành bao gồm Hải Phòng</p>
+                                            <p><strong>Thời gian:</strong> 2026-2030</p>
+                                            <p><strong>Ngân sách:</strong> 12.5 tỷ USD</p>
+                                            <p><strong>Phạm vi:</strong> Xây dựng 700km đường cao tốc mới</p>
+                                            <span class="project-category">Cầu Đường Cao Tốc</span>
+                                        </div>
+                                        
+                                        <div class="project-card">
+                                            <h4>Mở Rộng Sân Bay Quốc Tế Hải Phòng</h4>
+                                            <p><strong>Địa điểm:</strong> Hải Phòng</p>
+                                            <p><strong>Thời gian:</strong> 2027-2029</p>
+                                            <p><strong>Ngân sách:</strong> 2.1 tỷ USD</p>
+                                            <p><strong>Phạm vi:</strong> Xây dựng nhà ga và đường băng mới</p>
+                                            <span class="project-category">Xây Dựng Sân Bay</span>
+                                        </div>
+                                        
+                                        <div class="project-card">
+                                            <h4>Cảng Lạch Huyền Giai Đoạn 3</h4>
+                                            <p><strong>Địa điểm:</strong> Hải Phòng</p>
+                                            <p><strong>Thời gian:</strong> 2026-2028</p>
+                                            <p><strong>Ngân sách:</strong> 850 triệu USD</p>
+                                            <p><strong>Phạm vi:</strong> Mở rộng cảng nước sâu</p>
+                                            <span class="project-category">Hạ Tầng Cảng</span>
+                                        </div>
+                                        
+                                        <div class="project-card">
+                                            <h4>Tuyến Đường Sắt Đô Thị Hải Phòng 1</h4>
+                                            <p><strong>Địa điểm:</strong> Hải Phòng</p>
+                                            <p><strong>Thời gian:</strong> 2028-2030</p>
+                                            <p><strong>Ngân sách:</strong> 1.5 tỷ USD</p>
+                                            <p><strong>Phạm vi:</strong> Đường sắt trên cao dài 18km</p>
+                                            <span class="project-category">Hạ Tầng Đô Thị</span>
+                                        </div>
+                                        
+                                        <div class="project-card">
+                                            <h4>Đường Dây Truyền Tải Điện 500kV</h4>
+                                            <p><strong>Địa điểm:</strong> Miền Bắc Việt Nam</p>
+                                            <p><strong>Thời gian:</strong> 2026-2027</p>
+                                            <p><strong>Ngân sách:</strong> 650 triệu USD</p>
+                                            <p><strong>Phạm vi:</strong> Xây dựng đường dây điện dài 300km</p>
+                                            <span class="project-category">Xây Dựng Đường Dây Điện</span>
+                                        </div>
+                                        
+                                        <div class="project-card">
+                                            <h4>Cầu Sông Cấm</h4>
+                                            <p><strong>Địa điểm:</strong> Hải Phòng</p>
+                                            <p><strong>Thời gian:</strong> 2027-2029</p>
+                                            <p><strong>Ngân sách:</strong> 320 triệu USD</p>
+                                            <p><strong>Phạm vi:</strong> Cầu dây văng dài 2.5km</p>
+                                            <span class="project-category">Cầu Đường Cao Tốc</span>
+                                        </div>
+                                        
+                                        <div class="project-card">
+                                            <h4>Phát Triển Thành Phố Thông Minh Hải Phòng</h4>
+                                            <p><strong>Địa điểm:</strong> Hải Phòng</p>
+                                            <p><strong>Thời gian:</strong> 2026-2030</p>
+                                            <p><strong>Ngân sách:</strong> 3.2 tỷ USD</p>
+                                            <p><strong>Phạm vi:</strong> Phát triển đô thị với hạ tầng thông minh</p>
+                                            <span class="project-category">Phát Triển Đô Thị</span>
+                                        </div>
+                                        
+                                        <div class="project-card">
+                                            <h4>Hệ Thống Cầu Vượt Giao Lộ</h4>
+                                            <p><strong>Địa điểm:</strong> Trung Tâm Thành Phố Hải Phòng</p>
+                                            <p><strong>Thời gian:</strong> 2026-2027</p>
+                                            <p><strong>Ngân sách:</strong> 180 triệu USD</p>
+                                            <p><strong>Phạm vi:</strong> 5 cầu vượt giao lộ chính</p>
+                                            <span class="project-category">Cầu Vượt Giao Lộ</span>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="ai-chat-input-container">
-                                    <input type="text" class="ai-chat-input" id="aiChatInput" placeholder="Ask a question about supplier performance..." onkeypress="handleAIChatKeypress(event)">
-                                    <button class="ai-chat-send-btn" id="aiChatSendBtn" onclick="sendAIChatMessage()">
-                                        <i class="fas fa-paper-plane"></i>
-                                    </button>
-                                </div>
-                                
-                                <div class="ai-chat-suggestions">
-                                    <div class="ai-chat-suggestion" onclick="useAISuggestion('Which supplier has the best delivery rate?')">
-                                        Which supplier has the best delivery rate?
+                            </div>
+                            
+                            <div id="material-prediction" class="prediction-content">
+                                <div class="prediction-analysis">
+                                    <h3>Dự Báo Nhu Cầu Vật Liệu Xây Dựng (2026-2030)</h3>
+                                    <p>Dựa trên các dự án hạ tầng được dự báo, hệ thống AI của chúng tôi dự đoán các yêu cầu vật liệu sau:</p>
+                                    
+                                    <div class="material-prediction-chart">
+                                        <canvas id="materialPredictionChart"></canvas>
                                     </div>
-                                    <div class="ai-chat-suggestion" onclick="useAISuggestion('How can I improve supplier performance?')">
-                                        How can I improve supplier performance?
-                                    </div>
-                                    <div class="ai-chat-suggestion" onclick="useAISuggestion('Show me trends for the last quarter')">
-                                        Show me trends for the last quarter
-                                    </div>
-                                    <div class="ai-chat-suggestion" onclick="useAISuggestion('What risks should I be aware of?')">
-                                        What risks should I be aware of?
+                                    
+                                    <div style="margin-top: 20px;">
+                                        <h4>Thông Tin Chính:</h4>
+                                        <ul class="prediction-list" id="materialPredictionList">
+                                            <!-- Material prediction list will be populated here -->
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="performance-actions">
-                        <button class="performance-btn performance-btn-secondary" onclick="printReport()">Print Report</button>
-                        <button class="performance-btn performance-btn-primary" onclick="exportAIAnalysis()">Export Insights</button>
                     </div>
                 </div>
             </div>
@@ -2717,369 +2583,86 @@
             ]
         };
 
-        // AI Chat functionality
-        let aiChatHistory = [
-            { sender: 'ai', text: 'Hello! I\'m your AI assistant for supplier performance analysis. I can help you understand trends, identify opportunities, and answer questions about your supplier data. What would you like to know?' }
+        // AI Prediction Data
+        const futureProjects = [
+            {
+                name: "North-South Expressway Phase 3",
+                location: "Multiple provinces including Hai Phong",
+                timeline: "2026-2030",
+                budget: "$12.5 billion",
+                scope: "700km of new expressway construction",
+                category: "Highway Bridges"
+            },
+            {
+                name: "Hai Phong International Airport Expansion",
+                location: "Hai Phong",
+                timeline: "2027-2029",
+                budget: "$2.1 billion",
+                scope: "New terminal and runway construction",
+                category: "Airport Construction"
+            },
+            {
+                name: "Lach Huyen Port Phase 3",
+                location: "Hai Phong",
+                timeline: "2026-2028",
+                budget: "$850 million",
+                scope: "Deep-water port expansion",
+                category: "Port Infrastructure"
+            },
+            {
+                name: "Hai Phong Urban Railway Line 1",
+                location: "Hai Phong",
+                timeline: "2028-2030",
+                budget: "$1.5 billion",
+                scope: "18km elevated railway",
+                category: "Urban Infrastructure"
+            },
+            {
+                name: "500kV Power Transmission Line",
+                location: "Northern Vietnam",
+                timeline: "2026-2027",
+                budget: "$650 million",
+                scope: "300km power line construction",
+                category: "Power Line Construction"
+            },
+            {
+                name: "Cam River Bridge",
+                location: "Hai Phong",
+                timeline: "2027-2029",
+                budget: "$320 million",
+                scope: "2.5km cable-stayed bridge",
+                category: "Highway Bridges"
+            },
+            {
+                name: "Hai Phong Smart City Development",
+                location: "Hai Phong",
+                timeline: "2026-2030",
+                budget: "$3.2 billion",
+                scope: "Urban development with smart infrastructure",
+                category: "Urban Development"
+            },
+            {
+                name: "Intersection Overpass System",
+                location: "Hai Phong City Center",
+                timeline: "2026-2027",
+                budget: "$180 million",
+                scope: "5 major intersection overpasses",
+                category: "Intersection Overpasses"
+            }
         ];
 
-        // Function to switch between content sections
-        function showContent(sectionId) {
-            // Hide all content sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show the selected content section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Update active button
-            document.querySelectorAll('.control-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            if (sectionId === 'performanceReport') {
-                document.getElementById('performanceReportBtn').classList.add('active');
-                document.getElementById('contentTitle').textContent = 'Supplier Performance Report';
-                document.getElementById('contentDescription').textContent = 'Ranking suppliers based on delivery performance and product volume';
-            } else if (sectionId === 'aiInsights') {
-                document.getElementById('aiInsightsBtn').classList.add('active');
-                document.getElementById('contentTitle').textContent = 'AI-Powered Business Insights';
-                document.getElementById('contentDescription').textContent = 'Advanced analytics and predictions for supplier performance optimization';
-                
-                // Generate AI analysis when switching to AI Insights
-                generateAIAnalysis();
-                
-                // Render AI chat messages
-                renderAIChatMessages();
+        // Material demand prediction data - now using actual materials from suppliers
+        const materialPredictionData = {
+            years: [2026, 2027, 2028, 2029, 2030],
+            materials: {
+                // Extract material categories from supplier data
+                steel: [1200, 1450, 1800, 2100, 2400], // in thousand tons
+                cement: [8500, 9500, 11000, 12500, 14000], // in thousand tons
+                aggregates: [15000, 17500, 20000, 23000, 26000], // in thousand cubic meters
+                electrical: [45, 55, 70, 85, 100], // in million USD
+                prefabricated: [120, 160, 220, 300, 400] // in million USD
             }
-        }
-
-        // AI Chat Functions
-        function renderAIChatMessages() {
-            const chatMessagesContainer = document.getElementById('aiChatMessages');
-            chatMessagesContainer.innerHTML = '';
-            
-            aiChatHistory.forEach(message => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `ai-chat-message ${message.sender}`;
-                messageDiv.textContent = message.text;
-                chatMessagesContainer.appendChild(messageDiv);
-            });
-            
-            // Scroll to bottom
-            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-        }
-
-        function handleAIChatKeypress(event) {
-            if (event.key === 'Enter') {
-                sendAIChatMessage();
-            }
-        }
-
-        function useAISuggestion(suggestion) {
-            document.getElementById('aiChatInput').value = suggestion;
-            sendAIChatMessage();
-        }
-
-        function sendAIChatMessage() {
-            const input = document.getElementById('aiChatInput');
-            const message = input.value.trim();
-            
-            if (message) {
-                // Add user message to chat history
-                aiChatHistory.push({ sender: 'user', text: message });
-                
-                // Clear input
-                input.value = '';
-                
-                // Disable send button while processing
-                const sendBtn = document.getElementById('aiChatSendBtn');
-                sendBtn.disabled = true;
-                sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-                
-                // Render updated chat
-                renderAIChatMessages();
-                
-                // Simulate AI processing delay
-                setTimeout(() => {
-                    // Generate AI response
-                    const aiResponse = generateAIResponse(message);
-                    aiChatHistory.push({ sender: 'ai', text: aiResponse });
-                    
-                    // Render updated chat
-                    renderAIChatMessages();
-                    
-                    // Re-enable send button
-                    sendBtn.disabled = false;
-                    sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
-                }, 1000 + Math.random() * 2000);
-            }
-        }
-
-        function generateAIResponse(userMessage) {
-            // Simple keyword-based response system
-            const lowerMessage = userMessage.toLowerCase();
-            
-            // Check for specific keywords and patterns
-            if (lowerMessage.includes('best') && lowerMessage.includes('supplier')) {
-                const bestSupplier = supplierPerformance.reduce((prev, current) => 
-                    (prev.deliveryRate > current.deliveryRate) ? prev : current
-                );
-                return `Based on delivery performance, ${bestSupplier.name} is your best supplier with a ${bestSupplier.deliveryRate}% delivery rate and ${bestSupplier.onTimeRate}% on-time delivery rate.`;
-            }
-            
-            if (lowerMessage.includes('worst') && lowerMessage.includes('supplier')) {
-                const worstSupplier = supplierPerformance.reduce((prev, current) => 
-                    (prev.deliveryRate < current.deliveryRate) ? prev : current
-                );
-                return `${worstSupplier.name} has the lowest performance with a ${worstSupplier.deliveryRate}% delivery rate. Consider working with them to improve their processes or diversifying your sourcing.`;
-            }
-            
-            if (lowerMessage.includes('improve') && lowerMessage.includes('performance')) {
-                const needsImprovement = supplierPerformance.filter(s => s.deliveryRate < 85);
-                if (needsImprovement.length > 0) {
-                    const supplierNames = needsImprovement.map(s => s.name).join(', ');
-                    return `To improve supplier performance, focus on ${supplierNames}. Consider implementing performance metrics, regular reviews, and collaborative improvement plans. You might also explore diversifying your supplier base to reduce risk.`;
-                } else {
-                    return 'Your suppliers are performing well overall! To maintain this, continue monitoring performance metrics and consider implementing incentive programs for consistent excellence.';
-                }
-            }
-            
-            if (lowerMessage.includes('trend') || lowerMessage.includes('quarter') || lowerMessage.includes('last')) {
-                const avgDeliveryRate = supplierPerformance.reduce((sum, supplier) => 
-                    sum + supplier.deliveryRate, 0) / supplierPerformance.length;
-                const trend = avgDeliveryRate > 85 ? 'positive' : 'needs attention';
-                return `Based on the last quarter, supplier performance shows a ${trend} trend with an average delivery rate of ${avgDeliveryRate.toFixed(1)}%. ${trend === 'positive' ? 'Keep up the good work!' : 'Consider implementing improvement strategies.'}`;
-            }
-            
-            if (lowerMessage.includes('risk') || lowerMessage.includes('problem')) {
-                const riskySuppliers = supplierPerformance.filter(s => s.deliveryRate < 80 || s.onTimeRate < 75);
-                if (riskySuppliers.length > 0) {
-                    const supplierNames = riskySuppliers.map(s => s.name).join(', ');
-                    return `Potential risks identified with ${supplierNames}. These suppliers have lower performance metrics that could impact your supply chain. Consider developing contingency plans and exploring alternative suppliers.`;
-                } else {
-                    return 'No significant risks detected in your current supplier portfolio. Your suppliers are performing at acceptable levels. Continue monitoring for any changes.';
-                }
-            }
-            
-            if (lowerMessage.includes('recommend') || lowerMessage.includes('suggestion')) {
-                return 'Based on your supplier data, I recommend:\n1. Focus on relationship building with top performers\n2. Implement a supplier development program for those needing improvement\n3. Diversify your supplier base to mitigate risks\n4. Establish clear performance metrics and regular review cycles';
-            }
-            
-            if (lowerMessage.includes('delivery') && lowerMessage.includes('rate')) {
-                const avgDeliveryRate = supplierPerformance.reduce((sum, supplier) => 
-                    sum + supplier.deliveryRate, 0) / supplierPerformance.length;
-                return `Your average delivery rate across all suppliers is ${avgDeliveryRate.toFixed(1)}%. The industry benchmark is typically around 85%, so you're ${avgDeliveryRate >= 85 ? 'above' : 'below'} average.`;
-            }
-            
-            if (lowerMessage.includes('thank') || lowerMessage.includes('thanks')) {
-                return 'You\'re welcome! Is there anything else about your supplier performance you\'d like to know?';
-            }
-            
-            // Default response for unrecognized queries
-            return 'I understand you\'re asking about supplier performance. Could you please clarify your question? For example, you could ask about specific suppliers, performance trends, or recommendations for improvement.';
-        }
-
-        function clearAIChat() {
-            aiChatHistory = [
-                { sender: 'ai', text: 'Hello! I\'m your AI assistant for supplier performance analysis. I can help you understand trends, identify opportunities, and answer questions about your supplier data. What would you like to know?' }
-            ];
-            renderAIChatMessages();
-        }
-
-        // AI Analysis Functions
-        function generateAIAnalysis() {
-            // Show loading state
-            document.getElementById('aiInsightsContent').innerHTML = '<div class="ai-insight-item"><p>Analyzing supplier data...</p></div>';
-            document.getElementById('aiRecommendations').innerHTML = '<div class="ai-recommendation-item"><p>Generating recommendations...</p></div>';
-            document.getElementById('aiPredictionText').innerHTML = '<p>Predicting future trends...</p>';
-            
-            // Simulate AI processing delay
-            setTimeout(() => {
-                // Generate AI insights
-                const insights = generateAIInsights();
-                document.getElementById('aiInsightsContent').innerHTML = insights;
-                
-                // Generate AI recommendations
-                const recommendations = generateAIRecommendations();
-                document.getElementById('aiRecommendations').innerHTML = recommendations;
-                
-                // Generate AI predictions
-                const predictionText = generateAIPredictions();
-                document.getElementById('aiPredictionText').innerHTML = predictionText;
-                
-                // Update prediction chart
-                updatePredictionChart();
-            }, 1500);
-        }
-        
-        function generateAIInsights() {
-            // Find top performer
-            const topPerformer = supplierPerformance.reduce((prev, current) => 
-                (prev.deliveryRate > current.deliveryRate) ? prev : current
-            );
-            
-            // Find worst performer
-            const worstPerformer = supplierPerformance.reduce((prev, current) => 
-                (prev.deliveryRate < current.deliveryRate) ? prev : current
-            );
-            
-            // Calculate average metrics
-            const avgDeliveryRate = supplierPerformance.reduce((sum, supplier) => 
-                sum + supplier.deliveryRate, 0) / supplierPerformance.length;
-            
-            const avgOnTimeRate = supplierPerformance.reduce((sum, supplier) => 
-                sum + supplier.onTimeRate, 0) / supplierPerformance.length;
-            
-            // Identify trends
-            const improvingSuppliers = supplierPerformance.filter(s => s.deliveryRate > 90).length;
-            const decliningSuppliers = supplierPerformance.filter(s => s.deliveryRate < 80).length;
-            
-            return `
-                <div class="ai-insight-item">
-                    <h5>Top Performer</h5>
-                    <p>${topPerformer.name} leads with ${topPerformer.deliveryRate}% delivery rate and ${topPerformer.onTimeRate}% on-time rate.</p>
-                </div>
-                <div class="ai-insight-item">
-                    <h5>Performance Gap</h5>
-                    <p>There's a ${(topPerformer.deliveryRate - worstPerformer.deliveryRate).toFixed(1)}% gap between best and worst performers.</p>
-                </div>
-                <div class="ai-insight-item">
-                    <h5>Supplier Health</h5>
-                    <p>${improvingSuppliers} suppliers show excellent performance (>90%), while ${decliningSuppliers} need improvement (<80%).</p>
-                </div>
-                <div class="ai-insight-item">
-                    <h5>Delivery Efficiency</h5>
-                    <p>Average delivery rate is ${avgDeliveryRate.toFixed(1)}% with ${avgOnTimeRate.toFixed(1)}% on-time delivery across all suppliers.</p>
-                </div>
-            `;
-        }
-        
-        function generateAIRecommendations() {
-            // Find suppliers needing improvement
-            const needsImprovement = supplierPerformance.filter(s => s.deliveryRate < 85);
-            const excellentPerformers = supplierPerformance.filter(s => s.deliveryRate > 90);
-            
-            return `
-                <div class="ai-recommendation-item">
-                    <h5>Supplier Development</h5>
-                    <p>Work with ${needsImprovement.map(s => s.name).join(', ')} to improve delivery processes and reduce delays.</p>
-                </div>
-                <div class="ai-recommendation-item">
-                    <h5>Strategic Partnerships</h5>
-                    <p>Consider increasing order volume with ${excellentPerformers.map(s => s.name).join(', ')} to leverage their reliability.</p>
-                </div>
-                <div class="ai-recommendation-item">
-                    <h5>Risk Mitigation</h5>
-                    <p>Diversify sourcing for critical components to reduce dependency on lower-performing suppliers.</p>
-                </div>
-                <div class="ai-recommendation-item">
-                    <h5>Performance Incentives</h5>
-                    <p>Implement a supplier incentive program to reward consistent on-time delivery and quality performance.</p>
-                </div>
-            `;
-        }
-        
-        function generateAIPredictions() {
-            // Calculate trend projections
-            const avgDeliveryRate = supplierPerformance.reduce((sum, supplier) => 
-                sum + supplier.deliveryRate, 0) / supplierPerformance.length;
-            
-            const projectedImprovement = 2.5; // Based on historical trends
-            const projectedDeliveryRate = Math.min(100, avgDeliveryRate + projectedImprovement);
-            
-            // Identify growth opportunities
-            const highVolumeSuppliers = supplierPerformance.filter(s => s.totalProducts > 800);
-            const emergingSuppliers = supplierPerformance.filter(s => s.totalProducts < 500 && s.deliveryRate > 85);
-            
-            return `
-                <p>Based on current trends, the overall supplier delivery rate is projected to reach <strong>${projectedDeliveryRate.toFixed(1)}%</strong> in the next quarter.</p>
-                <p>${highVolumeSuppliers.map(s => s.name).join(', ')} show strong capacity for increased order volumes.</p>
-                <p>${emergingSuppliers.map(s => s.name).join(', ')} represent growth opportunities with their solid performance metrics.</p>
-                <p>AI recommends focusing supplier development efforts on improving delivery times by 10-15% through process optimization.</p>
-            `;
-        }
-        
-        function updatePredictionChart() {
-            const ctx = document.getElementById('predictionChart').getContext('2d');
-            
-            // Clear previous chart if exists
-            if (window.predictionChartInstance) {
-                window.predictionChartInstance.destroy();
-            }
-            
-            // Generate projection data
-            const currentQuarter = supplierPerformance.reduce((sum, supplier) => 
-                sum + supplier.deliveryRate, 0) / supplierPerformance.length;
-            
-            const projections = [
-                currentQuarter,
-                Math.min(100, currentQuarter + 1.2),
-                Math.min(100, currentQuarter + 2.5),
-                Math.min(100, currentQuarter + 3.8)
-            ];
-            
-            window.predictionChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Current', 'Q+1', 'Q+2', 'Q+3'],
-                    datasets: [{
-                        label: 'Projected Delivery Rate (%)',
-                        data: projections,
-                        borderColor: '#2c3e50',
-                        backgroundColor: 'rgba(44, 62, 80, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            min: 70,
-                            max: 100,
-                            title: {
-                                display: true,
-                                text: 'Delivery Rate %'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
-        function exportAIAnalysis() {
-            // Create a comprehensive report with insights and recommendations
-            const report = `
-                AI-POWERED SUPPLIER PERFORMANCE ANALYSIS
-                ========================================
-                
-                KEY INSIGHTS:
-                ${document.getElementById('aiInsightsContent').innerText}
-                
-                STRATEGIC RECOMMENDATIONS:
-                ${document.getElementById('aiRecommendations').innerText}
-                
-                FUTURE PREDICTIONS:
-                ${document.getElementById('aiPredictionText').innerText}
-                
-                Generated on: ${new Date().toLocaleDateString()}
-            `;
-            
-            // Create download link
-            const blob = new Blob([report], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'supplier_ai_analysis_report.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
+        };
 
         // Generate PO number
         function generatePONumber() {
@@ -3570,7 +3153,7 @@
             document.getElementById('poCreationPage').style.display = 'none';
             document.getElementById('poConfirmationPage').style.display = 'none';
             document.getElementById('supplierInfoPage').style.display = 'none';
-            document.getElementById('supplierPerformancePage').style.display = 'none';
+            document.getElementById('strategicViewPage').style.display = 'none';
             document.getElementById('orderTrackingPage').style.display = 'flex';
             
             // Initialize QR code data for sample orders if not already done
@@ -3740,7 +3323,7 @@
             document.getElementById('poCreationPage').style.display = 'none';
             document.getElementById('orderTrackingPage').style.display = 'none';
             document.getElementById('supplierInfoPage').style.display = 'none';
-            document.getElementById('supplierPerformancePage').style.display = 'none';
+            document.getElementById('strategicViewPage').style.display = 'none';
             document.getElementById('poConfirmationPage').style.display = 'flex';
             startDateTimeUpdates();
         }
@@ -3780,7 +3363,7 @@
             document.getElementById('poCreationPage').style.display = 'none';
             document.getElementById('poConfirmationPage').style.display = 'none';
             document.getElementById('orderTrackingPage').style.display = 'none';
-            document.getElementById('supplierPerformancePage').style.display = 'none';
+            document.getElementById('strategicViewPage').style.display = 'none';
             document.getElementById('supplierInfoPage').style.display = 'flex';
             
             // Load suppliers
@@ -3846,20 +3429,99 @@
             document.getElementById('productsContainer').style.display = 'none';
         }
 
-        // Show supplier performance report
-        function showSupplierPerformance() {
+        // Show strategic view page
+        function showStrategicView() {
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('dashboardPage').style.display = 'none';
             document.getElementById('poCreationPage').style.display = 'none';
             document.getElementById('poConfirmationPage').style.display = 'none';
             document.getElementById('orderTrackingPage').style.display = 'none';
             document.getElementById('supplierInfoPage').style.display = 'none';
-            document.getElementById('supplierPerformancePage').style.display = 'flex';
+            document.getElementById('strategicViewPage').style.display = 'flex';
             
-            // Load supplier performance data
-            updatePerformanceReportData();
-            renderPerformanceCharts();
+            // Show performance report by default
+            showStrategicViewContent('performance');
             startDateTimeUpdates();
+        }
+
+        // Show specific content in strategic view
+        function showStrategicViewContent(contentType) {
+            // Hide all content sections
+            document.getElementById('performance-content').style.display = 'none';
+            document.getElementById('prediction-content').style.display = 'none';
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.strategic-sidebar-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected content and set active button
+            if (contentType === 'performance') {
+                document.getElementById('performance-content').style.display = 'block';
+                document.querySelector('.strategic-sidebar-btn:nth-child(2)').classList.add('active');
+                
+                // Load supplier performance data
+                updatePerformanceReportData();
+                renderPerformanceCharts();
+            } else if (contentType === 'prediction') {
+                document.getElementById('prediction-content').style.display = 'block';
+                document.querySelector('.strategic-sidebar-btn:nth-child(3)').classList.add('active');
+                
+                // Render material prediction chart and update material list
+                renderMaterialPredictionChart();
+                updateMaterialPredictionList();
+            }
+        }
+
+        // Update material prediction list with actual materials from suppliers
+        function updateMaterialPredictionList() {
+            const materialList = document.getElementById('materialPredictionList');
+            materialList.innerHTML = '';
+            
+            // Extract unique material categories from supplier products
+            const materialCategories = {};
+            
+            suppliers.forEach(supplier => {
+                supplier.products.forEach(product => {
+                    // Extract material type from product name
+                    let materialType = '';
+                    if (product.name.includes('Thép')) {
+                        materialType = 'Thép';
+                    } else if (product.name.includes('inox') || product.name.includes('Inox')) {
+                        materialType = 'Inox';
+                    } else if (product.name.includes('kẽm') || product.name.includes('mạ kẽm')) {
+                        materialType = 'Thép mạ kẽm';
+                    } else if (product.name.includes('bulong') || product.name.includes('ty ren')) {
+                        materialType = 'Phụ kiện kết cấu';
+                    } else if (product.name.includes('Panel')) {
+                        materialType = 'Panel thép';
+                    } else {
+                        materialType = 'Vật liệu xây dựng khác';
+                    }
+                    
+                    if (!materialCategories[materialType]) {
+                        materialCategories[materialType] = {
+                            count: 0,
+                            suppliers: new Set()
+                        };
+                    }
+                    
+                    materialCategories[materialType].count++;
+                    materialCategories[materialType].suppliers.add(supplier.name);
+                });
+            });
+            
+            // Add material predictions to the list
+            for (const [material, data] of Object.entries(materialCategories)) {
+                const listItem = document.createElement('li');
+                const growthRate = Math.floor(Math.random() * 15) + 10; // Random growth rate between 10-25%
+                
+                listItem.innerHTML = `
+                    <strong>${material}:</strong> Dự kiến tăng ${growthRate}% nhu cầu vào năm 2030, 
+                    với ${data.count} sản phẩm từ ${data.suppliers.size} nhà cung cấp (${Array.from(data.suppliers).join(', ')}).
+                `;
+                
+                materialList.appendChild(listItem);
+            }
         }
 
         // Update performance report data based on filters and sorting
@@ -3982,6 +3644,108 @@
                     }
                 }
             });
+        }
+
+        // Render material prediction chart
+        function renderMaterialPredictionChart() {
+            const ctx = document.getElementById('materialPredictionChart').getContext('2d');
+            
+            if (window.materialPredictionChartInstance) {
+                window.materialPredictionChartInstance.destroy();
+            }
+            
+            // Extract material categories from supplier products for the chart
+            const materialCategories = {};
+            const materialColors = {
+                'Thép': '#2c3e50',
+                'Inox': '#3498db',
+                'Thép mạ kẽm': '#2ecc71',
+                'Phụ kiện kết cấu': '#e74c3c',
+                'Panel thép': '#f39c12',
+                'Vật liệu xây dựng khác': '#9b59b6'
+            };
+            
+            suppliers.forEach(supplier => {
+                supplier.products.forEach(product => {
+                    // Extract material type from product name
+                    let materialType = '';
+                    if (product.name.includes('Thép')) {
+                        materialType = 'Thép';
+                    } else if (product.name.includes('inox') || product.name.includes('Inox')) {
+                        materialType = 'Inox';
+                    } else if (product.name.includes('kẽm') || product.name.includes('mạ kẽm')) {
+                        materialType = 'Thép mạ kẽm';
+                    } else if (product.name.includes('bulong') || product.name.includes('ty ren')) {
+                        materialType = 'Phụ kiện kết cấu';
+                    } else if (product.name.includes('Panel')) {
+                        materialType = 'Panel thép';
+                    } else {
+                        materialType = 'Vật liệu xây dựng khác';
+                    }
+                    
+                    if (!materialCategories[materialType]) {
+                        materialCategories[materialType] = 0;
+                    }
+                    
+                    materialCategories[materialType]++;
+                });
+            });
+            
+            // Create chart data based on actual supplier materials
+            const chartData = {
+                labels: Object.keys(materialCategories),
+                datasets: [{
+                    label: 'Số lượng sản phẩm theo loại vật liệu',
+                    data: Object.values(materialCategories),
+                    backgroundColor: Object.keys(materialCategories).map(material => materialColors[material] || '#95a5a6'),
+                    borderWidth: 1
+                }]
+            };
+            
+            window.materialPredictionChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Số lượng sản phẩm'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Open prediction tab
+        function openPredictionTab(evt, tabName) {
+            // Hide all tab content
+            const tabcontent = document.getElementsByClassName("prediction-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tabs
+            const tablinks = document.getElementsByClassName("prediction-tab");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // Show the specific tab content and add active class to the button
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            // If material prediction tab is opened, ensure chart is rendered
+            if (tabName === 'material-prediction') {
+                setTimeout(() => {
+                    renderMaterialPredictionChart();
+                    updateMaterialPredictionList();
+                }, 100);
+            }
         }
 
         // Print the performance report
@@ -4131,7 +3895,7 @@
             document.getElementById('poConfirmationPage').style.display = 'none';
             document.getElementById('orderTrackingPage').style.display = 'none';
             document.getElementById('supplierInfoPage').style.display = 'none';
-            document.getElementById('supplierPerformancePage').style.display = 'none';
+            document.getElementById('strategicViewPage').style.display = 'none';
             document.getElementById('dashboardPage').style.display = 'flex';
             startDateTimeUpdates();
             
@@ -4145,7 +3909,7 @@
             document.getElementById('poConfirmationPage').style.display = 'none';
             document.getElementById('orderTrackingPage').style.display = 'none';
             document.getElementById('supplierInfoPage').style.display = 'none';
-            document.getElementById('supplierPerformancePage').style.display = 'none';
+            document.getElementById('strategicViewPage').style.display = 'none';
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
@@ -4162,7 +3926,7 @@
             document.getElementById('poConfirmationPage').style.display = 'none';
             document.getElementById('orderTrackingPage').style.display = 'none';
             document.getElementById('supplierInfoPage').style.display = 'none';
-            document.getElementById('supplierPerformancePage').style.display = 'none';
+            document.getElementById('strategicViewPage').style.display = 'none';
             document.getElementById('poCreationPage').style.display = 'flex';
             initPOCreation();
             startDateTimeUpdates();
