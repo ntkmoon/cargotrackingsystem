@@ -3168,13 +3168,30 @@
             startDateTimeUpdates();
         }
 
-        // Filter orders by status
+        // Filter orders by status - FIXED VERSION
         function filterOrders(status) {
             const ordersList = document.getElementById('ordersList');
             ordersList.innerHTML = '';
             
-            // Always show all orders regardless of the filter
-            const filteredOrders = orders;
+            // Filter orders based on status
+            let filteredOrders = [];
+            if (status === 'all') {
+                filteredOrders = orders;
+            } else {
+                filteredOrders = orders.filter(order => order.status === status);
+            }
+            
+            // If no orders found for the filter, show a message
+            if (filteredOrders.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="9" style="text-align: center; padding: 20px;">
+                        Không có đơn hàng nào với trạng thái này.
+                    </td>
+                `;
+                ordersList.appendChild(row);
+                return;
+            }
             
             filteredOrders.forEach(order => {
                 const row = document.createElement('tr');
